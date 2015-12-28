@@ -1,0 +1,5 @@
+QUESTIONS
+* What version.NET framework should I use?
+	Even when not using C# or any windows library?
+
+TODOS
