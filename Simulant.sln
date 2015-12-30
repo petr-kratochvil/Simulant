@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimulantCore", "SimulantCore\SimulantCore.vcxproj", "{6F895866-FA13-443B-A8B7-F7A3A5B0A294}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimulantPlayWith", "SimulantPlayWith\SimulantPlayWith.vcxproj", "{FF38BF50-6A98-4D94-8B5C-2B17F1ADCD84}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6F895866-FA13-443B-A8B7-F7A3A5B0A294} = {6F895866-FA13-443B-A8B7-F7A3A5B0A294}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
