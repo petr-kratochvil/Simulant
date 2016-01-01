@@ -15,5 +15,5 @@ public:
 	void setSymbol(int x, int y, const Symbol& symbol);
 
 	// Evaluate the win, with optional stats reported to the StatDelegate
-	int winCrissCross(StatDelegate* stat = NULL);
+	int winCrissCross(StatDelegate* stat = nullptr);
 };

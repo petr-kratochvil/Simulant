@@ -110,9 +110,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Reel.h" />
+    <ClInclude Include="ReelSet.h" />
+    <ClInclude Include="Simulator.h" />
     <ClInclude Include="Spin.h" />
+    <ClInclude Include="SpinSource.h" />
+    <ClInclude Include="SpinSourceGenerator.h" />
     <ClInclude Include="StatDelegate.h" />
+    <ClInclude Include="Statistics.h" />
     <ClInclude Include="Symbol.h" />
+    <ClInclude Include="SymbolSet.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
