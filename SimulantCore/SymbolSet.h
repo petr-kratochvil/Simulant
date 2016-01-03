@@ -4,6 +4,17 @@
 class SymbolSet
 {
 public:
-	const Symbol& getSymbol(int symbolID);
-	void addSymbol(std::wstring name, std::vector<int> pay);
+	SymbolSet();
+	~SymbolSet();
+	static SymbolSet* createDummySet();
+
+	const Symbol& getSymbol(int symbolId) const;
+
+	// Returns assigned id
+	int addSymbol(const std::wstring& name, const std::vector<int>& pay);
+	int getSymbolCount();
+
+protected:
+	int symbolCount;
+	std::vector<const Symbol*> symbols;
 };

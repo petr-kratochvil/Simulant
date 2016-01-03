@@ -7,6 +7,8 @@
 class Window
 {
 public:
+	Window(int maxWidth, int maxHeight);
+
 	// In case of non-rectangular window, returns the maximum possible indexes
 	int getWidth() const;
 	int getHeight() const;
@@ -16,4 +18,8 @@ public:
 
 	// Evaluate the win, with optional stats reported to the StatDelegate
 	int winCrissCross(StatDelegate* stat = nullptr);
+
+protected:
+	int maxWidth, maxHeight;
+	std::vector<std::vector<const Symbol*>> matrix;
 };

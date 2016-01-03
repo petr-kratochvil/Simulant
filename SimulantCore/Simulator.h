@@ -1,11 +1,12 @@
 #pragma once
 #include "Statistics.h"
+#include "SpinSource.h"
 #include "Spin.h"
 
 class Simulator
 {
 public:
-	Simulator();
+	Simulator(SpinSource& spinSource);
 	
 	// Spin all the respins, included in one bet
 	void spinOneBet(Statistics* statistics = nullptr);
@@ -13,7 +14,11 @@ public:
 	void spinOneStart(Statistics* statistics = nullptr);
 
 	// Next spin is not a respin
-	bool isNextSpinBasic();
+	bool isFinal();
 	
 	const Spin& getLastSpin();
+
+protected:
+	SpinSource& spinSource;
+	Spin* lastSpin;
 };

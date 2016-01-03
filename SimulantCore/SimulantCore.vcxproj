@@ -123,7 +123,11 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Simulator.cpp" />
     <ClCompile Include="Spin.cpp" />
+    <ClCompile Include="SpinSource.cpp" />
+    <ClCompile Include="Symbol.cpp" />
+    <ClCompile Include="SymbolSet.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
