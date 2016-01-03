@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="Reel">
+    <Position X="10" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReelSet">
+    <Position X="8.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ReelSet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simulator">
+    <Position X="3.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAgAAAAgAQAAIAAEAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Simulator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spin">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAAAAAAAAAAAAAgAAEAAAAAAAIAAAAAAIAAEA=</HashCode>
+      <FileName>Spin.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpinSource">
+    <Position X="1.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAIAAAAQAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>SpinSource.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpinSourceGenerator">
+    <Position X="1.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpinSourceGenerator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatDelegate">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StatDelegate.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Statistics">
+    <Position X="9.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Statistics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Symbol">
+    <Position X="3.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAACAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAACkA=</HashCode>
+      <FileName>Symbol.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SymbolSet">
+    <Position X="5.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAgEAAAAACAACAAIAAAABAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>SymbolSet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Window">
+    <Position X="7.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAQgAAIAAAAAAAAAAAAACAAAAAAQAgAAAAAGAAAAAA=</HashCode>
+      <FileName>Window.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@1 @15 @3 Type=StatDelegate)" Category="CodeSchema_Class" Bounds="-10422.2202996648,-10037.0809755664,109.003333333334,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="StatDelegate" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="StatDelegate" UseManualLocation="True" />
+    <Node Id="(@1 @16 @3 Type=Statistics)" Category="CodeSchema_Class" Bounds="-10089.2001730488,-9625.34137395043,87.2233333333352,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="Statistics" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="Statistics" UseManualLocation="True" />
+    <Node Id="(@1 @19 @3 Type=SymbolSet)" Category="CodeSchema_Class" Bounds="-10985.7896932485,-10133.6445832614,97.2233333333352,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="SymbolSet" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="SymbolSet" UseManualLocation="True" />
+    <Node Id="@10" Category="CodeSchema_Class" Bounds="-10616.5017817725,-9833.72291262215,64.123333333333,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="Spin" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="Spin" UseManualLocation="True" />
+    <Node Id="@12" Category="CodeSchema_Class" Bounds="-11055.4731776936,-9650.31026727525,193.436666666668,86.0001999999986" CodeSchemaProperty_IsPublic="True" Group="Expanded" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="SpinSource" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="SpinSource" UseManualLocation="True" />
+    <Node Id="@14" Category="CodeSchema_Class" Bounds="-11035.4731776936,-9610.31016727525,153.436666666668,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="SpinSourceGenerator" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="SpinSourceGenerator" />
+    <Node Id="@18" Category="CodeSchema_Class" Bounds="-10796.8581355353,-10040.6229133591,80.506666666668,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="Symbol" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="Symbol" UseManualLocation="True" />
+    <Node Id="@21" Category="CodeSchema_Class" Bounds="-10631.8985464534,-10037.0140395361,84.6766666666663,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="Window" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="Window" UseManualLocation="True" />
+    <Node Id="@4" Category="CodeSchema_Class" Bounds="-10988.6564234747,-9977.10012551273,63.6366666666654,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="Reel" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="Reel" UseManualLocation="True" />
+    <Node Id="@6" Category="CodeSchema_Class" Bounds="-10998.1130264957,-9837.00652908668,80.3533333333326,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="ReelSet" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="ReelSet" UseManualLocation="True" />
+    <Node Id="@8" Category="CodeSchema_Class" Bounds="-10281.9714256349,-9625.19081483412,91.6900000000023,26" CodeSchemaProperty_IsPublic="True" Icon="c86cf79e-7edd-401d-8226-9cd14e7c7416" Label="Simulator" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" NativeProvider_TypeName="Simulator" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="(@1 @19 @3 Type=SymbolSet)" Target="@18" Bounds="-10911.9426315,-10107.64453125,122.101269116567,62.8999134074402" />
+    <Link Source="@10" Target="@21" Bounds="-10589.0060880646,-10002.0165245125,4.23826970440314,168.293868262506" />
+    <Link Source="@12" Target="@10" Bounds="-10883.3349036638,-9803.26498901614,268.274632918294,152.954721740887" />
+    <Link Source="@12" Target="@14" Category="Contains" />
+    <Link Source="@14" Target="@6" Bounds="-10958.7074933479,-9802.00689450938,0.691598888346562,191.696347634381" />
+    <Link Source="@21" Target="(@1 @15 @3 Type=StatDelegate)" Bounds="-10547.2217252604,-10024.0617100188,116.001426009854,0.0351932654521079" />
+    <Link Source="@21" Target="@18" Bounds="-10707.3537473223,-10026.5588650511,75.4553553951737,1.63037984227412" />
+    <Link Source="@4" Target="@18" Bounds="-10925.0210249521,-10012.5088220722,120.774334019976,38.3153840831419" />
+    <Link Source="@6" Target="@4" Bounds="-10957.8345750913,-9942.09988611131,0.824158666102448,105.093050173813" />
+    <Link Source="@8" Target="(@1 @16 @3 Type=Statistics)" Bounds="-10190.2814648437,-9612.30000103166,92.0809338295549,0.073151084865458" />
+    <Link Source="@8" Target="@10" Bounds="-10555.0044742333,-9803.09963233645,297.163948126125,177.909202648945" />
+    <Link Source="@8" Target="@12" Bounds="-10853.0367162632,-9611.88081600967,571.065251419412,3.85668257771613" />
+  </Links>
+  <Categories>
+    <Category Id="CodeSchema_Class" Label="Class" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Classes" />
+    <Category Id="CodeSchema_Type" Label="Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Types" />
+    <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPublic" Label="Is Public" Description="Flag to indicate the scope is Public" DataType="System.Boolean" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="Icon" Label="Icon" Description="Icon" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="Language" Label="Language" Description="Language" DataType="System.String" />
+    <Property Id="NativeProvider_TypeName" Label="TypeName" Description="TypeName" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="Assembly" Label="Assembly" ValueType="Uri" />
+    <Name Id="File" Label="File" ValueType="Uri" />
+    <Name Id="Namespace" Label="Namespace" ValueType="System.String" />
+    <Name Id="Type" Label="Type" ValueType="System.Object" />
+  </QualifiedNames>
+  <IdentifierAliases>
+    <Alias n="1" Uri="Assembly=$(6f895866-fa13-443b-a8b7-f7a3a5b0a294.OutputPathUri)" />
+    <Alias n="2" Uri="File=$(VsSolutionUri)/SimulantCore/Reel.h" />
+    <Alias n="3" Id="Namespace=::" />
+    <Alias n="4" Id="(@1 @2 @3 Type=Reel)" />
+    <Alias n="5" Uri="File=$(VsSolutionUri)/SimulantCore/ReelSet.h" />
+    <Alias n="6" Id="(@1 @5 @3 Type=ReelSet)" />
+    <Alias n="7" Uri="File=$(VsSolutionUri)/SimulantCore/Simulator.h" />
+    <Alias n="8" Id="(@1 @7 @3 Type=Simulator)" />
+    <Alias n="9" Uri="File=$(VsSolutionUri)/SimulantCore/Spin.h" />
+    <Alias n="10" Id="(@1 @9 @3 Type=Spin)" />
+    <Alias n="11" Uri="File=$(VsSolutionUri)/SimulantCore/SpinSource.h" />
+    <Alias n="12" Id="(@1 @11 @3 Type=SpinSource)" />
+    <Alias n="13" Uri="File=$(VsSolutionUri)/SimulantCore/SpinSourceGenerator.h" />
+    <Alias n="14" Id="(@1 @13 @3 Type=SpinSourceGenerator)" />
+    <Alias n="15" Uri="File=$(VsSolutionUri)/SimulantCore/StatDelegate.h" />
+    <Alias n="16" Uri="File=$(VsSolutionUri)/SimulantCore/Statistics.h" />
+    <Alias n="17" Uri="File=$(VsSolutionUri)/SimulantCore/Symbol.h" />
+    <Alias n="18" Id="(@1 @17 @3 Type=Symbol)" />
+    <Alias n="19" Uri="File=$(VsSolutionUri)/SimulantCore/SymbolSet.h" />
+    <Alias n="20" Uri="File=$(VsSolutionUri)/SimulantCore/Window.h" />
+    <Alias n="21" Id="(@1 @20 @3 Type=Window)" />
+  </IdentifierAliases>
+  <Paths>
+    <Path Id="6f895866-fa13-443b-a8b7-f7a3a5b0a294.OutputPath" Value="C:\aCodes\Slot design\Simulant\Debug\SimulantCore.lib" />
+    <Path Id="6f895866-fa13-443b-a8b7-f7a3a5b0a294.OutputPathUri" Value="file:///C:/aCodes/Slot design/Simulant/Debug/SimulantCore.lib" />
+    <Path Id="VsSolution" Value="C:\aCodes\Slot design\Simulant" />
+    <Path Id="VsSolutionUri" Value="file:///C:/aCodes/Slot design/Simulant" />
+  </Paths>
+</DirectedGraph>
