@@ -131,8 +131,8 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram.dgml" />
+    <None Include="Diagrams\ClassDiagram.cd" />
+    <None Include="Diagrams\ClassDiagram.dgml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
