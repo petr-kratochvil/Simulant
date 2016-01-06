@@ -12,7 +12,7 @@ public:
 
 	// Returns assigned id
 	int addSymbol(const std::wstring& name, const std::vector<int>& pay);
-	int getSymbolCount();
+	int getSymbolCount() const;
 
 protected:
 	int symbolCount;

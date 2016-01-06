@@ -7,6 +7,7 @@ class Simulator
 {
 public:
 	Simulator(SpinSource& spinSource);
+	~Simulator();
 	
 	// Spin all the respins, included in one bet
 	void spinOneBet(Statistics* statistics = nullptr);
@@ -14,9 +15,9 @@ public:
 	void spinOneStart(Statistics* statistics = nullptr);
 
 	// Next spin is not a respin
-	bool isFinal();
+	bool isFinal() const;
 	
-	const Spin& getLastSpin();
+	const Spin& getLastSpin() const;
 
 protected:
 	SpinSource& spinSource;

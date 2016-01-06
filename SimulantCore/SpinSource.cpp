@@ -1,19 +1,25 @@
 #include "SpinSource.h"
 
-SpinSource::SpinSource()
-	: dummySet(SymbolSet::createDummySet())
+SpinSource::SpinSource(const SymbolSet* symbolSet)
+	: symbolSet(symbolSet)
+	, symbolSetIsMyOwn(false)
 {
+	if (this->symbolSet == nullptr)
+	{
+		this->symbolSet = SymbolSet::createDummySet();
+		this->symbolSetIsMyOwn = true;
+	}
 }
 
 SpinSource::~SpinSource()
 {
-	delete this->dummySet;
+	if (this->symbolSetIsMyOwn)
+		delete this->symbolSet;
 }
 
-Spin* SpinSource::getDummySpin(int width, int height, const SymbolSet* ss)
+Spin* SpinSource::getDummySpin(int width, int height) const
 {
-	if (ss == nullptr)
-		ss = this->dummySet;
+	const SymbolSet* ss = this->symbolSet;
 	Window* window = new Window(width, height);
 	for (int i = 1; i <= width; i++)
 		for (int j = 1; j <= height; j++)

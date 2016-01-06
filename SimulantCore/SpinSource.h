@@ -5,10 +5,11 @@
 class SpinSource
 {
 public:
-	SpinSource();
+	SpinSource(const SymbolSet* symbolSet = NULL);
 	~SpinSource();
 	virtual Spin* getNextSpin() = 0;
-	Spin* getDummySpin(int width, int height, const SymbolSet* ss = NULL);
+	Spin* getDummySpin(int width, int height) const;
 private:
-	SymbolSet* dummySet;
+	const SymbolSet* symbolSet;
+	bool symbolSetIsMyOwn;	// symbolSet should be deleted in destructor
 };

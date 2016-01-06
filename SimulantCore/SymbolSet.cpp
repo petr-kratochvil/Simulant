@@ -35,7 +35,7 @@ int SymbolSet::addSymbol(const std::wstring& name, const std::vector<int>& pay)
 	return this->symbolCount++;
 }
 
-int SymbolSet::getSymbolCount()
+int SymbolSet::getSymbolCount() const
 {
 	return this->symbolCount;
 }

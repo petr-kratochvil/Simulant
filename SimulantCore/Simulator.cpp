@@ -6,6 +6,12 @@ Simulator::Simulator(SpinSource & spinSource)
 {
 }
 
+Simulator::~Simulator()
+{
+	if (this->lastSpin != nullptr)
+		delete this->lastSpin;
+}
+
 void Simulator::spinOneBet(Statistics * statistics)
 {
 	do
@@ -22,13 +28,13 @@ void Simulator::spinOneStart(Statistics * statistics)
 	this->lastSpin = newSpin;
 }
 
-bool Simulator::isFinal()
+bool Simulator::isFinal() const
 {
 	// TODO throw exception
 	return this->lastSpin->isFinal();
 }
 
-const Spin& Simulator::getLastSpin()
+const Spin& Simulator::getLastSpin() const
 {
 	// TODO throw exception
 	return *this->lastSpin;

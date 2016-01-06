@@ -12,19 +12,22 @@ int main()
 	wprintf(L"SimulantPlayWith\n");
 
 	SpinSourceGenerator sg;
-	Simulator simul(sg);
-	simul.spinOneBet();
-
-	Spin spin = simul.getLastSpin();
-	wprintf(L"The win amount is: %d.\n", spin.getWin());
-	Symbol symbol = spin.getWindow().getSymbol(2, 3);
-	wprintf(L"The symbol at (2,3) is: id=%d, name=%s\n", symbol.getId(), symbol.getName().c_str());
+	{
+		Simulator simul(sg);
+		simul.spinOneBet();
+		{
+			const Spin& spin = simul.getLastSpin();
+			wprintf(L"The win amount is: %d.\n", spin.getWin());
+			Symbol symbol = spin.getWindow().getSymbol(2, 3);
+			wprintf(L"The symbol at (2,3) is: id=%d, name=%s\n", symbol.getId(), symbol.getName().c_str());
+		}
+	}
 
 	SymbolSet* sset = SymbolSet::createDummySet();
 	int newId = sset->addSymbol(L"Ředkvička", { 1,2,3,0,0 });
 	wprintf(L"New id for symbol: %d\n", newId);
 	wprintf(L"Newly added symbol is: id=%d, name=%s\n", sset->getSymbol(newId).getId(), sset->getSymbol(newId).getName().c_str());
-	Spin* spin2 = sg.getDummySpin(50, 1, sset);
+	Spin* spin2 = sg.getDummySpin(50, 1);
 	Symbol symbol2 = spin2->getWindow().getSymbol(43, 1);
 	wprintf(L"Dummy spin2 at (42,1) is: id=%d, name=%s\n", symbol2.getId(), symbol2.getName().c_str());
 

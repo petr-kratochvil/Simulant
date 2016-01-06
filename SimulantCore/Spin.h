@@ -17,4 +17,7 @@ public:
 protected:
 	bool final;
 	Window* window;
+
+private:
+	Spin(const Spin&);
 };

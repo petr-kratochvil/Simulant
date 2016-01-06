@@ -4,5 +4,6 @@
 class SpinSourceGenerator : public SpinSource
 {
 public:
-	virtual Spin* getNextSpin() { return this->getDummySpin(5, 3); }
+	SpinSourceGenerator(const SymbolSet* symbolSet = NULL);
+	virtual Spin* getNextSpin();
 };
