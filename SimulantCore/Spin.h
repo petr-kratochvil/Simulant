@@ -20,4 +20,5 @@ protected:
 
 private:
 	Spin(const Spin&);
+	Spin& operator=(const Spin&);
 };

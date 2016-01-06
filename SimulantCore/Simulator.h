@@ -22,4 +22,7 @@ public:
 protected:
 	SpinSource& spinSource;
 	Spin* lastSpin;
+private:
+	Simulator(const Simulator&);
+	Simulator& operator=(const Simulator&);
 };
