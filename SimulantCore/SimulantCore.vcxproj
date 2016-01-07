@@ -123,6 +123,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="JSON\JSON.cpp" />
+    <ClCompile Include="JSON\JSONValue.cpp" />
     <ClCompile Include="Simulator.cpp" />
     <ClCompile Include="Spin.cpp" />
     <ClCompile Include="SpinSource.cpp" />
