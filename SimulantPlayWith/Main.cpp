@@ -5,6 +5,7 @@
 #include "SimulantCore/SymbolSet.h"
 #include <io.h>
 #include <fcntl.h>
+#include "SimulantCore/JSON/JSON.h"
 
 int main()
 {
@@ -23,7 +24,23 @@ int main()
 		}
 	}
 
-	SymbolSet* sset = SymbolSet::createDummySet();
+
+	FILE *fr;
+	errno_t err = fopen_s(&fr, "examples/example1.json", "rt,ccs=UTF-8");
+	wchar_t json[1000];
+	wchar_t buffer[1000];
+	json[0] = '\0';
+	int jsonLength = 0;
+	while (!feof(fr))
+	{
+		fgetws(buffer, 1000, fr);
+		wcsncat_s(json, buffer, 1000 - jsonLength);
+		jsonLength += wcslen(buffer);
+	}
+	wprintf(L"json file:\n%s\n", json);
+	JSONValue* symbolSetJson = JSON::Parse(json);
+
+	SymbolSet* sset = new SymbolSet(symbolSetJson);
 	int newId = sset->addSymbol(L"Ředkvička", { 1,2,3,0,0 });
 	wprintf(L"New id for symbol: %d\n", newId);
 	wprintf(L"Newly added symbol is: id=%d, name=%s\n", sset->getSymbol(newId).getId(), sset->getSymbol(newId).getName().c_str());

@@ -5,6 +5,18 @@ SymbolSet::SymbolSet()
 {
 }
 
+SymbolSet::SymbolSet(JSONValue* source)
+{
+	// TODO throw exception
+	JSONObject sset = source->AsObject();
+	JSONArray array = sset[L"symbols"]->AsArray();
+	this->symbols.resize(array.size());
+	for (int i = 0; i < array.size(); i++)
+	{
+		this->symbols[i] = new Symbol(array[i]);
+	}
+}
+
 SymbolSet::~SymbolSet()
 {
 	for (int i = 0; i < this->symbols.size(); i++)

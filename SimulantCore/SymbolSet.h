@@ -1,10 +1,12 @@
 #pragma once
 #include "Symbol.h"
+#include "JSON/JSON.h"
 
 class SymbolSet
 {
 public:
 	SymbolSet();
+	SymbolSet(JSONValue* source);
 	~SymbolSet();
 	static SymbolSet* createDummySet();
 
