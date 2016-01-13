@@ -5,7 +5,7 @@
 class ReelSet
 {
 public:
-	ReelSet(JSONValue* source);
+	ReelSet(const JSONValue* source);
 	void shuffle();
 	void spin();
 	Window* getWindow() const;

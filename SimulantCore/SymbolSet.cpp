@@ -5,7 +5,7 @@ SymbolSet::SymbolSet()
 {
 }
 
-SymbolSet::SymbolSet(JSONValue* source)
+SymbolSet::SymbolSet(const JSONValue* source)
 {
 	// TODO throw exception
 	JSONObject sset = source->AsObject();

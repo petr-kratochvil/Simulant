@@ -8,7 +8,7 @@ Symbol::Symbol(int id, const std::wstring& name, const std::vector<int>& pay)
 	this->pay.insert(this->pay.begin(), 0);
 }
 
-Symbol::Symbol(JSONValue* source)
+Symbol::Symbol(const JSONValue* source)
 {
 	// TODO throw exception
 	JSONObject symbol = source->AsObject();

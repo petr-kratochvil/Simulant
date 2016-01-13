@@ -38,7 +38,7 @@ int main()
 		jsonLength += wcslen(buffer);
 	}
 	wprintf(L"json file:\n%s\n", json);
-	JSONValue* symbolSetJson = JSON::Parse(json);
+	const JSONValue* symbolSetJson = JSON::Parse(json);
 
 	SymbolSet* sset = new SymbolSet(symbolSetJson);
 	int newId = sset->addSymbol(L"Ředkvička", { 1,2,3,0,0 });
@@ -54,5 +54,6 @@ int main()
 		, sset->getSymbol(0).getWin(4));
 
 	delete sset;
+	delete symbolSetJson;
 	return 0;
 }

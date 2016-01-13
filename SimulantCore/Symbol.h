@@ -8,7 +8,7 @@ class Symbol
 {
 public:
 	Symbol(int id, const std::wstring& name, const std::vector<int>& pay);
-	Symbol(JSONValue* source);
+	Symbol(const JSONValue* source);
 	const std::wstring& getName() const;
 	int getId() const;
 	int getWin(int symbolsInLine) const;

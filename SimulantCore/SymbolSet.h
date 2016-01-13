@@ -6,7 +6,7 @@ class SymbolSet
 {
 public:
 	SymbolSet();
-	SymbolSet(JSONValue* source);
+	SymbolSet(const JSONValue* source);
 	~SymbolSet();
 	static SymbolSet* createDummySet();
 
