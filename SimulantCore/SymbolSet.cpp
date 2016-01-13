@@ -9,7 +9,7 @@ SymbolSet::SymbolSet(const JSONValue* source)
 {
 	// TODO throw exception
 	JSONObject sset = source->AsObject();
-	JSONArray array = sset[L"symbols"]->AsArray();
+	JSONArray array = sset[L"SymbolSet"]->AsArray();
 	this->symbols.resize(array.size());
 	this->symbolCount = array.size();
 	for (int i = 0; i < array.size(); i++)
