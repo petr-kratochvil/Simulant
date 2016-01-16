@@ -1,27 +1,27 @@
 {
-    "GameName": "Testovací hra 1",
-    "GameVersion": "0.1",
+    "gameName": "Testovací hra 1",
+    "gameVersion": "0.1",
     
-	"SymbolSet":
+	"symbolSet":
 	[
 		{ "id": 0, "name": "nůla", "pay": [0,0,3,4,5] },
 		{ "id": 1, "name": "jédňa", "pay": [0,0,30,40,50] }
 	],
     
-    "ReelSets":
+    "reelSets":
     [
         { "id": 0, "name": "nulova", "reels":
             [
-                [0,1,0,1],
-                [1,1,1],
-                [0,0,0,0,0,0]
+                { "id": 0, "symbols": [0,1,0,1] },
+                { "id": 1, "symbols": [1,1,1] },
+                { "id": 2, "symbols": [0,0,0,0,0,0] }
             ]
         },
         { "id": 1, "name": "hlavni", "reels":
             [
-                [1,1,1,1,0],
-                [1,1,1,1,0],
-                [1,1,1,1,0]
+                { "id": 0, "symbols": [1,1,1,1,0] },
+                { "id": 1, "symbols": [1,1,1,1,0] },
+                { "id": 2, "symbols": [1,1,1,1,0] }
             ]
         }
     ]

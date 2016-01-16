@@ -1,29 +1,29 @@
 #include "Window.h"
 
-Window::Window(int maxWidth, int maxHeight)
-	: maxWidth(maxWidth)
-	, maxHeight(maxHeight)
-	, matrix(maxWidth, std::vector<const Symbol*>(maxHeight))
+Window::Window(int width, int height)
+	: width(width)
+	, height(height)
+	, matrix(width, std::vector<const Symbol*>(height))
 {
 }
 
 int Window::getWidth() const
 {
-	return this->maxWidth;
+	return this->width;
 }
 
 int Window::getHeight() const
 {
-	return this->maxHeight;
+	return this->height;
 }
 
 const Symbol& Window::getSymbol(int x, int y) const
 {
 	// TODO throw exception
-	return *this->matrix[x-1][y-1];
+	return *this->matrix[x][y];
 }
 
 void Window::setSymbol(int x, int y, const Symbol& symbol)
 {
-	this->matrix[x-1][y-1] = &symbol;
+	this->matrix[x][y] = &symbol;
 }

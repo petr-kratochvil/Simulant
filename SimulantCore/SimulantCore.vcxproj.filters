@@ -80,6 +80,12 @@
     <ClCompile Include="JSON\JSONValue.cpp">
       <Filter>Source Files\JSON</Filter>
     </ClCompile>
+    <ClCompile Include="ReelSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Reel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\ClassDiagram.cd" />

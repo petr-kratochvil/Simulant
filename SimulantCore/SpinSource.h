@@ -5,7 +5,7 @@
 class SpinSource
 {
 public:
-	SpinSource(const SymbolSet* symbolSet = NULL);
+	SpinSource(const SymbolSet* symbolSet = nullptr);
 	~SpinSource();
 	virtual Spin* getNextSpin() = 0;
 	Spin* getDummySpin(int width, int height) const;

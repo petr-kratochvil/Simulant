@@ -21,8 +21,8 @@ Spin* SpinSource::getDummySpin(int width, int height) const
 {
 	const SymbolSet* ss = this->symbolSet;
 	Window* window = new Window(width, height);
-	for (int i = 1; i <= width; i++)
-		for (int j = 1; j <= height; j++)
+	for (int i = 0; i < width; i++)
+		for (int j = 0; j < height; j++)
 		{
 			window->setSymbol(i, j, ss->getSymbol(0));
 		}
