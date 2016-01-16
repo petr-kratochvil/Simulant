@@ -12,6 +12,7 @@ class Random
 public:
 	static void init();
 	static void init(int seed);
+	static void release();
 	static int gen(int min, int max);
 	static bool genPct(int pct);
 	static bool genPml(int pml);

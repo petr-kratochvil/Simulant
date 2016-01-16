@@ -5,7 +5,14 @@ std::mt19937* Random::generator = nullptr;
 
 void Random::init(int seed)
 {
+	if (Random::generator != nullptr)
+		delete Random::generator;
 	Random::generator = new std::mt19937(seed);
+}
+
+void Random::release()
+{
+	delete Random::generator;
 }
 
 void Random::init()

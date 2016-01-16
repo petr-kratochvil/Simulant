@@ -76,5 +76,6 @@ int main()
 		wprintf(L"Random numbers: %d, %d, %d, %d\n", Random::gen(100, 1000), Random::gen(100, 1000), Random::gen(100, 1000), Random::gen(100, 1000));
 	}
 	delete parsedJSON;
+	Random::release();
 	return 0;
 }
