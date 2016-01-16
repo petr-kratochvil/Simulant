@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Random.h" />
     <ClInclude Include="Reel.h" />
     <ClInclude Include="ReelSet.h" />
     <ClInclude Include="Simulator.h" />
@@ -125,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="JSON\JSON.cpp" />
     <ClCompile Include="JSON\JSONValue.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="Reel.cpp" />
     <ClCompile Include="ReelSet.cpp" />
     <ClCompile Include="Simulator.cpp" />

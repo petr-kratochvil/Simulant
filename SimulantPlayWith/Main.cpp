@@ -7,6 +7,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include "SimulantCore/JSON/JSON.h"
+#include "SimulantCore/Random.h"
 
 int main()
 {
@@ -57,8 +58,8 @@ int main()
 	JSONObject parsedJSONObject = parsedJSON->AsObject();
 	JSONArray parsedJSONReelSets = parsedJSONObject[L"reelSets"]->AsArray();
 	ReelSet rs(parsedJSONReelSets[0], sset);
-    wprintf(L"Test ReelSetu:\n");
-	
+	wprintf(L"Test ReelSetu:\n");
+
 	Window* w = rs.getWindow();
 	for (int x = 0; x < w->getWidth(); x++)
 	{
@@ -69,6 +70,11 @@ int main()
 
 	delete w;
 
+	for (int i = 0; i < 10; i++)
+	{
+		Random::init();
+		wprintf(L"Random numbers: %d, %d, %d, %d\n", Random::gen(100, 1000), Random::gen(100, 1000), Random::gen(100, 1000), Random::gen(100, 1000));
+	}
 	delete parsedJSON;
 	return 0;
 }
