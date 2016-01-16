@@ -21,6 +21,12 @@ ReelSet::~ReelSet()
         delete this->reels[i];
 }
 
+void ReelSet::spin()
+{
+	for (int i = 0; i < this->reelsCount; i++)
+		this->reels[i]->spin();
+}
+
 Window * ReelSet::getWindow(Window* window) const
 {
 	Window* w = window;

@@ -14,6 +14,8 @@ int main()
 	_setmode(_fileno(stdout), _O_U8TEXT);
 	wprintf(L"SimulantPlayWith\n");
 
+	Random::init();
+
 	SpinSourceGenerator sg;
 	{
 		Simulator simul(sg);
@@ -57,9 +59,10 @@ int main()
 
 	JSONObject parsedJSONObject = parsedJSON->AsObject();
 	JSONArray parsedJSONReelSets = parsedJSONObject[L"reelSets"]->AsArray();
+	
 	ReelSet rs(parsedJSONReelSets[0], sset);
 	wprintf(L"Test ReelSetu:\n");
-
+	rs.spin();
 	Window* w = rs.getWindow();
 	for (int x = 0; x < w->getWidth(); x++)
 	{

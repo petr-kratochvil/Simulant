@@ -1,4 +1,5 @@
 #include "Reel.h"
+#include "Random.h"
 
 Reel::Reel(const JSONValue * source, const SymbolSet& symbolSet)
     : position(0)
@@ -12,6 +13,11 @@ Reel::Reel(const JSONValue * source, const SymbolSet& symbolSet)
 	{
 		this->symbols[i] = &symbolSet.getSymbol(int(array[i]->AsNumber()));
 	}
+}
+
+void Reel::spin()
+{
+	this->position = Random::gen(0, length - 1);
 }
 
 const Symbol& Reel::getSymbol(int y) const
