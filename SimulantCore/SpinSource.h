@@ -12,6 +12,7 @@ public:
 private:
 	SpinSource(const SpinSource&);
 	SpinSource& operator=(const SpinSource&);
-	const SymbolSet* symbolSet;
 	bool symbolSetIsMyOwn;	// symbolSet should be deleted in destructor
+protected:
+	const SymbolSet* symbolSet;
 };

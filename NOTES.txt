@@ -3,3 +3,5 @@ QUESTIONS
 	Even when not using C# or any windows library?
 
 TODOS
+* exception
+* private copy ctors and operator='s

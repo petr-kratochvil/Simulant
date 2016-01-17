@@ -10,14 +10,14 @@
     
     "reelSets":
     [
-        { "id": 0, "name": "nulova", "reels":
+        { "id": 0, "name": "nulova", "pml": 500, "reels":
             [
                 { "id": 0, "symbols": [0,1,0,1] },
                 { "id": 1, "symbols": [1,1,1] },
                 { "id": 2, "symbols": [0,0,0,0,0,0] }
             ]
         },
-        { "id": 1, "name": "hlavni", "reels":
+        { "id": 1, "name": "hlavni", "pml": 500, "reels":
             [
                 { "id": 0, "symbols": [1,1,1,1,0] },
                 { "id": 1, "symbols": [1,1,1,1,0] },

@@ -10,11 +10,10 @@
 #include "SimulantCore/Random.h"
 
 // dummy spin and default symbol set
-void testSpinSourceGenerator()
+void testSpinSourceGenerator2(SpinSourceGenerator* sg)
 {
-	SpinSourceGenerator sg;
 	{
-		Simulator simul(sg);
+		Simulator simul(*sg);
 		simul.spinOneBet();
 		{
 			const Spin& spin = simul.getLastSpin();
@@ -23,7 +22,7 @@ void testSpinSourceGenerator()
 			wprintf(L"The symbol at (2,3) is: id=%d, name=%s\n", symbol.getId(), symbol.getName().c_str());
 		}
 	}
-	Spin* spin2 = sg.getDummySpin(50, 1);
+	Spin* spin2 = sg->getDummySpin(50, 1);
 	Symbol symbol2 = spin2->getWindow().getSymbol(43, 0);
 	wprintf(L"Dummy spin2 at (42,1) is: id=%d, name=%s\n", symbol2.getId(), symbol2.getName().c_str());
 }
@@ -78,6 +77,21 @@ void testRandom()
 	}
 }
 
+SpinSourceGenerator* testSpinSourceGenerator(const SymbolSet& sset, JSONArray jsonReelSets)
+{
+	SpinSourceGenerator* sg = new SpinSourceGenerator(&sset, jsonReelSets);
+	Spin* spin = sg->getNextSpin();
+	Window w = spin->getWindow();
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+			wprintf(L"%s\t", w.getSymbol(i, j).getName().c_str());
+		wprintf(L"\n");
+	}
+	delete spin;
+	return sg;
+}
+
 int main()
 {
 	Random::init();
@@ -85,7 +99,7 @@ int main()
 	_setmode(_fileno(stdout), _O_U8TEXT);
 	wprintf(L"SimulantPlayWith\n");
 
-	testSpinSourceGenerator();
+	//testSpinSourceGenerator();
 	
 	wchar_t json[1000];
 	getJSONInput(json);
@@ -103,6 +117,9 @@ int main()
 	testReelSet(rs);
 
 	testRandom();
+
+	SpinSourceGenerator* sg = testSpinSourceGenerator(sset, parsedJSONReelSets);
+	testSpinSourceGenerator2(sg);
 
 	delete parsedJSON;
 	Random::release();
