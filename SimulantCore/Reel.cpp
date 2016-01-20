@@ -20,7 +20,18 @@ void Reel::spin()
 	this->position = Random::gen(0, length - 1);
 }
 
+void Reel::spinToPosition(int position)
+{
+	// TODO throw exception
+	this->position = position;
+}
+
 const Symbol& Reel::getSymbol(int y) const
 {
 	return *this->symbols[(this->position + y) % this->length];
+}
+
+int Reel::getLength()
+{
+	return this->length;
 }
