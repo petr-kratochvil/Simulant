@@ -117,6 +117,7 @@
     <ClInclude Include="Spin.h" />
     <ClInclude Include="SpinSource.h" />
     <ClInclude Include="SpinSourceGenerator.h" />
+    <ClInclude Include="SpinSourceGeneratorSeq.h" />
     <ClInclude Include="StatDelegate.h" />
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="Symbol.h" />
@@ -133,6 +134,7 @@
     <ClCompile Include="Spin.cpp" />
     <ClCompile Include="SpinSource.cpp" />
     <ClCompile Include="SpinSourceGenerator.cpp" />
+    <ClCompile Include="SpinSourceGeneratorSeq.cpp" />
     <ClCompile Include="Symbol.cpp" />
     <ClCompile Include="SymbolSet.cpp" />
     <ClCompile Include="Window.cpp" />

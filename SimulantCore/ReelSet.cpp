@@ -27,6 +27,12 @@ void ReelSet::spin()
 		this->reels[i]->spin();
 }
 
+void ReelSet::spinToPosition(const std::vector<int>& position)
+{
+	for (int i = 0; i < this->reelsCount; i++)
+		this->reels[i]->spinToPosition(position[i]);
+}
+
 Window * ReelSet::getWindow(Window* window) const
 {
 	Window* w = window;
@@ -36,4 +42,14 @@ Window * ReelSet::getWindow(Window* window) const
 		for (int y = 0; y < w->getHeight(); y++)
 			w->setSymbol(x, y, this->reels[x]->getSymbol(y));
 	return w;
+}
+
+int ReelSet::getReelsCount()
+{
+	return this->reelsCount;
+}
+
+int ReelSet::getReelLength(int reelID)
+{
+	return this->reels[reelID]->getLength();
 }

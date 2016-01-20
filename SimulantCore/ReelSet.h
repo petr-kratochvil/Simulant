@@ -10,9 +10,12 @@ public:
     ~ReelSet();
 	void shuffle();
 	void spin();
+	void spinToPosition(const std::vector<int>& position);
 	// Gets the spin window; if the parametr is nullptr, it allocates a new window,
 	// which the caller is responsible to destroy
 	Window* getWindow(Window* window = nullptr) const;
+	int getReelsCount();
+	int getReelLength(int reelID);
 protected:
     int reelsCount;
 	int visibleReelsCount;
