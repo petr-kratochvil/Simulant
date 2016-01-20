@@ -4,7 +4,7 @@
 class SpinSourceGeneratorSeq : public SpinSourceGenerator
 {
 public:
-	SpinSourceGenerator(const SymbolSet* symbolSet, JSONArray reelSets);
+	SpinSourceGeneratorSeq(const SymbolSet* symbolSet, JSONArray reelSets);
 	virtual Spin* getNextSpin();
 	bool seqEnded();
 protected:
