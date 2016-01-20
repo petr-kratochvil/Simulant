@@ -12,4 +12,6 @@ protected:
 	int seqID;
 	// Total count of spins in the sequence
 	int totalSeqCount;
+	int reelsCount;
+	std::vector<int> reelLengths;
 };
