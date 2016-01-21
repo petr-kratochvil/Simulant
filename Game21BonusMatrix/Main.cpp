@@ -34,6 +34,34 @@ int getMatrixID(int a, int b, int c)
 	return index;
 }
 
+bool idMakesSense(int id)
+{
+	if (id == 729)
+		return true;
+	int a = id % 9;
+	id /= 9;
+	int b = id % 9;
+	id /= 9;
+	int c = id;
+
+	if (a == 8)
+	{
+		if ((b != 8) || (c != 8))
+			return false;
+	}
+	else if (b == 8)
+	{
+		if (c != 8)
+			return false;
+	}
+	else
+	{
+		if ((a == b) || (a == c) || (b == c))
+			return false;
+	}
+	return true;
+}
+
 int transition(int a, int b, int c, int i, int j, int k)
 {
 	std::vector<int> result(0);
@@ -56,7 +84,7 @@ int transition(int a, int b, int c, int i, int j, int k)
 	result.resize(4);
 	for (int res = size; res < 4; res++)
 		result[res] = 8;
-	printf("%d, %d, %d, %d -- ", result[0], result[1], result[2], result[3]);
+	//printf("%d, %d, %d, %d -- ", result[0], result[1], result[2], result[3]);
 	if (result[3] != 8)
 		return 729;
 	return getMatrixID(result[0], result[1], result[2]);
@@ -126,12 +154,13 @@ int main()
 		delete spin;
 	}
 
-/*	for (int x = 0; x < 10; x++)
+	/*for (int x = 0; x < 10; x++)
 	{
 		int a, b, c, i, j, k;
 		scanf("%d%d%d%d%d%d", &a, &b, &c, &i, &j, &k);
 		printf("%d\n", transition(a, b, c, i, j, k));
 	}*/
+
 	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 9; j++)
 			for (int k = 0; k < 9; k++)
@@ -145,9 +174,15 @@ int main()
 	wprintf(L"%s\n", value->Stringify().c_str());*/
 	for (int i = 0; i < 730; i++)
 	{
+		if (!idMakesSense(i))
+			continue;
 		JSONArray* inner = new JSONArray;
 		for (int j = 0; j < 730; j++)
 		{
+			if (!idMakesSense(j))
+				continue;
+			if (matrix[i][j] > 0)
+				;//__debugbreak();
 			JSONValue* value = new JSONValue(double(matrix[i][j]));
 			inner->push_back(value);
 		}
@@ -156,8 +191,9 @@ int main()
 	}
 
 	FILE* fw = fopen("matrix.json", "wt,ccs=UTF-8");
+	printf("Delka pole: %d\n", array.size());
 	JSONValue* value = new JSONValue(array);
-	fwprintf(fw, L"%s", value->Stringify().c_str());
+	fwprintf(fw, L"%s", value->Stringify(true).c_str());
 	fclose(fw);
 
 	return 0;
