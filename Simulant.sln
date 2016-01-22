@@ -15,6 +15,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimulantPlayWithGUI", "SimulantPlayWithGUI\SimulantPlayWithGUI.vcxproj", "{6BD88DB0-96EE-4351-8D35-F5B48F689C69}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game21BonusMatrix", "Game21BonusMatrix\Game21BonusMatrix.vcxproj", "{33053AA7-1C30-46F0-BFDC-43C71CB96D0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6F895866-FA13-443B-A8B7-F7A3A5B0A294} = {6F895866-FA13-443B-A8B7-F7A3A5B0A294}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

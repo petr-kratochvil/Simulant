@@ -20,7 +20,7 @@ void getJSONInput(wchar_t* json)
 	}
 }
 
-int cnts[9][9][9]; // symbol with ID=7 means that nothing came (X could not came)
+int cnts[9][9][9]; // symbol with ID=8 means that nothing came (X could not came)
 int matrix[730][730];
 
 int getMatrixID(int a, int b, int c)
@@ -59,6 +59,8 @@ bool idMakesSense(int id)
 		if ((a == b) || (a == c) || (b == c))
 			return false;
 	}
+	if ((a == 7) || (b == 7) || (c == 7))
+		return false;
 	return true;
 }
 
@@ -97,7 +99,7 @@ void computeMatrix(int a, int b, int c)
 		for (int j = 0; j < 9; j++)
 			for (int k = 0; k < 9; k++)
 			{
-				matrix[id][transition(a, b, c, i, j, k)]++;
+				matrix[id][transition(a, b, c, i, j, k)] += cnts[i][j][k];
 			}
 }
 
@@ -161,11 +163,22 @@ int main()
 		printf("%d\n", transition(a, b, c, i, j, k));
 	}*/
 
+	int counter = 1;
+	FILE* fwIds = fopen("matrixIds.csv", "w");
+	fprintf(fwIds, "Order\tID\tFirst\tSecond\tThird\n");
 	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 9; j++)
 			for (int k = 0; k < 9; k++)
+			{
 				computeMatrix(i, j, k);
-
+				int id = getMatrixID(i, j, k);
+				if (idMakesSense(id))
+				{
+					fprintf(fwIds, "%d\t%d\t%d\t%d\t%d\n", counter++, id, i, j, k);
+				}
+			}
+	fclose(fwIds);
+	
 	JSONArray array;
 	/*array.push_back(new JSONValue(1.0));
 	array.push_back(new JSONValue(2.0));
@@ -187,7 +200,11 @@ int main()
 			inner->push_back(value);
 		}
 		JSONValue* value = new JSONValue(*inner);
-		array.push_back(value);
+		JSONObject* object = new JSONObject();
+		object->insert(std::pair<const std::wstring, JSONValue*>(L"order", new JSONValue(double(i))));
+		object->insert(std::pair<const std::wstring, JSONValue*>(L"row", value));
+		JSONValue* value2 = new JSONValue(*object);
+		array.push_back(value2);
 	}
 
 	FILE* fw = fopen("matrix.json", "wt,ccs=UTF-8");
