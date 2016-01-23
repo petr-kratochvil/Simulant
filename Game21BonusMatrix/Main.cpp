@@ -22,6 +22,7 @@ void getJSONInput(wchar_t* json)
 
 int cnts[9][9][9]; // symbol with ID=8 means that nothing came (X could not came)
 int matrix[730][730];
+int XSymbolCnt = 0;
 
 int getMatrixID(int a, int b, int c)
 {
@@ -92,6 +93,17 @@ int transition(int a, int b, int c, int i, int j, int k)
 	return getMatrixID(result[0], result[1], result[2]);
 }
 
+int transitionX(int a, int b, int c)
+{
+	if ((a != 8) && (b == 8))
+		a = 8;
+	else if ((a != 8) && (b != 8) && (c == 8))
+		b = 8;
+	else if ((a != 8) && (b != 8) && (c != 8))
+		c = 8;
+	return getMatrixID(a, b, c);
+}
+
 void computeMatrix(int a, int b, int c)
 {
 	int id = getMatrixID(a, b, c);
@@ -124,10 +136,11 @@ int main()
 	int seq = 0;
 	while (!ssg.seqEnded())
 	{
-		printf("\r %d", seq++);
+		printf("\r %d", ++seq);
 		Spin* spin = ssg.getNextSpin();
 		const Window& w = spin->getWindow();
 		std::vector<const Symbol*> winSymbols;
+		bool wasXSymbol = false;
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 3; j++)
 				for (int k = 0; k < 3; k++)
@@ -137,21 +150,26 @@ int main()
 				const Symbol& s3 = w.getSymbol(2, k);
 				if ((&s1 == &s2) && (&s1 == &s3))
 				{
-					winSymbols.push_back(&s1);
+					if (std::find(winSymbols.begin(), winSymbols.end(), &s1) == winSymbols.end())
+						winSymbols.push_back(&s1);
 				}
+				if ((s1.getId() == 7) || (s2.getId() == 7) || (s3.getId() == 7))
+					wasXSymbol = true;
 			}
+		if (wasXSymbol)
+			XSymbolCnt++;
 		for (int i = winSymbols.size() - 1; i < 3; i++)
 			winSymbols.push_back(NULL);
 		int first, second, third;
 		if (winSymbols[0])
 			first = winSymbols[0]->getId();
-		else first = 7;
+		else first = 8;
 		if (winSymbols[1])
 			second = winSymbols[1]->getId();
-		else second = 7;
+		else second = 8;
 		if (winSymbols[2])
 			third = winSymbols[2]->getId();
-		else third = 7;
+		else third = 8;
 		cnts[first][second][third]++;
 		delete spin;
 	}
@@ -172,13 +190,15 @@ int main()
 			{
 				computeMatrix(i, j, k);
 				int id = getMatrixID(i, j, k);
+			//	matrix[id][transitionX(i, j, k)] += XSymbolCnt;
 				if (idMakesSense(id))
 				{
 					fprintf(fwIds, "%d\t%d\t%d\t%d\t%d\n", counter++, id, i, j, k);
 				}
 			}
 	fclose(fwIds);
-	
+	matrix[729][729] = seq;
+
 	JSONArray array;
 	/*array.push_back(new JSONValue(1.0));
 	array.push_back(new JSONValue(2.0));
@@ -190,6 +210,7 @@ int main()
 		if (!idMakesSense(i))
 			continue;
 		JSONArray* inner = new JSONArray;
+		int checksum = 0;
 		for (int j = 0; j < 730; j++)
 		{
 			if (!idMakesSense(j))
@@ -198,6 +219,12 @@ int main()
 				;//__debugbreak();
 			JSONValue* value = new JSONValue(double(matrix[i][j]));
 			inner->push_back(value);
+			checksum += matrix[i][j];
+		}
+		if (checksum != seq)
+		{
+			printf("Chyba, checksum radku %d je %d misto %d!\n", i, checksum, seq);
+			__debugbreak();
 		}
 		JSONValue* value = new JSONValue(*inner);
 		JSONObject* object = new JSONObject();
