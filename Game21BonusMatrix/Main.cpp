@@ -9,13 +9,13 @@ void getJSONInput(wchar_t* json)
 	FILE *fr;
 	errno_t err = fopen_s(&fr, "game21.json", "rt,ccs=UTF-8");
 
-	wchar_t buffer[1000];
+	wchar_t buffer[10000];
 	json[0] = '\0';
 	int jsonLength = 0;
 	while (!feof(fr))
 	{
-		fgetws(buffer, 1000, fr);
-		wcsncat_s(json, 999, buffer, 1000 - jsonLength);
+		fgetws(buffer, 10000, fr);
+		wcsncat_s(json, 9999, buffer, 10000 - jsonLength);
 		jsonLength += wcslen(buffer);
 	}
 }
@@ -117,7 +117,7 @@ void computeMatrix(int a, int b, int c)
 
 int main()
 {
-	wchar_t json[2000];
+	wchar_t json[10000];
 	getJSONInput(json);
 	const JSONValue* parsedJSON = JSON::Parse(json);
 	
@@ -230,7 +230,7 @@ int main()
 		JSONObject* object = new JSONObject();
 		object->insert(std::pair<const std::wstring, JSONValue*>(L"order", new JSONValue(double(i))));
 		object->insert(std::pair<const std::wstring, JSONValue*>(L"row", value));
-		JSONValue* value2 = new JSONValue(*object);
+		JSONValue* value2 = new JSONValue(/*object*/ *value);
 		array.push_back(value2);
 	}
 
