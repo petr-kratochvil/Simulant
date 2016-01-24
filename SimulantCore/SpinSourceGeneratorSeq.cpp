@@ -15,14 +15,14 @@ SpinSourceGeneratorSeq::SpinSourceGeneratorSeq(const SymbolSet* symbolSet, JSONA
 	}
 }
 
-Spin * SpinSourceGeneratorSeq::getNextSpin()
+Spin * SpinSourceGeneratorSeq::getNextSpin()	
 {
 	std::vector<int> positions(this->reelsCount);
-	int seq = seqID;
+	int seq = this->seqID;
 	for (int i = 0; i < this->reelsCount; i++)
 	{
-		positions[i] = seqID % this->reelLengths[i];
-		seqID /= this->reelLengths[i];
+		positions[i] = seq % this->reelLengths[i];
+		seq /= this->reelLengths[i];
 	}
 	this->reelSets[0]->spinToPosition(positions);
 	this->seqID++;

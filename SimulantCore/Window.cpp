@@ -56,23 +56,21 @@ int Window::winCrissCross3x3() const
 				int sameSymbolsCount = 1;
 				if (isWildReplacing)
 				{
-					if ((this->matrix[0][i] == this->matrix[1][j])
-						|| (this->matrix[0][i]->getId() == 6)
+					if ((main == this->matrix[1][j])
 						|| (this->matrix[1][j]->getId() == 6))
 					{
 						sameSymbolsCount = 2;
-						if ((this->matrix[2][k] == this->matrix[1][j])
-							|| (this->matrix[2][k]->getId() == 6)
-							|| (this->matrix[1][j]->getId() == 6))
+						if ((this->matrix[2][k] == main)
+							|| (this->matrix[2][k]->getId() == 6))
 							sameSymbolsCount = 3;
 					}
 				}
 				else
 				{
-					if (this->matrix[0][i] == this->matrix[1][j])
+					if (main == this->matrix[1][j])
 					{
 						sameSymbolsCount = 2;
-						if (this->matrix[2][k] == this->matrix[1][j])
+						if (this->matrix[2][k] == main)
 							sameSymbolsCount = 3;
 					}
 				}
