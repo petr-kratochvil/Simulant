@@ -20,8 +20,45 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\SimulantGUI\resource.rc">
+    <Image Include="..\resources\game21\2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\game21\3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\game21\4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\game21\5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\game21\6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\game21\7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\game21\8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\game21\1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+    <ResourceCompile Include="..\SimulantGUI\resource_SimulantGUI.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

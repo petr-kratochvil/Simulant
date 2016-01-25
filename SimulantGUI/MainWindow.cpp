@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "resource.h"
 
 MainWindow::MainWindow(HINSTANCE hInstance, const wchar_t* title, int width, int height)
 	: hInstance(hInstance)
@@ -9,7 +10,7 @@ MainWindow::MainWindow(HINSTANCE hInstance, const wchar_t* title, int width, int
 	wcsncpy_s(this->title, title, 250);
 	this->registerWindowClass();
 	this->createWindow();
-	int rmW = 500;
+	int rmW = 446;
 	this->reelMachine = new ReelMachine((width-rmW) / 2, 50, rmW, 5, 3);
 }
 
@@ -18,6 +19,8 @@ MainWindow::~MainWindow()
 	if (this->hDC != nullptr)
 		DeleteDC(this->hDC);
 	delete this->reelMachine;
+	for (int i = 0; i < this->symbols.size(); i++)
+		DeleteObject(this->symbols[i]);
 }
 
 void MainWindow::show(int showFlag)
@@ -28,9 +31,14 @@ void MainWindow::show(int showFlag)
 
 void MainWindow::setNewSpin(const Spin & spin)
 {
-	this->reelMachine->draw(this->hDC);
+	this->reelMachine->draw(this->hDC, this->symbols);
 	InvalidateRect(this->hWnd, NULL, false);
 	UpdateWindow(this->hWnd);
+}
+
+void MainWindow::addSymbol(int resourceID)
+{
+	this->symbols.push_back(LoadBitmap(this->hInstance, MAKEINTRESOURCE(resourceID)));
 }
 
 void MainWindow::registerWindowClass()
@@ -95,7 +103,7 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			// fill background
 			RECT rect; rect.left = 0, rect.top = 0;
 			rect.right = this->width, rect.bottom = this->height;
-			HBRUSH hBrBackground = CreateSolidBrush(RGB(128, 255, 128));
+			HBRUSH hBrBackground = CreateSolidBrush(RGB(0, 0, 0));
 			FillRect(this->hDC, &rect, hBrBackground);
 			DeleteObject(hBrBackground);
 		}

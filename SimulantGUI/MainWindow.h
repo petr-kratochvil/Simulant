@@ -1,6 +1,5 @@
 #pragma once
 #include <windows.h>
-#include "resource.h"
 #include "ReelMachine.h"
 #include "SimulantCore/Spin.h"
 
@@ -11,6 +10,7 @@ public:
 	~MainWindow();
 	void show(int showFlag = SW_SHOW);
 	void setNewSpin(const Spin& spin);
+	void addSymbol(int resourceID);
 private:
 	MainWindow(const MainWindow&);
 	MainWindow& operator=(const MainWindow&);
@@ -26,4 +26,5 @@ protected:
 	HDC hDC; // DC to be painted to - gets copied to the window on WM_PAINT
 	HBITMAP hBMP; // bitmap associated with hDC
 	ReelMachine* reelMachine;
+	std::vector<HBITMAP> symbols;
 };
