@@ -1,6 +1,5 @@
 #pragma once
 #include "Symbol.h"
-#include "StatDelegate.h"
 
 // A visible set of symbols on the screen
 // Different types of win can be evaluated
@@ -17,7 +16,9 @@ public:
 	void setSymbol(int x, int y, const Symbol& symbol);
 
 	// Evaluate the win, with optional stats reported to the StatDelegate
-	int winCrissCross(StatDelegate* stat = nullptr) const;
+	int winCrissCross() const;
+	// implementation of a special case - should be replaced by a general variant
+	int winCrissCross3x3() const;
 
 protected:
 	int width, height;

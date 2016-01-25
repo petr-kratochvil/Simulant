@@ -5,7 +5,6 @@ Symbol::Symbol(int id, const std::wstring& name, const std::vector<int>& pay)
 	, name(name)
 	, pay(pay)
 {
-	this->pay.insert(this->pay.begin(), 0);
 }
 
 Symbol::Symbol(const JSONValue* source)
@@ -34,5 +33,5 @@ int Symbol::getId() const
 int Symbol::getWin(int symbolsInLine) const
 {
 	// TODO throw exception
-	return this->pay[symbolsInLine];
+	return this->pay[symbolsInLine-1];
 }
