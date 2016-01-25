@@ -4,17 +4,19 @@ MainWindow::MainWindow(HINSTANCE hInstance, const wchar_t* title, int width, int
 	: hInstance(hInstance)
 	, width(width)
 	, height(height)
+	, hDC(nullptr)
 {
 	wcsncpy_s(this->title, title, 250);
 	this->registerWindowClass();
 	this->createWindow();
-	int rmW = width * 2 / 3;
-	this->reelMachine = new ReelMachine((width-rmW) / 2, 50, rmW, 300);
+	int rmW = 500;
+	this->reelMachine = new ReelMachine((width-rmW) / 2, 50, rmW, 5, 3);
 }
 
 MainWindow::~MainWindow()
 {
-	DeleteDC(this->hDC);
+	if (this->hDC != nullptr)
+		DeleteDC(this->hDC);
 	delete this->reelMachine;
 }
 
@@ -22,16 +24,13 @@ void MainWindow::show(int showFlag)
 {
 	ShowWindow(this->hWnd, showFlag);
 	UpdateWindow(this->hWnd);
-	HDC hDCWindow = GetDC(this->hWnd);
-	this->hDC = CreateCompatibleDC(hDCWindow);
-	HBITMAP bmp = CreateCompatibleBitmap(hDCWindow, 500, 500);
-	SelectObject(hDC, bmp);
-	ReleaseDC(this->hWnd, hDCWindow);
 }
 
 void MainWindow::setNewSpin(const Spin & spin)
 {
 	this->reelMachine->draw(this->hDC);
+	InvalidateRect(this->hWnd, NULL, false);
+	UpdateWindow(this->hWnd);
 }
 
 void MainWindow::registerWindowClass()
@@ -80,16 +79,29 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		break;
 	case WM_SHOWWINDOW:
 		{
+			if (this->hDC != nullptr)
+			{
+				DeleteDC(this->hDC);
+				DeleteObject(this->hBMP);
+			}
+
+			// Create hDC and bitmap
 			HDC hDCWindow = GetDC(this->hWnd);
 			this->hDC = CreateCompatibleDC(hDCWindow);
-			HBITMAP bmp = CreateCompatibleBitmap(hDCWindow, 500, 500);
-			SelectObject(hDC, bmp);
+			this->hBMP = CreateCompatibleBitmap(hDCWindow, GetDeviceCaps(this->hDC, HORZRES), GetDeviceCaps(this->hDC, VERTRES));
+			SelectObject(hDC, this->hBMP);
 			ReleaseDC(this->hWnd, hDCWindow);
-			break;
+
+			// fill background
+			RECT rect; rect.left = 0, rect.top = 0;
+			rect.right = this->width, rect.bottom = this->height;
+			HBRUSH hBrBackground = CreateSolidBrush(RGB(128, 255, 128));
+			FillRect(this->hDC, &rect, hBrBackground);
+			DeleteObject(hBrBackground);
 		}
+		break;
 	case WM_PAINT:
 		{
-			this->setNewSpin(Spin(NULL));
 			PAINTSTRUCT ps;
 			HDC hDCPaint = BeginPaint(hWnd, &ps);
 			bool a = BitBlt(hDCPaint, 0, 0, this->width, this->height, this->hDC, 0, 0, SRCCOPY);

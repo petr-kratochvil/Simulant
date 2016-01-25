@@ -24,5 +24,6 @@ protected:
 	int width, height;
 	wchar_t title[250];
 	HDC hDC; // DC to be painted to - gets copied to the window on WM_PAINT
+	HBITMAP hBMP; // bitmap associated with hDC
 	ReelMachine* reelMachine;
 };
