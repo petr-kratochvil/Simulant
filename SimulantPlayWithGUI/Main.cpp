@@ -2,7 +2,7 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	MainWindow mw(hInstance, L"Okénko ìšèøžýáí", 500, 300);
+	MainWindow mw(hInstance, L"Okénko ìšèøžýáí", 800, 600);
 	mw.show(nCmdShow);
 
 	MSG msg;

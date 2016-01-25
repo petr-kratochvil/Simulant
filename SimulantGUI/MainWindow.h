@@ -1,12 +1,16 @@
 #pragma once
 #include <windows.h>
 #include "resource.h"
+#include "ReelMachine.h"
+#include "SimulantCore/Spin.h"
 
 class MainWindow
 {
 public:
 	MainWindow(HINSTANCE hInstance, const wchar_t* title, int width, int height);
+	~MainWindow();
 	void show(int showFlag = SW_SHOW);
+	void setNewSpin(const Spin& spin);
 private:
 	MainWindow(const MainWindow&);
 	MainWindow& operator=(const MainWindow&);
@@ -19,4 +23,6 @@ protected:
 	HWND hWnd;
 	int width, height;
 	wchar_t title[250];
+	HDC hDC; // DC to be painted to - gets copied to the window on WM_PAINT
+	ReelMachine* reelMachine;
 };

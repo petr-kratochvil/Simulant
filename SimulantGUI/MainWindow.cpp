@@ -8,12 +8,30 @@ MainWindow::MainWindow(HINSTANCE hInstance, const wchar_t* title, int width, int
 	wcsncpy_s(this->title, title, 250);
 	this->registerWindowClass();
 	this->createWindow();
+	int rmW = width * 2 / 3;
+	this->reelMachine = new ReelMachine((width-rmW) / 2, 50, rmW, 300);
+}
+
+MainWindow::~MainWindow()
+{
+	DeleteDC(this->hDC);
+	delete this->reelMachine;
 }
 
 void MainWindow::show(int showFlag)
 {
 	ShowWindow(this->hWnd, showFlag);
 	UpdateWindow(this->hWnd);
+	HDC hDCWindow = GetDC(this->hWnd);
+	this->hDC = CreateCompatibleDC(hDCWindow);
+	HBITMAP bmp = CreateCompatibleBitmap(hDCWindow, 500, 500);
+	SelectObject(hDC, bmp);
+	ReleaseDC(this->hWnd, hDCWindow);
+}
+
+void MainWindow::setNewSpin(const Spin & spin)
+{
+	this->reelMachine->draw(this->hDC);
 }
 
 void MainWindow::registerWindowClass()
@@ -59,6 +77,24 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 	{
 	case WM_DESTROY:
 		PostQuitMessage(0);
+		break;
+	case WM_SHOWWINDOW:
+		{
+			HDC hDCWindow = GetDC(this->hWnd);
+			this->hDC = CreateCompatibleDC(hDCWindow);
+			HBITMAP bmp = CreateCompatibleBitmap(hDCWindow, 500, 500);
+			SelectObject(hDC, bmp);
+			ReleaseDC(this->hWnd, hDCWindow);
+			break;
+		}
+	case WM_PAINT:
+		{
+			this->setNewSpin(Spin(NULL));
+			PAINTSTRUCT ps;
+			HDC hDCPaint = BeginPaint(hWnd, &ps);
+			bool a = BitBlt(hDCPaint, 0, 0, this->width, this->height, this->hDC, 0, 0, SRCCOPY);
+			EndPaint(hWnd, &ps);
+		}
 		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
