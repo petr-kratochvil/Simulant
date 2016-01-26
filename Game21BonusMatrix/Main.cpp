@@ -205,6 +205,8 @@ int main()
 	array.push_back(new JSONValue(3.0));
 	JSONValue* value = new JSONValue(array);
 	wprintf(L"%s\n", value->Stringify().c_str());*/
+
+	FILE* fwMatrixTxt = fopen("matrix.txt", "w");
 	for (int i = 0; i < 730; i++)
 	{
 		if (!idMakesSense(i))
@@ -220,7 +222,12 @@ int main()
 			JSONValue* value = new JSONValue(double(matrix[i][j]));
 			inner->push_back(value);
 			checksum += matrix[i][j];
+			double element = double(matrix[i][j]) / double(seq);
+			fprintf(fwMatrixTxt, "%10.8f", element);
+			if (j < 729)
+				fprintf(fwMatrixTxt, " ");
 		}
+		fprintf(fwMatrixTxt, "\n");
 		if (checksum != seq)
 		{
 			printf("Chyba, checksum radku %d je %d misto %d!\n", i, checksum, seq);
@@ -233,6 +240,7 @@ int main()
 		JSONValue* value2 = new JSONValue(/*object*/ *value);
 		array.push_back(value2);
 	}
+	fclose(fwMatrixTxt);
 
 	FILE* fw = fopen("matrix.json", "wt,ccs=UTF-8");
 	printf("Delka pole: %d\n", array.size());
