@@ -39,8 +39,8 @@ int main()
 		simulator.spinOneStart();
 		const Spin& spin = simulator.getLastSpin();
 		const Window& w = spin.getWindow();
-		if (totalCount == 46312)
-			__debugbreak();
+//		if (totalCount == 46312)
+	//		__debugbreak();
 		int win = w.winCrissCross3x3();
 		totalCount++;
 		totalWin += win;
