@@ -248,5 +248,40 @@ int main()
 	fwprintf(fw, L"%s", value->Stringify(true).c_str());
 	fclose(fw);
 
+	FILE* fwMatrixZero = fopen("matrixZero.txt", "w");
+
+	double matrixZero[730][730];
+	memset(matrixZero, 0, sizeof(matrixZero));
+	for (int i = 0; i < 730; i++)
+		matrixZero[i][i] = 1.0;
+
+	double pX = 0.1;
+
+	for (int i = 0; i < 9; i++)
+		for (int j = 0; j < 9; j++)
+			for (int k = 0; k < 9; k++)
+			{
+				int id1 = getMatrixID(i, j, k);
+				int id2 = transitionX(i, j, k);
+				matrixZero[id1][id2] = pX;
+				matrixZero[id1][id1] -= pX;
+			}
+
+	for (int i = 0; i < 730; i++)
+	{
+		if (!idMakesSense(i))
+			continue;
+		for (int j = 0; j < 730; j++)
+		{
+			if (!idMakesSense(j))
+				continue;
+			fprintf(fwMatrixZero, "%10.8f", matrixZero[i][j]);
+			if (j < 729)
+				fprintf(fwMatrixZero, " ");
+		}
+		fprintf(fwMatrixZero, "\n");
+	}
+	fclose(fwMatrixZero);
+		
 	return 0;
 }
