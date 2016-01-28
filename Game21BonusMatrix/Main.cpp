@@ -117,7 +117,7 @@ void computeMatrix(int a, int b, int c)
 
 int main()
 {
-	wchar_t json[10000];
+	wchar_t* json = new wchar_t[10000];
 	getJSONInput(json);
 	const JSONValue* parsedJSON = JSON::Parse(json);
 	
@@ -129,6 +129,8 @@ int main()
 	ReelSet rs(parsedJSONReelSets[0], sset);
 
 	SpinSourceGeneratorSeq ssg(&sset, parsedJSONReelSets);
+
+	delete [] json;
 
 	memset(cnts, 0, sizeof(cnts));
 	memset(matrix, 0, sizeof(matrix));
@@ -250,10 +252,15 @@ int main()
 
 	FILE* fwMatrixZero = fopen("matrixZero.txt", "w");
 
-	double matrixZero[730][730];
-	memset(matrixZero, 0, sizeof(matrixZero));
+	double** matrixZero = new double*[730];
+	for (int i = 0; i < 730; i++)
+	{
+		matrixZero[i] = new double[730];
+		memset(matrixZero[i], 0, sizeof(matrixZero[i]));
+	}
 	for (int i = 0; i < 730; i++)
 		matrixZero[i][i] = 1.0;
+
 
 	double pX = 0.1;
 
@@ -263,8 +270,11 @@ int main()
 			{
 				int id1 = getMatrixID(i, j, k);
 				int id2 = transitionX(i, j, k);
-				matrixZero[id1][id2] = pX;
-				matrixZero[id1][id1] -= pX;
+				if (id1 != id2)
+				{
+					matrixZero[id1][id2] = pX;
+					matrixZero[id1][id1] -= pX;
+				}
 			}
 
 	for (int i = 0; i < 730; i++)
