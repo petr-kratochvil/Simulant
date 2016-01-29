@@ -4,10 +4,10 @@
 #include "SimulantCore/SpinSourceGeneratorSeq.h"
 #include <algorithm>
 
-void getJSONInput(wchar_t* json)
+void getJSONInput(wchar_t* json, char* fileName)
 {
 	FILE *fr;
-	errno_t err = fopen_s(&fr, "game21.json", "rt,ccs=UTF-8");
+	errno_t err = fopen_s(&fr, fileName, "rt,ccs=UTF-8");
 
 	wchar_t buffer[10000];
 	json[0] = '\0';
@@ -115,10 +115,16 @@ void computeMatrix(int a, int b, int c)
 			}
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	wchar_t* json = new wchar_t[10000];
-	getJSONInput(json);
+	char fileName[50];
+	if (argc <= 1)
+		strcpy(fileName, "game21.json");
+	else
+		strcpy(fileName, argv[1]);
+	printf("Loading input file %s\n", fileName);
+	getJSONInput(json, fileName);
 	const JSONValue* parsedJSON = JSON::Parse(json);
 	
 	SymbolSet sset(parsedJSON);
@@ -259,9 +265,14 @@ int main()
 		memset(matrixZero[i], 0, sizeof(matrixZero[i]));
 	}
 	for (int i = 0; i < 730; i++)
+		for (int j = 0; j < 730; j++)
+			matrixZero[i][j] = 0;
+
+	for (int i = 0; i < 730; i++)
 		matrixZero[i][i] = 1.0;
 
-
+	///////////////////////////////////////////////////////
+	// probability of X symbol appearing on the middle reel
 	double pX = 0.1;
 
 	for (int i = 0; i < 9; i++)
