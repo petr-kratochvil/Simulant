@@ -1,26 +1,22 @@
 #include "MainWindow.h"
+#include "GUI.h"
 #include "resource.h"
 
-MainWindow::MainWindow(HINSTANCE hInstance, const wchar_t* title, int width, int height)
-	: hInstance(hInstance)
-	, width(width)
+MainWindow::MainWindow(GUI* gui, HINSTANCE hInstance, const wchar_t* title, int width, int height)
+	: width(width)
 	, height(height)
 	, hDC(nullptr)
+	, gui(gui)
 {
 	wcsncpy_s(this->title, title, 250);
-	this->registerWindowClass();
-	this->createWindow();
-	int rmW = 446;
-	this->reelMachine = new ReelMachine((width-rmW) / 2, 50, rmW, 5, 3);
+	this->registerWindowClass(hInstance);
+	this->createWindow(hInstance);
 }
 
 MainWindow::~MainWindow()
 {
 	if (this->hDC != nullptr)
 		DeleteDC(this->hDC);
-	delete this->reelMachine;
-	for (int i = 0; i < this->symbols.size(); i++)
-		DeleteObject(this->symbols[i]);
 }
 
 void MainWindow::show(int showFlag)
@@ -29,19 +25,18 @@ void MainWindow::show(int showFlag)
 	UpdateWindow(this->hWnd);
 }
 
-void MainWindow::setNewSpin(const Spin & spin)
+void MainWindow::refresh()
 {
-	this->reelMachine->draw(this->hDC, this->symbols);
 	InvalidateRect(this->hWnd, NULL, false);
 	UpdateWindow(this->hWnd);
 }
 
-void MainWindow::addSymbol(int resourceID)
+HDC MainWindow::getDC()
 {
-	this->symbols.push_back(LoadBitmap(this->hInstance, MAKEINTRESOURCE(resourceID)));
+	return this->hDC;
 }
 
-void MainWindow::registerWindowClass()
+void MainWindow::registerWindowClass(HINSTANCE hInstance)
 {
 	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
@@ -61,11 +56,11 @@ void MainWindow::registerWindowClass()
 	RegisterClassEx(&wcex);
 }
 
-void MainWindow::createWindow()
+void MainWindow::createWindow(HINSTANCE hInstance)
 {
 	// TODO throw exception
 	this->hWnd = CreateWindow(L"MainWindowClass", this->title, WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME ^ WS_MAXIMIZEBOX,
-		CW_USEDEFAULT, 0, this->width, this->height, NULL, NULL, this->hInstance, NULL);
+		CW_USEDEFAULT, 0, this->width, this->height, NULL, NULL, hInstance, NULL);
 	SetWindowLong(this->hWnd, GWLP_USERDATA, long(this));
 }
 
@@ -103,7 +98,7 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			// fill background
 			RECT rect; rect.left = 0, rect.top = 0;
 			rect.right = this->width, rect.bottom = this->height;
-			HBRUSH hBrBackground = CreateSolidBrush(RGB(0, 0, 0));
+			HBRUSH hBrBackground = CreateSolidBrush(RGB(255, 255, 255));
 			FillRect(this->hDC, &rect, hBrBackground);
 			DeleteObject(hBrBackground);
 		}
@@ -115,6 +110,9 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			bool a = BitBlt(hDCPaint, 0, 0, this->width, this->height, this->hDC, 0, 0, SRCCOPY);
 			EndPaint(hWnd, &ps);
 		}
+		break;
+	case WM_KEYDOWN:
+		this->gui->userStartClicked();
 		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);

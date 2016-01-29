@@ -135,11 +135,15 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="ReelMachine.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="ReelMachine.cpp" />
   </ItemGroup>

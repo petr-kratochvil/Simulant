@@ -14,7 +14,7 @@ ReelMachine::ReelMachine(int left, int top, int width, int reels, int rows)
 	Random::init();
 }
 
-void ReelMachine::draw(HDC hDC, const std::vector<HBITMAP>& symbols)
+void ReelMachine::draw(HDC hDC, const std::vector<HBITMAP>& symbols, const Spin* spin)
 {
 	RECT rect;
 	rect.left = this->left, rect.top = this->top;
@@ -24,17 +24,24 @@ void ReelMachine::draw(HDC hDC, const std::vector<HBITMAP>& symbols)
 	DeleteObject(hBrBackground);
 
 	// Draw symbols
-	for (int i = 0; i < this->reels; i++)
-		for (int j = 0; j < this->rows; j++)
-		{
-			int symbolID = Random::gen(0, symbols.size()-1);
-			DrawState(hDC, NULL, NULL, LPARAM(symbols[symbolID]), 0
-				, 1+this->left + i * this->symbolWidth, 1+this->top + j * this->symbolHeight
-				, 0, 0, DST_BITMAP);
-		}
+	// TODO throw exception
+	if (spin != nullptr)
+	{
+		const Window& w = spin->getWindow();
+		for (int i = 0; i < this->reels; i++)
+			for (int j = 0; j < this->rows; j++)
+			{
+				if ((i < w.getWidth()) && (j <= w.getHeight()))
+				{
+					DrawState(hDC, NULL, NULL, LPARAM(symbols[w.getSymbol(i,j).getId()]), 0
+						, 1 + this->left + i * this->symbolWidth, 1 + this->top + j * this->symbolHeight
+						, 0, 0, DST_BITMAP);
+				}
+			}
+	}
 
 	// Draw the grid
-/*	for (int j = 0; j <= this->rows; j++)
+	/*for (int j = 0; j <= this->rows; j++)
 	{
 		MoveToEx(hDC, this->left, this->top + j * this->symbolHeight, NULL);
 		LineTo(hDC, this->left + this->width, this->top + j * this->symbolHeight);
@@ -45,3 +52,4 @@ void ReelMachine::draw(HDC hDC, const std::vector<HBITMAP>& symbols)
 		LineTo(hDC, this->left + i * this->symbolWidth, this->top + this->height);
 	}*/
 }
+
