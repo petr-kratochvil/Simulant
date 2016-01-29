@@ -1,10 +1,10 @@
 #include "SimulantCore/Simulator.h"
 #include "SimulantCore/SpinSourceGeneratorSeq.h"
 
-void getJSONInput(wchar_t* json)
+void getJSONInput(wchar_t* json, char* fileName)
 {
 	FILE *fr;
-	errno_t err = fopen_s(&fr, "game21.json", "rt,ccs=UTF-8");
+	errno_t err = fopen_s(&fr, fileName, "rt,ccs=UTF-8");
 
 	wchar_t buffer[10000];
 	json[0] = '\0';
@@ -17,10 +17,16 @@ void getJSONInput(wchar_t* json)
 	}
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	wchar_t json[10000];
-	getJSONInput(json);
+	char fileName[50];
+	if (argc <= 1)
+		strcpy(fileName, "game21.json");
+	else
+		strcpy(fileName, argv[1]);
+	printf("Loading input file %s\n", fileName);
+	getJSONInput(json, fileName);
 	const JSONValue* parsedJSON = JSON::Parse(json);
 	SymbolSet sset(parsedJSON);
 
