@@ -2,6 +2,8 @@
 #include "GUI.h"
 #include "resource.h"
 
+WNDPROC MainWindow::oldButtonProc;
+
 MainWindow::MainWindow(GUI* gui, HINSTANCE hInstance, const wchar_t* title, int width, int height)
 	: width(width)
 	, height(height)
@@ -17,6 +19,8 @@ MainWindow::~MainWindow()
 {
 	if (this->hDC != nullptr)
 		DeleteDC(this->hDC);
+	DeleteObject(this->hFontHeading);
+	DeleteObject(this->hBMP);
 }
 
 void MainWindow::show(int showFlag)
@@ -62,6 +66,30 @@ void MainWindow::createWindow(HINSTANCE hInstance)
 	this->hWnd = CreateWindow(L"MainWindowClass", this->title, WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME ^ WS_MAXIMIZEBOX,
 		CW_USEDEFAULT, 0, this->width, this->height, NULL, NULL, hInstance, NULL);
 	SetWindowLong(this->hWnd, GWLP_USERDATA, long(this));
+
+	int voff = 100;
+
+	this->editInfo = CreateWindowEx(WS_EX_CLIENTEDGE, L"EDIT", L""
+		, WS_CHILD | WS_VISIBLE | ES_MULTILINE | WS_VSCROLL
+		, 368, voff
+		, 800-368-50, 268, this->hWnd, HMENU(NULL), hInstance, NULL);
+	ShowWindow(this->editInfo, SW_SHOW);
+
+	this->buttonStart = CreateWindow(L"BUTTON", L"Start !"
+		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
+		, 50+268/2-150/2, 268+50+voff
+		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
+	ShowWindow(this->buttonStart, SW_SHOW);
+
+	this->buttonBack = CreateWindow(L"BUTTON", L"Zpìt"
+		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
+		, 50 + 268 / 2 - 150 / 2, 268 + 50 + 50 + voff
+		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
+	ShowWindow(this->buttonBack, SW_SHOW);
+
+	this->hFontHeading = CreateFont(30, 0, 0, 0, 0, FALSE, 0, 0, 0, 0, 0, 0, 0, L"Times New Roman");
+	MainWindow::oldButtonProc = (WNDPROC)SetWindowLong(this->buttonStart, GWL_WNDPROC, (LONG)this->newButtonProc);
+	SetWindowLong(this->buttonBack, GWL_WNDPROC, (LONG)this->newButtonProc);
 }
 
 LRESULT MainWindow::internal_windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -101,6 +129,10 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			HBRUSH hBrBackground = CreateSolidBrush(RGB(255, 255, 255));
 			FillRect(this->hDC, &rect, hBrBackground);
 			DeleteObject(hBrBackground);
+
+			rect.top = 0, rect.left = 50, rect.right = 750, rect.bottom = 100;
+			SelectObject(this->hDC, this->hFontHeading);
+			DrawText(this->hDC, L"Hra 21 Scratch It!", -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 		}
 		break;
 	case WM_PAINT:
@@ -112,10 +144,32 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		}
 		break;
 	case WM_KEYDOWN:
-		this->gui->userStartClicked();
+		break;
+	case WM_COMMAND:
+		if (HIWORD(wParam) == BN_CLICKED)
+		{
+			if ((HWND)lParam == this->buttonStart)
+				this->gui->userStartClicked();
+		}
 		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
+}
+
+LRESULT MainWindow::newButtonProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_KEYDOWN:
+		if (wParam == VK_RETURN)
+		{
+			SendMessage(hWnd, BM_CLICK, 0, 0);
+			break;
+		}
+	default:
+		return CallWindowProc(MainWindow::oldButtonProc, hWnd, message, wParam, lParam);
 	}
 	return 0;
 }

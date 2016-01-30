@@ -20,9 +20,15 @@ private:
 	LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 protected:
 	HWND hWnd;
+	HWND editInfo;
+	HWND buttonStart;
+	HWND buttonBack;
 	int width, height;
 	wchar_t title[250];
 	HDC hDC; // DC to be painted to - gets copied to the window on WM_PAINT
 	HBITMAP hBMP; // bitmap associated with hDC
+	HFONT hFontHeading;
 	GUI* gui;
+	static WNDPROC oldButtonProc;
+	static LRESULT CALLBACK newButtonProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };
