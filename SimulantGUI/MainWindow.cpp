@@ -70,7 +70,7 @@ void MainWindow::createWindow(HINSTANCE hInstance)
 	int voff = 100;
 
 	this->editInfo = CreateWindowEx(WS_EX_CLIENTEDGE, L"EDIT", L""
-		, WS_CHILD | WS_VISIBLE | ES_MULTILINE | WS_VSCROLL
+		, WS_CHILD | WS_VISIBLE | ES_MULTILINE | WS_VSCROLL | ES_READONLY
 		, 368, voff
 		, 800-368-50, 268, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->editInfo, SW_SHOW);
@@ -87,9 +87,23 @@ void MainWindow::createWindow(HINSTANCE hInstance)
 		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
+	this->buttonBetUp = CreateWindow(L"BUTTON", L"Sázka +"
+		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
+		, 368, 268 + 50 + voff
+		, 100, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
+	ShowWindow(this->buttonBack, SW_SHOW);
+
+	this->buttonBetDown = CreateWindow(L"BUTTON", L"Sázka -"
+		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
+		, 368, 268 + 50 + 50 + voff
+		, 100, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
+	ShowWindow(this->buttonBack, SW_SHOW);
+
 	this->hFontHeading = CreateFont(30, 0, 0, 0, 0, FALSE, 0, 0, 0, 0, 0, 0, 0, L"Times New Roman");
 	MainWindow::oldButtonProc = (WNDPROC)SetWindowLong(this->buttonStart, GWL_WNDPROC, (LONG)this->newButtonProc);
 	SetWindowLong(this->buttonBack, GWL_WNDPROC, (LONG)this->newButtonProc);
+	SetWindowLong(this->buttonBetUp, GWL_WNDPROC, (LONG)this->newButtonProc);
+	SetWindowLong(this->buttonBetDown, GWL_WNDPROC, (LONG)this->newButtonProc);
 }
 
 LRESULT MainWindow::internal_windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

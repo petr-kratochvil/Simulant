@@ -23,6 +23,8 @@ protected:
 	HWND editInfo;
 	HWND buttonStart;
 	HWND buttonBack;
+	HWND buttonBetUp;
+	HWND buttonBetDown;
 	int width, height;
 	wchar_t title[250];
 	HDC hDC; // DC to be painted to - gets copied to the window on WM_PAINT
