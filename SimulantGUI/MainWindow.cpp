@@ -77,25 +77,25 @@ void MainWindow::createWindow(HINSTANCE hInstance)
 
 	this->buttonStart = CreateWindow(L"BUTTON", L"Start !"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 50+268/2-150/2, 268+50+voff
+		, 50, 268+50+voff
 		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonStart, SW_SHOW);
 
 	this->buttonBack = CreateWindow(L"BUTTON", L"Zpìt"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 50 + 268 / 2 - 150 / 2, 268 + 50 + 50 + voff
+		, 50, 268 + 50 + 50 + voff
 		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
 	this->buttonBetUp = CreateWindow(L"BUTTON", L"Sázka +"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 368, 268 + 50 + voff
+		, 218, 268 + 50 + voff
 		, 100, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
 	this->buttonBetDown = CreateWindow(L"BUTTON", L"Sázka -"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 368, 268 + 50 + 50 + voff
+		, 218, 268 + 50 + 50 + voff
 		, 100, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
@@ -144,6 +144,9 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			FillRect(this->hDC, &rect, hBrBackground);
 			DeleteObject(hBrBackground);
 
+
+			rect.top = 268+50+70, rect.left = 368, rect.right = 800, rect.bottom = 268 + 50 + 100;
+			DrawText(this->hDC, L"Bonusová okénka:", -1, &rect, DT_SINGLELINE | DT_LEFT | DT_VCENTER);
 			rect.top = 0, rect.left = 50, rect.right = 750, rect.bottom = 100;
 			SelectObject(this->hDC, this->hFontHeading);
 			DrawText(this->hDC, L"Hra 21 Scratch It!", -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);

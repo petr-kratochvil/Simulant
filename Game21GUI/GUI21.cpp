@@ -3,8 +3,9 @@
 GUI21::GUI21(HINSTANCE hInstance)
 	: GUI(hInstance)
 {
-	this->bonusStack = new BonusStack(368, 268+50+100, 800-368-50);
+	this->bonusStack = new BonusStack(368, 268+50+100, 357);
 	this->bonusStack->draw(this->mainWindow->getDC(), this->symbols);
+	this->mainWindow->refresh();
 }
 
 GUI21::~GUI21()
