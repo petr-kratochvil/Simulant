@@ -1,5 +1,6 @@
 #pragma once
 #include "Symbol.h"
+#include "WindowWin.h"
 
 // A visible set of symbols on the screen
 // Different types of win can be evaluated
@@ -18,9 +19,10 @@ public:
 	// Evaluate the win, with optional stats reported to the StatDelegate
 	int winCrissCross() const;
 	// implementation of a special case - should be replaced by a general variant
-	int winCrissCross3x3() const;
+	const WindowWin& winCrissCross3x3();
 
 protected:
 	int width, height;
 	std::vector<std::vector<const Symbol*>> matrix;
+	WindowWin wwin;
 };

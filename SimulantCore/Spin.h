@@ -9,15 +9,17 @@ public:
 	~Spin();
 
 	// Total win amount, including payline wins and bonuses,
-	int getWin() const;
+	int getTotalWin() const;
 	const Window& getWindow() const;
 	// Is next spin basic (not a respin)?
 	bool isFinal() const;
+	const WindowWin& getWin() const;
 
 protected:
 	bool final;
 	Window* window;
-
+	void computeWin();
+	const WindowWin* wwin;
 private:
 	Spin(const Spin&);
 	Spin& operator=(const Spin&);

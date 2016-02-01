@@ -28,8 +28,9 @@ void Window::setSymbol(int x, int y, const Symbol& symbol)
 	this->matrix[x][y] = &symbol;
 }
 
-int Window::winCrissCross3x3() const
+const WindowWin& Window::winCrissCross3x3()
 {
+	this->wwin.clear();
 	bool isWildReplacing = true;
 	int wildCount = 0;
 	int winAmount = 0;
@@ -74,7 +75,7 @@ int Window::winCrissCross3x3() const
 							sameSymbolsCount = 3;
 					}
 				}
-				winAmount += main->getWin(sameSymbolsCount);
+				this->wwin.addLine(*main, sameSymbolsCount, main->getWin(sameSymbolsCount));
 			}
-	return winAmount;
+	return this->wwin;
 }
