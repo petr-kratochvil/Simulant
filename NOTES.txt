@@ -5,3 +5,5 @@ QUESTIONS
 TODOS
 * exception
 * private copy ctors and operator='s
+* const policy
+* compare symbol's IDs, not addresses

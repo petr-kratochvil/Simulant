@@ -36,3 +36,10 @@ void Spin::computeWin()
 {
 	this->wwin = &this->window->winCrissCross3x3();
 }
+
+Spin::Spin(const Spin& spin)
+	: final(spin.final)
+{
+	this->window = new Window(*spin.window);
+	this->computeWin();
+}

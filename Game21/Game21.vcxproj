@@ -135,9 +135,11 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Spin21.h" />
     <ClInclude Include="SSG21.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Spin21.cpp" />
     <ClCompile Include="SSG21.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

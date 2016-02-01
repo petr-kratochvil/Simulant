@@ -6,7 +6,7 @@ class Spin
 {
 public:
 	Spin(Window* window, bool final = true);
-	~Spin();
+	virtual ~Spin();
 
 	// Total win amount, including payline wins and bonuses,
 	int getTotalWin() const;
@@ -20,7 +20,7 @@ protected:
 	Window* window;
 	void computeWin();
 	const WindowWin* wwin;
+	Spin(const Spin& spin);
 private:
-	Spin(const Spin&);
 	Spin& operator=(const Spin&);
 };
