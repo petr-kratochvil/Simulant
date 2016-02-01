@@ -1,5 +1,6 @@
 #include "Controller.h"
 #include "GUI.h"
+#include "Game21/SSG21.h"
 
 Controller::Controller(wchar_t * jsonGameDescription)
 {
@@ -8,7 +9,7 @@ Controller::Controller(wchar_t * jsonGameDescription)
 	this->symbolSet = new SymbolSet(parsedJSON);
 	const JSONObject& parsedJSONObject = parsedJSON->AsObject();
 	const JSONArray& parsedJSONReelSets = parsedJSONObject.at(L"reelSets")->AsArray();
-	this->spinSourceGenerator = new SpinSourceGenerator(this->symbolSet, parsedJSONReelSets);
+	this->spinSourceGenerator = new SSG21(this->symbolSet, parsedJSONReelSets);
 	this->simulator = new Simulator(*this->spinSourceGenerator);
 	delete parsedJSON;
 }

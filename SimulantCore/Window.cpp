@@ -75,7 +75,9 @@ const WindowWin& Window::winCrissCross3x3()
 							sameSymbolsCount = 3;
 					}
 				}
-				this->wwin.addLine(*main, sameSymbolsCount, main->getWin(sameSymbolsCount));
+				int pay = main->getWin(sameSymbolsCount);
+				if (pay > 0)
+					this->wwin.addLine(*main, sameSymbolsCount, pay);
 			}
 	return this->wwin;
 }

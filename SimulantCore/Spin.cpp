@@ -5,6 +5,7 @@ Spin::Spin(Window* window, bool final)
 	, window(window)
 {
 	this->computeWin();
+	this->sSet = nullptr;
 }
 
 Spin::~Spin()
@@ -15,6 +16,16 @@ Spin::~Spin()
 const WindowWin& Spin::getWin() const
 {
 	return *this->wwin;
+}
+
+void Spin::setSSet(const SymbolSet * sSet)
+{
+	this->sSet = sSet;
+}
+
+const SymbolSet * Spin::getSSet() const
+{
+	return this->sSet;
 }
 
 int Spin::getTotalWin() const
@@ -39,6 +50,7 @@ void Spin::computeWin()
 
 Spin::Spin(const Spin& spin)
 	: final(spin.final)
+	, sSet(spin.sSet)
 {
 	this->window = new Window(*spin.window);
 	this->computeWin();

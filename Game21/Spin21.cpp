@@ -20,3 +20,8 @@ void Spin21::stackPush(const Symbol & symbol)
 {
 	this->bonusStack.push_back(&symbol);
 }
+
+const std::vector<const Symbol*>& Spin21::getStack() const
+{
+	return this->bonusStack;
+}

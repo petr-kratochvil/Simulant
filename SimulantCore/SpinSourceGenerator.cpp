@@ -41,5 +41,7 @@ Spin * SpinSourceGenerator::getNextSpin()
 	// TODO throw exception if reelSetChosen == -1
 	this->reelSets[reelSetChosen]->spin();
 	Window* w = this->reelSets[reelSetChosen]->getWindow();
-	return new Spin(w);
+	Spin* spin = new Spin(w);
+	spin->setSSet(this->symbolSet);
+	return spin;
 }

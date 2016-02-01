@@ -1,4 +1,4 @@
-#include "SimulantGUI/GUI.h"
+#include "Game21GUI/GUI21.h"
 #include "SimulantGUI/Controller.h"
 #include "resource.h"
 #include "SimulantCore/JSON/JSON.h"
@@ -28,7 +28,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	getJSONInput(json);
 	
 	Controller controller(json);
-	GUI gui(hInstance);
+	GUI21 gui(hInstance);
 	controller.assignGUI(&gui);
 	gui.assignController(&controller);
 	

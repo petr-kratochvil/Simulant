@@ -1,5 +1,6 @@
 #pragma once
 #include "Window.h"
+#include "SymbolSet.h"
 
 // Represents one spin, or respin, or freespin
 class Spin
@@ -14,6 +15,8 @@ public:
 	// Is next spin basic (not a respin)?
 	bool isFinal() const;
 	const WindowWin& getWin() const;
+	void setSSet(const SymbolSet* sSet);
+	const SymbolSet* getSSet() const;
 
 protected:
 	bool final;
@@ -21,6 +24,7 @@ protected:
 	void computeWin();
 	const WindowWin* wwin;
 	Spin(const Spin& spin);
+	const SymbolSet* sSet;
 private:
 	Spin& operator=(const Spin&);
 };

@@ -9,6 +9,7 @@ public:
 	Spin21(const Spin& spin, const std::vector<const Symbol*>& bonusStack);
 	void stackPop();
 	void stackPush(const Symbol& symbol);
+	const std::vector<const Symbol*>& getStack() const;
 protected:
 	std::vector<const Symbol*> bonusStack;
 };

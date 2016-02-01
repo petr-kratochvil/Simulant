@@ -9,8 +9,8 @@ class GUI
 {
 public:
 	GUI(HINSTANCE hInstance);
-	~GUI();
-	void setNewSpin(const Spin & spin);
+	virtual ~GUI();
+	virtual void setNewSpin(const Spin & spin);
 	void assignController(Controller* controller);
 	void addSymbol(int resourceID);
 	void userStartClicked();

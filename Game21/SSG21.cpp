@@ -10,6 +10,8 @@ Spin21 * SSG21::getNextSpin()
 	Spin* spin = SpinSourceGenerator::getNextSpin();
 	std::vector<WindowWinItem> winList = spin->getWin().getList();
 
+	if (this->bonusStack.size() >= 4)
+		this->bonusStack.clear();
 	if (spin->getTotalWin() == 0)
 	{
 		const Window& w = spin->getWindow();
