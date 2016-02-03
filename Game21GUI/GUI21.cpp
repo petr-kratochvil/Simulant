@@ -46,6 +46,8 @@ void BonusStack::draw(HDC hDC, const std::vector<HBITMAP>& symbols, const Spin21
 	{
 		w->setSymbol(j, 0, spin->getSSet()->getSymbol(7));
 	}
+	if (spin->getBonusPosition() != -1)
+		w->setHighlight(spin->getBonusPosition(), 0);
 	Spin* newSpin = new Spin(w, spin->isFinal());
 	this->rm->draw(hDC, symbols, newSpin);
 	delete newSpin;

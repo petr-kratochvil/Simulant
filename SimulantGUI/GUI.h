@@ -2,6 +2,10 @@
 #include "SimulantCore/Spin.h"
 #include "ReelMachine.h"
 #include "MainWindow.h"
+#include <gdiplus.h>
+
+// link the Gdiplus library
+#pragma comment(lib,"gdiplus.lib")
 
 class Controller;
 
@@ -22,6 +26,8 @@ protected:
 	std::vector<HBITMAP> symbols;
 	HINSTANCE hInstance;
 	MainWindow* mainWindow;
+	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+	ULONG_PTR gdiplusToken;
 
 private:
 	GUI(const GUI&);

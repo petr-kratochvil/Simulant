@@ -8,6 +8,9 @@ GUI::GUI(HINSTANCE hInstance)
 	int rmW = 268;
 	int width = 800;
 	int height = 600;
+	
+	Gdiplus::GdiplusStartup(&this->gdiplusToken, &this->gdiplusStartupInput, NULL);
+
 	this->reelMachine = new ReelMachine(50, 100, rmW, 3, 3);
 	this->mainWindow = new MainWindow(this, hInstance, L"Simulant GUI", width, height);
 	this->mainWindow->show();

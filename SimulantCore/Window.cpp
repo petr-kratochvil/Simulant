@@ -4,7 +4,11 @@ Window::Window(int width, int height)
 	: width(width)
 	, height(height)
 	, matrix(width, std::vector<const Symbol*>(height))
+	, highlights(width, std::vector<bool>(height, false))
 {
+	for (int i = 0; i < width; i++)
+		for (int j = 0; j < height; j++)
+			this->highlights[i][j] = false;
 }
 
 int Window::getWidth() const
@@ -77,7 +81,22 @@ const WindowWin& Window::winCrissCross3x3()
 				}
 				int pay = main->getWin(sameSymbolsCount);
 				if (pay > 0)
+				{
 					this->wwin.addLine(*main, sameSymbolsCount, pay);
+					this->highlights[0][i] = true;
+					this->highlights[1][j] = true;
+					this->highlights[2][k] = true;
+				}
 			}
 	return this->wwin;
+}
+
+bool Window::highlighted(int x, int y) const
+{
+	return this->highlights[x][y];
+}
+
+void Window::setHighlight(int x, int y, bool status)
+{
+	this->highlights[x][y] = status;
 }

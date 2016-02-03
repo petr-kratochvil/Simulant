@@ -20,9 +20,12 @@ public:
 	int winCrissCross() const;
 	// implementation of a special case - should be replaced by a general variant
 	const WindowWin& winCrissCross3x3();
+	bool highlighted(int x, int y) const;
+	void setHighlight(int x, int y, bool status = true);
 
 protected:
 	int width, height;
 	std::vector<std::vector<const Symbol*>> matrix;
+	std::vector<std::vector<bool>> highlights;
 	WindowWin wwin;
 };
