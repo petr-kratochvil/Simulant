@@ -11,6 +11,7 @@ public:
 	GUI(HINSTANCE hInstance);
 	virtual ~GUI();
 	virtual void setNewSpin(const Spin & spin);
+	virtual void setNewDescription(const std::wstring& description);
 	void assignController(Controller* controller);
 	void addSymbol(int resourceID);
 	void userStartClicked();

@@ -136,6 +136,7 @@
     <ClCompile Include="SpinSource.cpp" />
     <ClCompile Include="SpinSourceGenerator.cpp" />
     <ClCompile Include="SpinSourceGeneratorSeq.cpp" />
+    <ClCompile Include="Statistics.cpp" />
     <ClCompile Include="Symbol.cpp" />
     <ClCompile Include="SymbolSet.cpp" />
     <ClCompile Include="Window.cpp" />

@@ -17,10 +17,13 @@ public:
 	const WindowWin& getWin() const;
 	void setSSet(const SymbolSet* sSet);
 	const SymbolSet* getSSet() const;
+	void setBet(int bet);
+	int getBet() const;
 
 protected:
 	bool final;
 	Window* window;
+	int bet;
 	void computeWin();
 	const WindowWin* wwin;
 	Spin(const Spin& spin);

@@ -2,6 +2,7 @@
 #include "SimulantCore/Simulator.h"
 #include "SimulantCore/JSON/JSON.h"
 #include "SimulantCore/SpinSourceGenerator.h"
+#include "SimulantCore/Statistics.h"
 
 class GUI;
 
@@ -17,4 +18,5 @@ protected:
 	SymbolSet* symbolSet;
 	SpinSourceGenerator* spinSourceGenerator;
 	GUI* gui;
+	Statistics* statistics;
 };

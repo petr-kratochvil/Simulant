@@ -1,5 +1,6 @@
 #pragma once
 #include <windows.h>
+#include <string>
 
 class GUI;
 
@@ -11,6 +12,7 @@ public:
 	void show(int showFlag = SW_SHOW);
 	void refresh();
 	HDC getDC();
+	void setDescription(const std::wstring description);
 private:
 	MainWindow(const MainWindow&);
 	MainWindow& operator=(const MainWindow&);

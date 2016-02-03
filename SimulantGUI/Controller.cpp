@@ -12,6 +12,8 @@ Controller::Controller(wchar_t * jsonGameDescription)
 	this->spinSourceGenerator = new SSG21(this->symbolSet, parsedJSONReelSets);
 	this->simulator = new Simulator(*this->spinSourceGenerator);
 	delete parsedJSON;
+
+	this->statistics = new Statistics(this->symbolSet->getSymbolCount(), 1000);
 }
 
 Controller::~Controller()
@@ -19,6 +21,7 @@ Controller::~Controller()
 	delete this->simulator;
 	delete this->symbolSet;
 	delete this->spinSourceGenerator;
+	delete this->statistics;
 }
 
 void Controller::assignGUI(GUI* gui)
@@ -29,5 +32,7 @@ void Controller::assignGUI(GUI* gui)
 void Controller::userStartClicked()
 {
 	this->simulator->spinOneStart();
+	this->statistics->addSpin(this->simulator->getLastSpin());
 	this->gui->setNewSpin(this->simulator->getLastSpin());
+	this->gui->setNewDescription(this->statistics->getDescription());
 }

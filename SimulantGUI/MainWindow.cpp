@@ -40,6 +40,11 @@ HDC MainWindow::getDC()
 	return this->hDC;
 }
 
+void MainWindow::setDescription(const std::wstring description)
+{
+	SetWindowText(this->editInfo, description.c_str());
+}
+
 void MainWindow::registerWindowClass(HINSTANCE hInstance)
 {
 	WNDCLASSEX wcex;

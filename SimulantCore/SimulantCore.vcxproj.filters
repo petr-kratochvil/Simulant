@@ -104,6 +104,9 @@
     <ClCompile Include="WindowWin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Statistics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\ClassDiagram.cd" />

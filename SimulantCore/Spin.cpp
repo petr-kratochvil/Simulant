@@ -3,6 +3,7 @@
 Spin::Spin(Window* window, bool final)
 	: final(final)
 	, window(window)
+	, bet(5)
 {
 	this->computeWin();
 	this->sSet = nullptr;
@@ -28,6 +29,16 @@ const SymbolSet * Spin::getSSet() const
 	return this->sSet;
 }
 
+void Spin::setBet(int bet)
+{
+	this->bet = bet;
+}
+
+int Spin::getBet() const
+{
+	return this->bet;
+}
+
 int Spin::getTotalWin() const
 {
 	return this->wwin->getTotal();
@@ -51,6 +62,7 @@ void Spin::computeWin()
 Spin::Spin(const Spin& spin)
 	: final(spin.final)
 	, sSet(spin.sSet)
+	, bet(spin.bet)
 {
 	this->window = new Window(*spin.window);
 	this->computeWin();

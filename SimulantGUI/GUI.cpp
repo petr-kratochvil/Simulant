@@ -29,6 +29,11 @@ void GUI::setNewSpin(const Spin& spin)
 	this->mainWindow->refresh();
 }
 
+void GUI::setNewDescription(const std::wstring& description)
+{
+	this->mainWindow->setDescription(description);
+}
+
 void GUI::assignController(Controller * controller)
 {
 	this->controller = controller;

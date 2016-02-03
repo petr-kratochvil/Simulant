@@ -9,4 +9,5 @@ public:
 	virtual Spin21* getNextSpin();
 protected:
 	std::vector<const Symbol*> bonusStack;
+	std::vector<const Symbol*> bonusStackVisible;
 };
