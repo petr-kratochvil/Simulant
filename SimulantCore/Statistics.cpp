@@ -8,6 +8,7 @@ Statistics::Statistics(int symbolCount, int credit)
 	, betCount(0)
 	, zeroCount(0)
 	, credit(credit)
+	, lastWin(0)
 	, symbolCount(symbolCount)
 	, respinNext(false)
 	, symbolStats(symbolCount)
@@ -19,11 +20,12 @@ Statistics::Statistics(int symbolCount, int credit)
 void Statistics::addSpin(const Spin & spin)
 {
 	const WindowWin& ww = spin.getWin();
-	this->totalWin += ww.getTotal();
-	this->totalWinSquared += ww.getTotal() * ww.getTotal();
-	if (ww.getTotal() == 0)
+	this->lastWin = ww.getTotal();
+	this->totalWin += this->lastWin;
+	this->totalWinSquared += this->lastWin * this->lastWin;
+	if (this->lastWin == 0)
 		this->zeroCount += 1;
-	this->credit += ww.getTotal();
+	this->credit += this->lastWin;
 	this->spinCount += 1;
 	if (!respinNext)
 	{
@@ -43,10 +45,12 @@ void Statistics::addSpin(const Spin & spin)
 const std::wstring & Statistics::getDescription()
 {
 	std::wstringstream description;
-	description << L"Kredit:\t" << this->credit << L"\r\n";
+	description << L"Kredit:\t\t" << this->credit << L"\r\n";
+	description << L"Poslední výhra:\t" << this->lastWin << L"\r\n";
+	description << L"RTP:\t\t" << double(this->totalWin) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
 	description << L"Poèet spinù:\t" << this->spinCount << L"\r\n";
 	description << L"Poèet sázek:\t" << this->betCount << L"\r\n";
-	description << L"Nulové otáèky:\t" << double(this->zeroCount) / double(this->betCount) * 100.0 << L"%\r\n";
+	description << L"Nulové otáèky:\t" << double(this->zeroCount) / double(this->betCount) * 100.0 << L" %\r\n";
 	description << L"Následuje respin?\t" << this->respinNext << L"\r\n";
 	this->descOut = description.str();
 	return this->descOut;

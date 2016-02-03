@@ -21,6 +21,7 @@ protected:
 	int64_t betCount;
 	int64_t zeroCount;
 	int64_t credit;
+	int lastWin;
 	int symbolCount;
 	bool respinNext;
 	std::vector<SymbolStatItem> symbolStats;

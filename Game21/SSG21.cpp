@@ -1,13 +1,29 @@
 #include "SSG21.h"
+#include "SimulantCore/Random.h"
 #include <algorithm>
 
 SSG21::SSG21(const SymbolSet * symbolSet, JSONArray reelSets)
 	: SpinSourceGenerator(symbolSet, reelSets)
+	, state(SSG21::Basic)
 {
+	this->windowBonus = new Window(3, 3);
 }
 
 Spin21 * SSG21::getNextSpin()
 {
+	Spin21* spin21;
+
+	if (this->state == SSG21::Bonus)
+	{
+		int symbolID = this->bonusStack[0]->getId();
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++)
+				this->windowBonus->setSymbol(i, j, this->symbolSet->getSymbol(symbolID));
+		spin21 = new Spin21(this->windowBonus, this->bonusStackVisible);
+		this->state = SSG21::Basic;
+		return spin21;
+	}
+
 	Spin* spin = SpinSourceGenerator::getNextSpin();
 	std::vector<WindowWinItem> winList = spin->getWin().getList();
 
@@ -39,7 +55,7 @@ Spin21 * SSG21::getNextSpin()
 				if (this->bonusStack[j] == &winList[i].symbol)
 				{
 					found = true;
-					break;
+					break; 
 				}
 			}
 			if (!found)
@@ -52,8 +68,12 @@ Spin21 * SSG21::getNextSpin()
 	{
 		this->bonusStackVisible.push_back(this->bonusStack[i]);
 	}
-	Spin21* spin21 = new Spin21(*spin, this->bonusStackVisible);
-	delete spin;
+	bool final = !(this->bonusStackVisible.size() >= 4);
+
+	if (!final)
+		this->state = SSG21::Bonus;
+
+	spin21 = new Spin21(*spin, this->bonusStackVisible, final);
 
 	return spin21;
 }
