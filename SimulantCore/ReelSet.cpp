@@ -13,6 +13,7 @@ ReelSet::ReelSet(const JSONValue * source, const SymbolSet& symbolSet)
 	{
 		this->reels[i] = new Reel(array[i], symbolSet);
 	}
+	this->name = rset[L"name"]->AsString();
 }
 
 ReelSet::~ReelSet()
@@ -52,4 +53,9 @@ int ReelSet::getReelsCount()
 int ReelSet::getReelLength(int reelID)
 {
 	return this->reels[reelID]->getLength();
+}
+
+const std::wstring & ReelSet::getName() const
+{
+	return this->name;
 }

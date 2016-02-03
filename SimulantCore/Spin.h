@@ -19,11 +19,14 @@ public:
 	const SymbolSet* getSSet() const;
 	void setBet(int bet);
 	int getBet() const;
+	const std::wstring& getReelset() const;
+	void setReelset(const std::wstring& reelset);
 
 protected:
 	bool final;
 	Window* window;
 	int bet;
+	std::wstring reelsetUsed;
 	void computeWin();
 	const WindowWin* wwin;
 	Spin(const Spin& spin);

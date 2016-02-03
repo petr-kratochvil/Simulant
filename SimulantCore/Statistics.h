@@ -26,4 +26,5 @@ protected:
 	bool respinNext;
 	std::vector<SymbolStatItem> symbolStats;
 	std::wstring descOut;
+	std::wstring lastReelset;
 };

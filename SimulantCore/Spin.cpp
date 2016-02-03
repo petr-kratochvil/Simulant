@@ -39,6 +39,16 @@ int Spin::getBet() const
 	return this->bet;
 }
 
+const std::wstring& Spin::getReelset() const
+{
+	return this->reelsetUsed;
+}
+
+void Spin::setReelset(const std::wstring & reelset)
+{
+	this->reelsetUsed = reelset;
+}
+
 int Spin::getTotalWin() const
 {
 	return this->wwin->getTotal();

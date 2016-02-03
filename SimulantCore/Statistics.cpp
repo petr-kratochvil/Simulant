@@ -40,6 +40,7 @@ void Statistics::addSpin(const Spin & spin)
 	{
 		respinNext = true;
 	}
+	this->lastReelset = spin.getReelset();
 }
 
 const std::wstring & Statistics::getDescription()
@@ -47,6 +48,7 @@ const std::wstring & Statistics::getDescription()
 	std::wstringstream description;
 	description << L"Kredit:\t\t" << this->credit << L"\r\n";
 	description << L"Poslední výhra:\t" << this->lastWin << L"\r\n";
+	description << L"Sada válcù:\t" << this->lastReelset << L"\r\n";
 	description << L"RTP:\t\t" << double(this->totalWin) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
 	description << L"Poèet spinù:\t" << this->spinCount << L"\r\n";
 	description << L"Poèet sázek:\t" << this->betCount << L"\r\n";

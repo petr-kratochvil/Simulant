@@ -16,9 +16,11 @@ public:
 	Window* getWindow(Window* window = nullptr) const;
 	int getReelsCount();
 	int getReelLength(int reelID);
+	const std::wstring& getName() const;
 protected:
     int reelsCount;
 	int visibleReelsCount;
 	int windowMaxHeight;
 	std::vector<Reel*> reels;
+	std::wstring name;
 };
