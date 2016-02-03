@@ -73,6 +73,7 @@ Spin::Spin(const Spin& spin)
 	: final(spin.final)
 	, sSet(spin.sSet)
 	, bet(spin.bet)
+	, reelsetUsed(spin.reelsetUsed)
 {
 	this->window = new Window(*spin.window);
 	this->computeWin();
