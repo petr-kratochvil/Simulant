@@ -1,9 +1,11 @@
-#include "Statistics.h"
+ï»¿#include "Statistics.h"
 
 
 Statistics::Statistics(int symbolCount, int credit)
 	: totalWin(0)
 	, totalWinSquared(0)
+	, totalWinBasic(0)
+	, totalWinBonus(0)
 	, spinCount(0)
 	, betCount(0)
 	, zeroCount(0)
@@ -31,6 +33,11 @@ void Statistics::addSpin(const Spin & spin)
 	{
 		this->betCount += 1;
 		this->credit -= spin.getBet();
+		this->totalWinBasic += this->lastWin;
+	}
+	else
+	{
+		this->totalWinBonus += this->lastWin;
 	}
 	if (spin.isFinal())
 	{
@@ -47,13 +54,17 @@ const std::wstring & Statistics::getDescription()
 {
 	std::wstringstream description;
 	description << L"Kredit:\t\t" << this->credit << L"\r\n";
-	description << L"Poslední výhra:\t" << this->lastWin << L"\r\n";
-	description << L"Sada válcù:\t" << this->lastReelset << L"\r\n";
+	description << L"PoslednÃ­ vÃ½hra:\t" << this->lastWin << L"\r\n";
+	description << L"Sada vÃ¡lcÃ¹:\t" << this->lastReelset << L"\r\n";
 	description << L"RTP:\t\t" << double(this->totalWin) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
-	description << L"Poèet spinù:\t" << this->spinCount << L"\r\n";
-	description << L"Poèet sázek:\t" << this->betCount << L"\r\n";
-	description << L"Nulové otáèky:\t" << double(this->zeroCount) / double(this->betCount) * 100.0 << L" %\r\n";
-	description << L"Následuje respin?\t" << this->respinNext << L"\r\n";
+	description << L"RTP zÃ¡klad:\t" << double(this->totalWinBasic) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
+	description << L"RTP bonus:\t" << double(this->totalWinBonus) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
+	description << L"PoÃ¨et spinÃ¹:\t" << this->spinCount << L"\r\n";
+	description << L"PoÃ¨et sÃ¡zek:\t" << this->betCount << L"\r\n";
+	double zeros = double(this->zeroCount) / double(this->betCount);
+	description << L"NulovÃ© otÃ¡Ã¨ky:\t" << zeros * 100.0 << L" % , tj. prÅ¯mÄ›rnÄ› "
+		<< zeros / (1-zeros) << "mezi 2 vÃ½hrami\r\n";
+	description << L"NÃ¡sleduje respin?\t" << this->respinNext << L"\r\n";
 	this->descOut = description.str();
 	return this->descOut;
 }

@@ -16,6 +16,8 @@ public:
 	const std::wstring& getDescription();
 protected:
 	int64_t totalWin;
+	int64_t totalWinBasic;
+	int64_t totalWinBonus;
 	int64_t totalWinSquared;
 	int64_t spinCount;
 	int64_t betCount;
