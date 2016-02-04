@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "Reel.h"
 #include "JSON/JSON.h"
+#include "Random.h"
 
 class ReelSet
 {
@@ -19,8 +20,12 @@ public:
 	const std::wstring& getName() const;
 protected:
     int reelsCount;
+	int permCount;
 	int visibleReelsCount;
 	int windowMaxHeight;
+	bool isShuffling;
 	std::vector<Reel*> reels;
+	std::vector<std::vector<int>> permutations;
+	std::vector<int> reelID; // used for reel shuffle
 	std::wstring name;
 };
