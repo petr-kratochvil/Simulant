@@ -5,6 +5,7 @@
 SSG21::SSG21(const SymbolSet * symbolSet, JSONArray reelSets)
 	: SpinSourceGenerator(symbolSet, reelSets)
 	, state(SSG21::Basic)
+	, reelsetIdBonus(0)
 {
 }
 
@@ -14,13 +15,14 @@ Spin21 * SSG21::getNextSpin()
 
 	if (this->state == SSG21::Bonus)
 	{
-		this->windowBonus = new Window(3, 3);
 		int bonusPos = Random::gen(0, 3);
 		int symbolID = this->bonusStack[bonusPos]->getId();
-		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 3; j++)
-				this->windowBonus->setSymbol(i, j, this->symbolSet->getSymbol(symbolID));
-		spin21 = new Spin21(this->windowBonus, this->bonusStackVisible, true, bonusPos);
+
+		this->reelSets[this->reelsetIdBonus]->spinAndFind21(symbolID);
+		Window* w = this->reelSets[this->reelsetIdBonus]->getWindow();
+		spin21 = new Spin21(w, this->bonusStackVisible, true, bonusPos);
+		spin21->setSSet(this->symbolSet);
+		spin21->setReelset(this->reelSets[this->reelsetIdBonus]->getName());
 		this->state = SSG21::Basic;
 		return spin21;
 	}

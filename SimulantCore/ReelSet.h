@@ -12,6 +12,7 @@ public:
 	void shuffle();
 	void spin();
 	void spinToPosition(const std::vector<int>& position);
+	void spinAndFind21(int symbolID);
 	// Gets the spin window; if the parametr is nullptr, it allocates a new window,
 	// which the caller is responsible to destroy
 	Window* getWindow(Window* window = nullptr) const;

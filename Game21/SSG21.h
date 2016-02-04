@@ -16,4 +16,5 @@ protected:
 	std::vector<const Symbol*> bonusStack;
 	std::vector<const Symbol*> bonusStackVisible;
 	Window* windowBonus;
+	int reelsetIdBonus;
 };

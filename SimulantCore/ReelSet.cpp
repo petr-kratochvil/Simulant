@@ -71,6 +71,16 @@ void ReelSet::spinToPosition(const std::vector<int>& position)
 		this->reels[this->reelID[i]]->spinToPosition(position[i]);
 }
 
+void ReelSet::spinAndFind21(int symbolID)
+{
+	this->spin();
+	for (int i = 0; i < this->visibleReelsCount; i++)
+	{
+		while (this->reels[this->reelID[i]]->getSymbol(0).getId() != symbolID)
+			this->reels[this->reelID[i]]->spinToPosition(this->reels[this->reelID[i]]->getPosition() + 1);
+	}
+}
+
 Window * ReelSet::getWindow(Window* window) const
 {
 	Window* w = window;

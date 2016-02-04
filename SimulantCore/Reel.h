@@ -11,7 +11,8 @@ public:
 	// get the i-th visible symbol from the top of the window,
 	// according to the last spin
 	const Symbol& getSymbol(int y) const;
-	int getLength();
+	int getLength() const;
+	int getPosition() const;
 protected:
 	int length;
     int position;
