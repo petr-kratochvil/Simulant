@@ -75,6 +75,7 @@ Spin21 * SSG21::getNextSpin()
 		this->state = SSG21::Bonus;
 
 	spin21 = new Spin21(*spin, this->bonusStackVisible, final);
+	delete spin;
 
 	return spin21;
 }

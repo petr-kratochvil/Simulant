@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 	}
 	else
 	{
-		int iterations = 1e4;
+		int iterations = 1e6;
 		double it;
 		if (argc >= 3)
 		{
