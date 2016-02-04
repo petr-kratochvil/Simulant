@@ -12,6 +12,7 @@ Simulator::~Simulator()
 		delete this->lastSpin;
 }
 
+// TODO zatim nefunguje, nezapocita non-final spiny do statistiky
 void Simulator::spinOneBet(Statistics * statistics)
 {
 	do

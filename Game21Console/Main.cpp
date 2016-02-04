@@ -42,6 +42,8 @@ int main(int argc, char** argv)
 
 	Random::init();
 
+	Statistics statistics(sset.getSymbolCount());
+
 	if ((argc >= 3) &&
 		strcmp(argv[2], "-seq") == 0)
 	{
@@ -77,8 +79,9 @@ int main(int argc, char** argv)
 
 		for (int i = 0; i < iterations; i++)
 		{
-			simulator.spinOneBet();
+			simulator.spinOneStart();
 			const Spin& spin = simulator.getLastSpin();
+			statistics.addSpin(spin);
 			int win = spin.getTotalWin();
 			totalCount++;
 			totalWin += win;
@@ -95,6 +98,8 @@ int main(int argc, char** argv)
 	printf("Total win: %lld, RTP: %5.2f%%\n"
 		, totalWin, double(totalWin) / double(5*totalCount) * 100.0);
 	printf("Average win: %5.2f\n", double(totalWin) / double(totalCount-zeroCount));
+	printf("\nStatistics:\n");
+	wprintf(L"%s", statistics.getDescription().c_str());
 
 	return 0;
 }
