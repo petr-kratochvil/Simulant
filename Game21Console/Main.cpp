@@ -54,6 +54,7 @@ int main(int argc, char** argv)
 		{
 			simulator.spinOneStart();
 			const Spin& spin = simulator.getLastSpin();
+			statistics.addSpin(spin);
 			int win = spin.getTotalWin();
 			totalCount++;
 			totalWin += win;
