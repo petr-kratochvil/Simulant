@@ -4,6 +4,7 @@ ReelSet::ReelSet(const JSONValue * source, const SymbolSet& symbolSet)
 	: windowMaxHeight(3)
 	, permCount(0)
 	, isShuffling(false)
+	, isSubstituting(false)
 {
     // TODO throw exception
 	JSONObject rset = source->AsObject();
@@ -32,8 +33,24 @@ ReelSet::ReelSet(const JSONValue * source, const SymbolSet& symbolSet)
 			for (int j = 0; j < this->visibleReelsCount; j++)
 			{
 				JSONArray perm = perms[i]->AsArray();
-				this->permutations[i][j] = int(perm[j]->AsNumber());
+				this->permutations[i][j] = (int) perm[j]->AsNumber();
 			}
+		}
+	}
+	if (rset.find(L"substituteReels") != rset.end())
+	{
+		this->isSubstituting = true;
+		JSONArray array = rset[L"substituteReels"]->AsArray();
+		this->substituteReels.resize(array.size());
+		for (int i = 0; i < array.size(); i++)
+		{
+			this->substituteReels[i] = new Reel(array[i], symbolSet);
+		}
+		JSONArray pos = rset[L"substitutePositions"]->AsArray();
+		this->substitutePositions.resize(pos.size());
+		for (int i = 0; i < pos.size(); i++)
+		{
+			this->substitutePositions[i] = (int) pos[i]->AsNumber();
 		}
 	}
 	this->reelID.resize(this->visibleReelsCount);
@@ -45,6 +62,8 @@ ReelSet::~ReelSet()
 {
     for (int i = 0; i < this->reels.size(); i++)
         delete this->reels[i];
+	for (int i = 0; i < this->substituteReels.size(); i++)
+		delete this->substituteReels[i];
 }
 
 void ReelSet::shuffle()
@@ -62,13 +81,15 @@ void ReelSet::spin()
 	if (this->isShuffling)
 		this->shuffle();
 	for (int i = 0; i < this->visibleReelsCount; i++)
-		this->reels[this->reelID[i]]->spin();
+	{
+		this->getReel(i).spin();
+	}
 }
 
 void ReelSet::spinToPosition(const std::vector<int>& position)
 {
 	for (int i = 0; i < this->visibleReelsCount; i++)
-		this->reels[this->reelID[i]]->spinToPosition(position[i]);
+		this->getReel(i).spinToPosition(position[i]);
 }
 
 void ReelSet::spinAndFind21(int symbolID)
@@ -76,19 +97,19 @@ void ReelSet::spinAndFind21(int symbolID)
 	this->spin();
 	for (int i = 0; i < this->visibleReelsCount; i++)
 	{
-		while (this->reels[this->reelID[i]]->getSymbol(0).getId() != symbolID)
-			this->reels[this->reelID[i]]->spinToPosition(this->reels[this->reelID[i]]->getPosition() + 1);
+		while (this->getReel(i).getSymbol(0).getId() != symbolID)
+			this->getReel(i).spinToPosition(this->getReel(i).getPosition() + 1);
 	}
 }
 
-Window * ReelSet::getWindow(Window* window) const
+Window * ReelSet::getWindow(Window* window)
 {
 	Window* w = window;
 	if (w == nullptr)
 		w = new Window(this->visibleReelsCount, this->windowMaxHeight);
 	for (int x = 0; x < w->getWidth(); x++)
 		for (int y = 0; y < w->getHeight(); y++)
-			w->setSymbol(x, y, this->reels[this->reelID[x]]->getSymbol(y));
+			w->setSymbol(x, y, this->getReel(x).getSymbol(y));
 	return w;
 }
 
@@ -97,12 +118,27 @@ int ReelSet::getReelsCount()
 	return this->reelsCount;
 }
 
-int ReelSet::getReelLength(int reelID)
+int ReelSet::getReelLength(int position)
 {
-	return this->reels[reelID]->getLength();
+	return this->getReel(position).getLength();
 }
 
 const std::wstring & ReelSet::getName() const
 {
 	return this->name;
+}
+
+Reel& ReelSet::getReel(int position)
+{
+	if (!this->isSubstituting)
+	{
+		return *this->reels[this->reelID[position]];
+	}
+	else
+	{
+		if (std::find(this->substitutePositions.begin(), this->substitutePositions.end(), position) == this->substitutePositions.end())
+			return *this->reels[this->reelID[position]];
+		else
+			return *this->substituteReels[this->reelID[position]];
+	}
 }
