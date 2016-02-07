@@ -4,10 +4,20 @@
 #include "SimulantCore/JSON/JSON.h"
 #include "SimulantCore/Random.h"
 
-void getJSONInput(wchar_t* json)
+void getJSONInput(HINSTANCE hInstance, wchar_t* json)
 {
-	FILE *fr;
-	errno_t err = fopen_s(&fr, "game21.json", "rt,ccs=UTF-8");
+	// TODO throw exception
+	HRSRC hResInfo = FindResource(hInstance, MAKEINTRESOURCE(IDT_GAME_JSON), L"TEXT");
+	HGLOBAL hResource = LoadResource(hInstance, hResInfo);
+	char* buff = (char*)LockResource(hResource);
+	int resSize = SizeofResource(hInstance, hResInfo);
+	char tmpFileName[L_tmpnam];
+	tmpnam(tmpFileName);
+	FILE* tmp = fopen(tmpFileName, "wb");
+	fwrite(buff, sizeof(char), resSize / sizeof(char), tmp);
+	fclose(tmp);
+	FreeResource(hResource);
+	FILE *fr = fopen(tmpFileName, "rt,ccs=UTF-8");
 
 	wchar_t buffer[10000];
 	json[0] = '\0';
@@ -25,7 +35,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Random::init();
 	
 	wchar_t json[10000];
-	getJSONInput(json);
+	getJSONInput(hInstance, json);
 	
 	Controller controller(json);
 	GUI21 gui(hInstance);
