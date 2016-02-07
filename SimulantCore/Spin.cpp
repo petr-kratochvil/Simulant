@@ -49,12 +49,12 @@ void Spin::setReelset(const std::wstring & reelset)
 	this->reelsetUsed = reelset;
 }
 
-const std::vector<std::string>& Spin::getCharacteristics() const
+const std::vector<std::wstring>& Spin::getCharacteristics() const
 {
 	return this->characteristics;
 }
 
-void Spin::addCharacteristic(std::string name)
+void Spin::addCharacteristic(std::wstring name)
 {
 	this->characteristics.push_back(name);
 }

@@ -28,7 +28,7 @@ protected:
 	int symbolCount;
 	bool respinNext;
 	std::vector<SymbolStatItem> symbolStats;
-	std::map<std::string, int> characteristicsStats;
+	std::map<std::wstring, int> characteristicsStats;
 	std::wstring descOut;
 	std::wstring lastReelset;
 };

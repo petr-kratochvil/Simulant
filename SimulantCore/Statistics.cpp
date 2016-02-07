@@ -51,7 +51,7 @@ void Statistics::addSpin(const Spin & spin)
 		respinNext = true;
 	}
 	this->lastReelset = spin.getReelset();
-	const std::vector<std::string>& c = spin.getCharacteristics();
+	const std::vector<std::wstring>& c = spin.getCharacteristics();
 	for (int i = 0; i < c.size(); i++)
 	{
 		if (this->characteristicsStats.find(c[i]) == this->characteristicsStats.end())
@@ -78,7 +78,7 @@ const std::wstring & Statistics::getDescription()
 		<< zeros / (1-zeros) << "mezi 2 výhrami\r\n";
 	description << L"Následuje respin?\t" << this->respinNext << L"\r\n";
 	description << L"Charakteristiky:\r\n";
-	for (std::map<std::string, int>::iterator iter = this->characteristicsStats.begin(); iter != this->characteristicsStats.end(); iter++)
+	for (std::map<std::wstring, int>::iterator iter = this->characteristicsStats.begin(); iter != this->characteristicsStats.end(); iter++)
 	{
 		description << std::wstring(iter->first.begin(), iter->first.end());
 		description << L"\t" << double(iter->second) / double(this->betCount) * 100.0 << L" %, tj. 1x za ";
