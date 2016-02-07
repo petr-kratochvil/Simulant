@@ -214,7 +214,10 @@ int main(int argc, char** argv)
 	JSONValue* value = new JSONValue(array);
 	wprintf(L"%s\n", value->Stringify().c_str());*/
 
-	FILE* fwMatrixTxt = fopen("matrix.txt", "w");
+	char matrixFileName[150] = "\0";
+	strcat(matrixFileName, fileName);
+	strcat(matrixFileName, "-matrix.txt");
+	FILE* fwMatrixTxt = fopen(matrixFileName, "w");
 	for (int i = 0; i < 730; i++)
 	{
 		if (!idMakesSense(i))
@@ -273,7 +276,7 @@ int main(int argc, char** argv)
 
 	///////////////////////////////////////////////////////
 	// probability of X symbol appearing on the middle reel
-	double pX = 0.1;
+	double pX = 0.055;
 
 	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 9; j++)
