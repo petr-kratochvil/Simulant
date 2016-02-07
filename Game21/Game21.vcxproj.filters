@@ -24,12 +24,18 @@
     <ClInclude Include="Spin21.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ZeroReelSet21.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SSG21.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Spin21.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZeroReelSet21.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

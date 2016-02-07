@@ -137,10 +137,12 @@
   <ItemGroup>
     <ClInclude Include="Spin21.h" />
     <ClInclude Include="SSG21.h" />
+    <ClInclude Include="ZeroReelSet21.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Spin21.cpp" />
     <ClCompile Include="SSG21.cpp" />
+    <ClCompile Include="ZeroReelSet21.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

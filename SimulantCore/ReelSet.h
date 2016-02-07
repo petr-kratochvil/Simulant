@@ -20,7 +20,7 @@ public:
 	int getReelLength(int reelID);
 	const std::wstring& getName() const;
 protected:
-	Reel& getReel(int position);
+	virtual Reel& getReel(int position);
     int reelsCount;
 	int permCount;
 	int visibleReelsCount;

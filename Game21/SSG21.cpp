@@ -3,10 +3,29 @@
 #include <algorithm>
 
 SSG21::SSG21(const SymbolSet * symbolSet, JSONArray reelSets)
-	: SpinSourceGenerator(symbolSet, reelSets)
+	: SpinSourceGenerator(symbolSet)
 	, state(SSG21::Basic)
 	, reelsetIdBonus(0)
 {
+	this->reelSetCount = reelSets.size();
+	this->reelSets.resize(this->reelSetCount);
+	this->reelSetPmls.resize(this->reelSetCount);
+
+	int totalPml = 0;
+	for (int i = 0; i < this->reelSetCount; i++)
+	{
+		JSONObject rs = reelSets[i]->AsObject();
+		if (rs.find(L"substitutePmls21") != rs.end())
+		{
+			this->reelSets[i] = new ZeroReelSet21(reelSets[i], *symbolSet);
+			this->zeroReelSetId = i;
+		}
+		else
+			this->reelSets[i] = new ReelSet(reelSets[i], *symbolSet);
+		totalPml += int(rs[L"pml"]->AsNumber());
+		this->reelSetPmls[i] = totalPml;
+	}
+	// TODO throw exception if totalPml > 1000
 }
 
 Spin21 * SSG21::getNextSpin()
@@ -27,15 +46,35 @@ Spin21 * SSG21::getNextSpin()
 		return spin21;
 	}
 
-	Spin* spin = SpinSourceGenerator::getNextSpin();
-	std::vector<WindowWinItem> winList = spin->getWin().getList();
-
 	if (this->bonusStack.size() >= 4)
 	{
 		//for (int i = 0; i < 4; i++)
 		//	this->bonusStack.erase(this->bonusStack.begin());
 		this->bonusStack.clear();
 	}
+
+	dynamic_cast<ZeroReelSet21*>(this->reelSets[this->zeroReelSetId])->setBonusStackSize(this->bonusStack.size());
+
+	Spin* spin = SpinSourceGenerator::getNextSpin();
+	std::vector<WindowWinItem> winList = spin->getWin().getList();
+
+	std::wstring bonusChar;
+	switch (this->bonusStack.size())
+	{
+	case 0:
+		bonusChar = L"0 bonusových";
+		break;
+	case 1:
+		bonusChar = L"1 bonusové";
+		break;
+	case 2:
+		bonusChar = L"2 bonusové";
+		break;
+	case 3:
+		bonusChar = L"3 bonusové";
+		break;
+	}
+	spin->addCharacteristic(bonusChar);
 	if (spin->getTotalWin() == 0)
 	{
 		const Window& w = spin->getWindow();

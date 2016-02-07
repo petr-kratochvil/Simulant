@@ -1,6 +1,7 @@
 #pragma once
 #include "SimulantCore/SpinSourceGenerator.h"
 #include "Spin21.h"
+#include "ZeroReelSet21.h"
 
 class SSG21 : public SpinSourceGenerator
 {
@@ -17,4 +18,5 @@ protected:
 	std::vector<const Symbol*> bonusStackVisible;
 	Window* windowBonus;
 	int reelsetIdBonus;
+	int zeroReelSetId;
 };
