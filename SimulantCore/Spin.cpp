@@ -49,6 +49,16 @@ void Spin::setReelset(const std::wstring & reelset)
 	this->reelsetUsed = reelset;
 }
 
+const std::vector<std::string>& Spin::getCharacteristics() const
+{
+	return this->characteristics;
+}
+
+void Spin::addCharacteristic(std::string name)
+{
+	this->characteristics.push_back(name);
+}
+
 int Spin::getTotalWin() const
 {
 	return this->wwin->getTotal();
@@ -74,6 +84,7 @@ Spin::Spin(const Spin& spin)
 	, sSet(spin.sSet)
 	, bet(spin.bet)
 	, reelsetUsed(spin.reelsetUsed)
+	, characteristics(spin.characteristics)
 {
 	this->window = new Window(*spin.window);
 	this->computeWin();

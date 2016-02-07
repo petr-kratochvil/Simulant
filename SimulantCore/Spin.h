@@ -21,6 +21,8 @@ public:
 	int getBet() const;
 	const std::wstring& getReelset() const;
 	void setReelset(const std::wstring& reelset);
+	const std::vector<std::string>& getCharacteristics() const;
+	void addCharacteristic(std::string name);
 
 protected:
 	bool final;
@@ -31,6 +33,7 @@ protected:
 	const WindowWin* wwin;
 	Spin(const Spin& spin);
 	const SymbolSet* sSet;
+	std::vector<std::string> characteristics;
 private:
 	Spin& operator=(const Spin&);
 };

@@ -23,10 +23,12 @@ protected:
 	int64_t betCount;
 	int64_t zeroCount;
 	int64_t credit;
+	int64_t bonusCount;
 	int lastWin;
 	int symbolCount;
 	bool respinNext;
 	std::vector<SymbolStatItem> symbolStats;
+	std::map<std::string, int> characteristicsStats;
 	std::wstring descOut;
 	std::wstring lastReelset;
 };

@@ -9,6 +9,7 @@ Statistics::Statistics(int symbolCount, int credit)
 	, spinCount(0)
 	, betCount(0)
 	, zeroCount(0)
+	, bonusCount(0)
 	, credit(credit)
 	, lastWin(0)
 	, symbolCount(symbolCount)
@@ -45,9 +46,19 @@ void Statistics::addSpin(const Spin & spin)
 	}
 	else
 	{
+		if (!respinNext)
+			this->bonusCount++;
 		respinNext = true;
 	}
 	this->lastReelset = spin.getReelset();
+	const std::vector<std::string>& c = spin.getCharacteristics();
+	for (int i = 0; i < c.size(); i++)
+	{
+		if (this->characteristicsStats.find(c[i]) == this->characteristicsStats.end())
+			this->characteristicsStats[c[i]] = 1;
+		else
+			this->characteristicsStats[c[i]]++;
+	}
 }
 
 const std::wstring & Statistics::getDescription()
@@ -61,10 +72,18 @@ const std::wstring & Statistics::getDescription()
 	description << L"RTP bonus:\t" << double(this->totalWinBonus) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
 	description << L"Poèet spinù:\t" << this->spinCount << L"\r\n";
 	description << L"Poèet sázek:\t" << this->betCount << L"\r\n";
+	description << L"Bonus 1x za:\t" << double(this->betCount) / double(this->bonusCount) << L" otáček\r\n";
 	double zeros = double(this->zeroCount) / double(this->betCount);
 	description << L"Nulové otáèky:\t" << zeros * 100.0 << L" % , tj. průměrně "
 		<< zeros / (1-zeros) << "mezi 2 výhrami\r\n";
 	description << L"Následuje respin?\t" << this->respinNext << L"\r\n";
+	description << L"Charakteristiky:\r\n";
+	for (std::map<std::string, int>::iterator iter = this->characteristicsStats.begin(); iter != this->characteristicsStats.end(); iter++)
+	{
+		description << std::wstring(iter->first.begin(), iter->first.end());
+		description << L"\t" << double(iter->second) / double(this->betCount) * 100.0 << L" %, tj. 1x za ";
+		description << double(this->betCount) / double(iter->second) << L" otáček\r\n";
+	}
 	this->descOut = description.str();
 	return this->descOut;
 }
