@@ -43,7 +43,8 @@ Spin21 * SSG21::getNextSpin()
 		{
 			if (w.getSymbol(1, i).getId() == 7)
 			{
-				this->bonusStack.pop_back();
+				if (this->bonusStack.size() > 0)
+					this->bonusStack.pop_back();
 				spin->addCharacteristic(L"symbolX");
 				break;
 			}
