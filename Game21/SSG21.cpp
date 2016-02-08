@@ -6,6 +6,7 @@ SSG21::SSG21(const SymbolSet * symbolSet, JSONArray reelSets)
 	: SpinSourceGenerator(symbolSet)
 	, state(SSG21::Basic)
 	, reelsetIdBonus(0)
+	, zeroReelSetId(-1)
 {
 	this->reelSetCount = reelSets.size();
 	this->reelSets.resize(this->reelSetCount);
@@ -53,7 +54,8 @@ Spin21 * SSG21::getNextSpin()
 		this->bonusStack.clear();
 	}
 
-	dynamic_cast<ZeroReelSet21*>(this->reelSets[this->zeroReelSetId])->setBonusStackSize(this->bonusStack.size());
+	if (this->zeroReelSetId >= 0)
+		dynamic_cast<ZeroReelSet21*>(this->reelSets[this->zeroReelSetId])->setBonusStackSize(this->bonusStack.size());
 
 	Spin* spin = SpinSourceGenerator::getNextSpin();
 	std::vector<WindowWinItem> winList = spin->getWin().getList();
