@@ -53,6 +53,16 @@ ReelSet::ReelSet(const JSONValue * source, const SymbolSet& symbolSet)
 			this->substitutePositions[i] = (int) pos[i]->AsNumber();
 		}
 	}
+	if (rset.find(L"substituteBonusReels21") != rset.end())
+	{
+		JSONArray array = rset[L"substituteBonusReels21"]->AsArray();
+		this->substituteBonusReels21.resize(array.size());
+		for (int i = 0; i < array.size(); i++)
+		{
+			this->substituteBonusReels21[i] = new Reel(array[i], symbolSet);
+		}
+	}
+
 	this->reelID.resize(this->visibleReelsCount);
 	for (int i = 0; i < this->visibleReelsCount; i++)
 		this->reelID[i] = i;

@@ -10,7 +10,7 @@ public:
 	ReelSet(const JSONValue* source, const SymbolSet& symbolSet);
     ~ReelSet();
 	void shuffle();
-	void spin();
+	virtual void spin();
 	void spinToPosition(const std::vector<int>& position);
 	void spinAndFind21(int symbolID);
 	// Gets the spin window; if the parametr is nullptr, it allocates a new window,
@@ -29,6 +29,7 @@ protected:
 	bool isSubstituting;
 	std::vector<Reel*> reels;
 	std::vector<Reel*> substituteReels;
+	std::vector<Reel*> substituteBonusReels21; // this is not clean code
 	std::vector<int> substitutePositions;
 	std::vector<std::vector<int>> permutations;
 	std::vector<int> reelID; // used for reel shuffle

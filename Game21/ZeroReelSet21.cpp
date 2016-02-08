@@ -2,6 +2,7 @@
 
 ZeroReelSet21::ZeroReelSet21(const JSONValue * source, const SymbolSet & symbolSet)
 	: ReelSet(source, symbolSet)
+	, isBonusSubstituting(false)
 {
 	JSONObject rset = source->AsObject();
 	JSONArray probs = rset[L"substitutePmls21"]->AsArray();
@@ -14,22 +15,26 @@ void ZeroReelSet21::setBonusStackSize(int size)
 	this->bonusStackSize = size;
 }
 
+void ZeroReelSet21::spin()
+{
+	ReelSet::spin();
+	if (Random::genPml(this->substitutionPmls[this->bonusStackSize]))
+		this->isBonusSubstituting = true;
+	else
+		this->isBonusSubstituting = false;
+}
+
 Reel & ZeroReelSet21::getReel(int position)
 {
-	if (!this->isSubstituting)
-	{
-		return *this->reels[this->reelID[position]];
-	}
+	if (!this->isBonusSubstituting)
+		return ReelSet::getReel(position);
 	else
 	{
 		if (std::find(this->substitutePositions.begin(), this->substitutePositions.end(), position) == this->substitutePositions.end())
-			return *this->reels[this->reelID[position]];
+			return ReelSet::getReel(position);
 		else
 		{
-			if (Random::genPml(this->substitutionPmls[this->bonusStackSize]))
-				return *this->substituteReels[this->reelID[position]];
-			else
-				return *this->reels[this->reelID[position]];
+			return *this->substituteBonusReels21[this->reelID[position]];
 		}
 	}
 }
