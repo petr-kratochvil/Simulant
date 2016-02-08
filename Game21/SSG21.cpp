@@ -21,6 +21,13 @@ SSG21::SSG21(const SymbolSet * symbolSet, JSONArray reelSets)
 			this->reelSets[i] = new ZeroReelSet21(reelSets[i], *symbolSet);
 			this->zeroReelSetId = i;
 		}
+		else if (rs.find(L"createdOf") != rs.end())
+		{
+			JSONArray c = rs[L"createdOf"]->AsArray();
+			this->bonusCreationPmls.resize(c.size());
+			for (int j = 0; j < c.size(); j++)
+				this->bonusCreationPmls[j] = (int)c[j]->AsNumber();
+		}
 		else
 			this->reelSets[i] = new ReelSet(reelSets[i], *symbolSet);
 		totalPml += int(rs[L"pml"]->AsNumber());
@@ -37,7 +44,14 @@ Spin21 * SSG21::getNextSpin()
 	{
 		int bonusPos = Random::gen(0, 3);
 		int symbolID = this->bonusStack[bonusPos]->getId();
-
+		int pml = Random::gen(0, 999);
+		int totalPml = 0;
+		int reelSetId = -1;
+		do
+		{
+			totalPml += this->bonusCreationPmls[++reelSetId];
+		} while (totalPml < pml);
+		this->reelsetIdBonus = reelSetId;
 		this->reelSets[this->reelsetIdBonus]->spinAndFind21(symbolID);
 		Window* w = this->reelSets[this->reelsetIdBonus]->getWindow();
 		spin21 = new Spin21(w, this->bonusStackVisible, true, bonusPos);

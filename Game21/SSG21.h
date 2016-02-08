@@ -19,4 +19,5 @@ protected:
 	Window* windowBonus;
 	int reelsetIdBonus;
 	int zeroReelSetId;
+	std::vector<int> bonusCreationPmls;
 };
