@@ -53,9 +53,9 @@ ReelSet::ReelSet(const JSONValue * source, const SymbolSet& symbolSet)
 			this->substitutePositions[i] = (int) pos[i]->AsNumber();
 		}
 	}
-	if (rset.find(L"substituteBonusReels21") != rset.end())
+	if (rset.find(L"substituteReels21_symbolX") != rset.end())
 	{
-		JSONArray array = rset[L"substituteBonusReels21"]->AsArray();
+		JSONArray array = rset[L"substituteReels21_symbolX"]->AsArray();
 		this->substituteBonusReels21.resize(array.size());
 		for (int i = 0; i < array.size(); i++)
 		{
@@ -78,11 +78,15 @@ ReelSet::~ReelSet()
 
 void ReelSet::shuffle()
 {
-	// TODO: if permCount == 0, do full shuffle
-	int permID = Random::gen(0, this->permCount - 1);
-	for (int i = 0; i < this->visibleReelsCount; i++)
+	if (this->permCount == 0)
+		this->fullShuffle();
+	else
 	{
-		this->reelID[i] = this->permutations[permID][i];
+		int permID = Random::gen(0, this->permCount - 1);
+		for (int i = 0; i < this->visibleReelsCount; i++)
+		{
+			this->reelID[i] = this->permutations[permID][i];
+		}
 	}
 }
 
@@ -150,5 +154,16 @@ Reel& ReelSet::getReel(int position)
 			return *this->reels[this->reelID[position]];
 		else
 			return *this->substituteReels[this->reelID[position]];
+	}
+}
+
+void ReelSet::fullShuffle()
+{
+	for (int i = 0; i < this->reelsCount; i++)
+	{
+		int tmp = this->reelID[i];
+		int index = Random::gen(0, this->reelsCount - 1);
+		this->reelID[i] = this->reelID[index];
+		this->reelID[index] = tmp;
 	}
 }

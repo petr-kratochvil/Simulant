@@ -21,6 +21,7 @@ public:
 	const std::wstring& getName() const;
 protected:
 	virtual Reel& getReel(int position);
+	void fullShuffle();	// generate a random permutation of reels, all permutations are allowed
     int reelsCount;
 	int permCount;
 	int visibleReelsCount;
