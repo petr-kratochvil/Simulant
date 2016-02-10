@@ -30,7 +30,7 @@ protected:
 	int symbolCount;
 	bool respinNext;
 	std::vector<SymbolStatItem> symbolStats;
-	std::vector<int64_t> winStats;
+	std::vector<int64_t> winStatsBonus;
 	std::vector<int64_t> winStatsBasic;
 	std::map<std::wstring, int> characteristicsStats;
 	std::wstring descOut;

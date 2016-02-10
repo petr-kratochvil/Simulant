@@ -16,13 +16,13 @@ Statistics::Statistics(int symbolCount, int credit)
 	, symbolCount(symbolCount)
 	, respinNext(false)
 	, symbolStats(symbolCount)
-	, winStats(2000)
+	, winStatsBonus(2000)
 	, winStatsBasic(2000)
 {
 	for (int i = 0; i < symbolCount; i++)
 		this->symbolStats[i] = { 0, 0 };
-	for (int i = 0; i < this->winStats.size(); i++)
-		this->winStats[i] = 0;
+	for (int i = 0; i < this->winStatsBonus.size(); i++)
+		this->winStatsBonus[i] = 0;
 	for (int i = 0; i < this->winStatsBasic.size(); i++)
 		this->winStatsBasic[i] = 0;
 }
@@ -34,8 +34,6 @@ void Statistics::addSpin(const Spin & spin)
 	const WindowWin& ww = spin.getWin();
 	this->lastWin = ww.getTotal();
 	this->totalWin += this->lastWin;
-	if (this->lastWin >= 1200)
-		__debugbreak();
 	this->totalWinSquared += this->lastWin * this->lastWin;
 	if (this->lastWin == 0)
 		this->zeroCount += 1;
@@ -52,11 +50,11 @@ void Statistics::addSpin(const Spin & spin)
 	else
 	{
 		this->totalWinBonus += this->lastWin;
+		this->winStatsBonus[this->lastWin / spin.getBet()]++;
 	}
 	if (spin.isFinal())
 	{
 		respinNext = false;
-		this->winStats[this->oneBetWin / spin.getBet()]++;
 	}
 	else
 	{
@@ -104,7 +102,7 @@ const std::wstring & Statistics::getDescription()
 
 std::string Statistics::getWinStats(bool onlyBasic)
 {
-	std::vector<int64_t>& ws = onlyBasic ? this->winStatsBasic : this->winStats;
+	std::vector<int64_t>& ws = onlyBasic ? this->winStatsBasic : this->winStatsBonus;
 	std::stringstream stats;
 	for (int i = 0; i < ws.size(); i++)
 	{
