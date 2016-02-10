@@ -51,3 +51,13 @@ void GUI::userStartClicked()
 {
 	this->controller->userStartClicked();
 }
+
+void GUI::userBackClicked()
+{
+	this->controller->userBackClicked();
+}
+
+void GUI::setGoBackEnabled(bool enabled)
+{
+	this->mainWindow->setButtonBackEnabled(enabled);
+}

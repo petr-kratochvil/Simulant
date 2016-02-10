@@ -19,6 +19,8 @@ public:
 	void assignController(Controller* controller);
 	void addSymbol(int resourceID);
 	void userStartClicked();
+	void userBackClicked();
+	void setGoBackEnabled(bool enabled);
 
 protected:
 	Controller* controller;

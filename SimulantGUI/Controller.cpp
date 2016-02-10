@@ -35,4 +35,15 @@ void Controller::userStartClicked()
 	this->statistics->addSpin(this->simulator->getLastSpin());
 	this->gui->setNewSpin(this->simulator->getLastSpin());
 	this->gui->setNewDescription(this->statistics->getDescription());
+	this->gui->setGoBackEnabled(this->simulator->canGoBack());
+}
+
+void Controller::userBackClicked()
+{
+	if (this->simulator->canGoBack())
+	{
+		this->simulator->goBackOneSpin();
+		this->gui->setNewSpin(this->simulator->getLastSpin());
+	}
+	this->gui->setGoBackEnabled(this->simulator->canGoBack());
 }

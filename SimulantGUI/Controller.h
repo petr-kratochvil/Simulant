@@ -13,6 +13,7 @@ public:
 	~Controller();
 	void assignGUI(GUI* gui);
 	void userStartClicked();
+	void userBackClicked();
 protected:
 	Simulator* simulator;
 	SymbolSet* symbolSet;

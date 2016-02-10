@@ -13,6 +13,8 @@ public:
 	void refresh();
 	HDC getDC();
 	void setDescription(const std::wstring description);
+	void setButtonBackEnabled(bool enabled);
+
 private:
 	MainWindow(const MainWindow&);
 	MainWindow& operator=(const MainWindow&);

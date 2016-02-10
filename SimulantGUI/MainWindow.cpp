@@ -45,6 +45,11 @@ void MainWindow::setDescription(const std::wstring description)
 	SetWindowText(this->editInfo, description.c_str());
 }
 
+void MainWindow::setButtonBackEnabled(bool enabled)
+{
+	EnableWindow(this->buttonBack, enabled);
+}
+
 void MainWindow::registerWindowClass(HINSTANCE hInstance)
 {
 	WNDCLASSEX wcex;
@@ -87,7 +92,7 @@ void MainWindow::createWindow(HINSTANCE hInstance)
 	ShowWindow(this->buttonStart, SW_SHOW);
 
 	this->buttonBack = CreateWindow(L"BUTTON", L"Zpìt"
-		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
+		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | WS_DISABLED
 		, 50, 268 + 50 + 50 + voff
 		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
@@ -172,6 +177,8 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		{
 			if ((HWND)lParam == this->buttonStart)
 				this->gui->userStartClicked();
+			else if ((HWND)lParam == this->buttonBack)
+				this->gui->userBackClicked();
 		}
 		break;
 	default:

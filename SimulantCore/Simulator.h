@@ -2,6 +2,7 @@
 #include "Statistics.h"
 #include "SpinSource.h"
 #include "Spin.h"
+#include <deque>
 
 class Simulator
 {
@@ -18,10 +19,14 @@ public:
 	bool isFinal() const;
 	
 	const Spin& getLastSpin() const;
+	void goBackOneSpin();
+	bool canGoBack() const;
 
 protected:
 	SpinSource& spinSource;
 	Spin* lastSpin;
+	int historySize;
+	std::deque<Spin*> spinHistory;
 private:
 	Simulator(const Simulator&);
 	Simulator& operator=(const Simulator&);
