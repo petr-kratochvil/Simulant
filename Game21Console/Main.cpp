@@ -102,5 +102,12 @@ int main(int argc, char** argv)
 	printf("\nStatistics:\n");
 	wprintf(L"%s", statistics.getDescription().c_str());
 
+	FILE* fw = fopen("statWin", "w");
+	fprintf(fw, "%s", statistics.getWinStats().c_str());
+	fclose(fw);
+	fw = fopen("statWinBasic", "w");
+	fprintf(fw, "%s", statistics.getWinStats(true).c_str());
+	fclose(fw);
+
 	return 0;
 }

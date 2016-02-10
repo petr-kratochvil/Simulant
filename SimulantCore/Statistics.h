@@ -14,11 +14,13 @@ public:
 	Statistics(int symbolCount, int credit = 0);
 	void addSpin(const Spin& spin);
 	const std::wstring& getDescription();
+	std::string getWinStats(bool onlyBasic = false);
 protected:
 	int64_t totalWin;
 	int64_t totalWinBasic;
 	int64_t totalWinBonus;
 	int64_t totalWinSquared;
+	int64_t oneBetWin;
 	int64_t spinCount;
 	int64_t betCount;
 	int64_t zeroCount;
@@ -28,6 +30,8 @@ protected:
 	int symbolCount;
 	bool respinNext;
 	std::vector<SymbolStatItem> symbolStats;
+	std::vector<int64_t> winStats;
+	std::vector<int64_t> winStatsBasic;
 	std::map<std::wstring, int> characteristicsStats;
 	std::wstring descOut;
 	std::wstring lastReelset;
