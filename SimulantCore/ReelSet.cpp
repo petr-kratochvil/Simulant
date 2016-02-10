@@ -111,7 +111,7 @@ void ReelSet::spinAndFind21(int symbolID)
 	this->spin();
 	for (int i = 0; i < this->visibleReelsCount; i++)
 	{
-		while (this->getReel(i).getSymbol(0).getId() != symbolID)
+		while ((this->getReel(i).getSymbol(0).getId() != symbolID) || (this->getReel(i).getSymbol(-1).getId() == symbolID))
 			this->getReel(i).spinToPosition(this->getReel(i).getPosition() + 1);
 	}
 }

@@ -50,7 +50,7 @@ Spin21 * SSG21::getNextSpin()
 		do
 		{
 			totalPml += this->bonusCreationPmls[++reelSetId];
-		} while (totalPml < pml);
+		} while (totalPml <= pml);
 		this->reelsetIdBonus = reelSetId;
 		Window* w = nullptr;
 		int spinWin;
@@ -60,8 +60,6 @@ Spin21 * SSG21::getNextSpin()
 				delete w;
 			 w = this->reelSets[this->reelsetIdBonus]->getWindow();
 			 spinWin = w->winCrissCross3x3().getTotal();
-			 if (spinWin == 30)
-				 __debugbreak();
 		} while ((spinWin > 400) && (spinWin != 540) && (spinWin != 600) && (spinWin != 800) && (spinWin != 1080));
 		spin21 = new Spin21(w, this->bonusStackVisible, true, bonusPos);
 		spin21->setSSet(this->symbolSet);

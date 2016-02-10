@@ -23,12 +23,12 @@ void Reel::spin()
 void Reel::spinToPosition(int position)
 {
 	// TODO throw exception
-	this->position = position % this->length;
+	this->position = (this->length + position) % this->length;
 }
 
 const Symbol& Reel::getSymbol(int y) const
 {
-	return *this->symbols[(this->position + y) % this->length];
+	return *this->symbols[(this->length + this->position + y) % this->length];
 }
 
 int Reel::getLength() const
