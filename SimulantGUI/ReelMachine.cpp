@@ -44,7 +44,7 @@ void ReelMachine::draw(HDC hDC, const std::vector<HBITMAP>& symbols, const Spin*
 	RECT rect;
 	rect.left = this->left, rect.top = this->top;
 	rect.right = this->left+this->width, rect.bottom = this->top+this->height;
-	HBRUSH hBrBackground = CreateSolidBrush(RGB(88, 88, 128));
+	HBRUSH hBrBackground = CreateSolidBrush(/*RGB(88, 88, 128)*/RGB(108, 108, 152));
 	FillRect(hDC, &rect, hBrBackground);
 	DeleteObject(hBrBackground);
 
