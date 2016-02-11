@@ -20,6 +20,7 @@ protected:
 	int64_t totalWinBasic;
 	int64_t totalWinBonus;
 	int64_t totalWinSquared;
+	int64_t totalBetSpent;
 	int64_t oneBetWin;
 	int64_t spinCount;
 	int64_t betCount;

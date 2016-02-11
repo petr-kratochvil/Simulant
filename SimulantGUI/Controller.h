@@ -14,7 +14,10 @@ public:
 	void assignGUI(GUI* gui);
 	void userStartClicked();
 	void userBackClicked();
+	void userBetUpClicked();
+	void userBetDownClicked();
 protected:
+	void updateDescription();
 	Simulator* simulator;
 	SymbolSet* symbolSet;
 	SpinSourceGenerator* spinSourceGenerator;

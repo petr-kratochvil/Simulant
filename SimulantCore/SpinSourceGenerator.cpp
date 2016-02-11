@@ -42,8 +42,11 @@ Spin * SpinSourceGenerator::getNextSpin()
 	this->reelSets[reelSetChosen]->spin();
 	Window* w = this->reelSets[reelSetChosen]->getWindow();
 	Spin* spin = new Spin(w);
+	spin->setBet(this->bet);
 	spin->setSSet(this->symbolSet);
 	spin->setReelset(this->reelSets[reelSetChosen]->getName());
 	spin->addCharacteristic(this->reelSets[reelSetChosen]->getName());
 	return spin;
 }
+
+

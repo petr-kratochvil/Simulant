@@ -20,6 +20,8 @@ public:
 	void addSymbol(int resourceID);
 	void userStartClicked();
 	void userBackClicked();
+	void userBetUpClicked();
+	void userBetDownClicked();
 	void setGoBackEnabled(bool enabled);
 
 protected:
