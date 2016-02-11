@@ -179,6 +179,10 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				this->gui->userStartClicked();
 			else if ((HWND)lParam == this->buttonBack)
 				this->gui->userBackClicked();
+			else if ((HWND)lParam == this->buttonBetUp)
+				this->gui->userBetUpClicked();
+			else if ((HWND)lParam == this->buttonBetDown)
+				this->gui->userBetDownClicked();
 		}
 		break;
 	default:

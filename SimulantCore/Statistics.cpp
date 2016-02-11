@@ -6,6 +6,7 @@ Statistics::Statistics(int symbolCount, int credit)
 	, totalWinSquared(0)
 	, totalWinBasic(0)
 	, totalWinBonus(0)
+	, totalBetSpent(0)
 	, spinCount(0)
 	, betCount(0)
 	, zeroCount(0)
@@ -43,6 +44,7 @@ void Statistics::addSpin(const Spin & spin)
 	if (!respinNext)
 	{
 		this->betCount += 1;
+		this->totalBetSpent += spin.getBet();
 		this->credit -= spin.getBet();
 		this->totalWinBasic += this->lastWin;
 		this->winStatsBasic[this->lastWin/ spin.getBet()]++;
@@ -78,16 +80,16 @@ const std::wstring & Statistics::getDescription()
 	std::wstringstream description;
 	description << L"Kredit:\t\t" << this->credit << L"\r\n";
 	description << L"Poslední výhra:\t" << this->lastWin << L"\r\n";
-	description << L"Sada válcù:\t" << this->lastReelset << L"\r\n";
-	description << L"RTP:\t\t" << double(this->totalWin) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
-	description << L"RTP základ:\t" << double(this->totalWinBasic) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
-	description << L"RTP bonus:\t" << double(this->totalWinBonus) / (double(this->betCount) * 5.0) * 100.0 << L" %\r\n";
-	description << L"Poèet spinù:\t" << this->spinCount << L"\r\n";
-	description << L"Poèet sázek:\t" << this->betCount << L"\r\n";
+	description << L"Sada válců:\t" << this->lastReelset << L"\r\n";
+	description << L"RTP:\t\t" << double(this->totalWin) / (double(this->totalBetSpent)) * 100.0 << L" %\r\n";
+	description << L"RTP základ:\t" << double(this->totalWinBasic) / (double(this->totalBetSpent)) * 100.0 << L" %\r\n";
+	description << L"RTP bonus:\t" << double(this->totalWinBonus) / (double(this->totalBetSpent)) * 100.0 << L" %\r\n";
+	description << L"Počet spinů:\t" << this->spinCount << L"\r\n";
+	description << L"Počet sázek:\t" << this->betCount << L"\r\n";
 	description << L"Bonus 1x za:\t" << double(this->betCount) / double(this->bonusCount) << L" otáček\r\n";
 	double zeros = double(this->zeroCount) / double(this->betCount);
-	description << L"Nulové otáèky:\t" << zeros * 100.0 << L" % , tj. průměrně "
-		<< zeros / (1-zeros) << "mezi 2 výhrami\r\n";
+	description << L"Nulové otáčky:\t" << zeros * 100.0 << L" % , tj. "
+		<< zeros / (1-zeros) << " za sebou\r\n";
 	description << L"Následuje respin?\t" << this->respinNext << L"\r\n";
 	description << L"Charakteristiky:\r\n";
 	for (std::map<std::wstring, int>::iterator iter = this->characteristicsStats.begin(); iter != this->characteristicsStats.end(); iter++)

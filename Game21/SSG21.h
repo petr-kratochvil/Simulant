@@ -13,6 +13,8 @@ class SSG21 : public SpinSourceGenerator
 public:
 	SSG21(const SymbolSet* symbolSet, JSONArray reelSets);
 	virtual Spin21* getNextSpin();
+	virtual void betUp();
+	virtual void betDown();
 protected:
 	std::vector<const Symbol*> bonusStack;
 	std::vector<const Symbol*> bonusStackVisible;
@@ -20,4 +22,6 @@ protected:
 	int reelsetIdBonus;
 	int zeroReelSetId;
 	std::vector<int> bonusCreationPmls;
+	std::vector<int> betValues;
+	int currentBetId;
 };

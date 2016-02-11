@@ -57,6 +57,16 @@ void GUI::userBackClicked()
 	this->controller->userBackClicked();
 }
 
+void GUI::userBetUpClicked()
+{
+	this->controller->userBetUpClicked();
+}
+
+void GUI::userBetDownClicked()
+{
+	this->controller->userBetDownClicked();
+}
+
 void GUI::setGoBackEnabled(bool enabled)
 {
 	this->mainWindow->setButtonBackEnabled(enabled);

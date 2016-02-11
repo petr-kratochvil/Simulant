@@ -34,7 +34,7 @@ void Controller::userStartClicked()
 	this->simulator->spinOneStart();
 	this->statistics->addSpin(this->simulator->getLastSpin());
 	this->gui->setNewSpin(this->simulator->getLastSpin());
-	this->gui->setNewDescription(this->statistics->getDescription());
+	this->updateDescription();
 	this->gui->setGoBackEnabled(this->simulator->canGoBack());
 }
 
@@ -46,4 +46,24 @@ void Controller::userBackClicked()
 		this->gui->setNewSpin(this->simulator->getLastSpin());
 	}
 	this->gui->setGoBackEnabled(this->simulator->canGoBack());
+}
+
+void Controller::userBetUpClicked()
+{
+	this->simulator->betUp();
+	this->updateDescription();
+}
+
+void Controller::userBetDownClicked()
+{
+	this->simulator->betDown();
+	this->updateDescription();
+}
+
+void Controller::updateDescription()
+{
+	std::wstringstream ws;
+	ws << L"Sázka:\t\t" << this->simulator->getBet() << L"\r\n";
+	ws << this->statistics->getDescription();
+	this->gui->setNewDescription(ws.str());
 }

@@ -16,15 +16,15 @@ Simulator::~Simulator()
 }
 
 // TODO zatim nefunguje, nezapocita non-final spiny do statistiky
-void Simulator::spinOneBet(Statistics * statistics)
+void Simulator::spinOneBet()
 {
 	do
 	{
-		this->spinOneStart(statistics);
+		this->spinOneStart();
 	} while (!this->lastSpin->isFinal());
 }
 
-void Simulator::spinOneStart(Statistics * statistics)
+void Simulator::spinOneStart()
 {
 	// TODO throw exception
 	Spin* newSpin = this->spinSource.getNextSpin();
@@ -63,5 +63,20 @@ void Simulator::goBackOneSpin()
 bool Simulator::canGoBack() const
 {
 	return !this->spinHistory.empty();
+}
+
+int Simulator::getBet() const
+{
+	return this->spinSource.getBet();
+}
+
+void Simulator::betUp()
+{
+	this->spinSource.betUp();
+}
+
+void Simulator::betDown()
+{
+	this->spinSource.betDown();
 }
 

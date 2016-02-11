@@ -7,6 +7,8 @@ SSG21::SSG21(const SymbolSet * symbolSet, JSONArray reelSets)
 	, state(SSG21::Basic)
 	, reelsetIdBonus(0)
 	, zeroReelSetId(-1)
+	, currentBetId(0)
+	, betValues({ 5, 10, 15, 25, 50, 100, 200, 300, 500, 1000 })
 {
 	this->reelSetCount = reelSets.size();
 	this->reelSets.resize(this->reelSetCount);
@@ -152,4 +154,17 @@ Spin21 * SSG21::getNextSpin()
 	delete spin;
 
 	return spin21;
+}
+
+void SSG21::betUp()
+{
+	this->currentBetId = (this->currentBetId + 1) % this->betValues.size();
+	SpinSourceGenerator::setBet(this->betValues[this->currentBetId]);
+	this->bonusStack.clear();
+}
+
+void SSG21::betDown()
+{
+	this->currentBetId = (this->currentBetId + this->betValues.size() - 1) % this->betValues.size();
+	SpinSourceGenerator::setBet(this->betValues[this->currentBetId]);
 }
