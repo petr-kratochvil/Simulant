@@ -19,6 +19,7 @@ Statistics::Statistics(int symbolCount, int credit)
 	, symbolStats(symbolCount)
 	, winStatsBonus(2000)
 	, winStatsBasic(2000)
+	, winStatsByBets(2000)
 {
 	for (int i = 0; i < symbolCount; i++)
 		this->symbolStats[i] = { 0, 0 };
@@ -26,6 +27,8 @@ Statistics::Statistics(int symbolCount, int credit)
 		this->winStatsBonus[i] = 0;
 	for (int i = 0; i < this->winStatsBasic.size(); i++)
 		this->winStatsBasic[i] = 0;
+	for (int i = 0; i < this->winStatsByBets.size(); i++)
+		this->winStatsByBets[i] = 0;
 }
 
 void Statistics::addSpin(const Spin & spin)
@@ -57,6 +60,7 @@ void Statistics::addSpin(const Spin & spin)
 	if (spin.isFinal())
 	{
 		respinNext = false;
+		this->winStatsByBets[this->oneBetWin / spin.getBet()]++;
 	}
 	else
 	{
@@ -102,13 +106,27 @@ const std::wstring & Statistics::getDescription()
 	return this->descOut;
 }
 
-std::string Statistics::getWinStats(bool onlyBasic)
+std::string Statistics::getWinStatsBasic() const
 {
-	std::vector<int64_t>& ws = onlyBasic ? this->winStatsBasic : this->winStatsBonus;
-	std::stringstream stats;
-	for (int i = 0; i < ws.size(); i++)
+	return this->getStatsString(this->winStatsBasic);
+}
+
+std::string Statistics::getWinStatsBonus() const
+{
+	return this->getStatsString(this->winStatsBonus);
+}
+
+std::string Statistics::getWinStatsByBets() const
+{
+	return this->getStatsString(this->winStatsByBets);
+}
+
+std::string Statistics::getStatsString(const std::vector<int64_t>& stats) const
+{
+	std::stringstream ss;
+	for (int i = 0; i < stats.size(); i++)
 	{
-		stats << i * 5 << "\t" << ws[i] << "\n";
+		ss << i * 5 << "\t" << stats[i] << "\n";
 	}
-	return stats.str();
+	return ss.str();
 }
