@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game21GUI", "Game21GUI\Game
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game21", "Game21\Game21.vcxproj", "{1FBB00EE-0B4A-4958-802B-C7975499C0F9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game17", "Game17\Game17.vcxproj", "{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -83,6 +85,14 @@ Global
 		{1FBB00EE-0B4A-4958-802B-C7975499C0F9}.Release|x64.Build.0 = Release|x64
 		{1FBB00EE-0B4A-4958-802B-C7975499C0F9}.Release|x86.ActiveCfg = Release|Win32
 		{1FBB00EE-0B4A-4958-802B-C7975499C0F9}.Release|x86.Build.0 = Release|Win32
+		{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}.Debug|x64.ActiveCfg = Debug|x64
+		{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}.Debug|x64.Build.0 = Debug|x64
+		{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}.Debug|x86.ActiveCfg = Debug|Win32
+		{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}.Debug|x86.Build.0 = Debug|Win32
+		{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}.Release|x64.ActiveCfg = Release|x64
+		{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}.Release|x64.Build.0 = Release|x64
+		{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}.Release|x86.ActiveCfg = Release|Win32
+		{E64C9BA1-899D-4CBF-AA36-BEF4E1E06E0F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
