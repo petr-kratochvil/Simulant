@@ -29,7 +29,7 @@ protected:
 	Window* window;
 	int bet;
 	std::wstring reelsetUsed;
-	void computeWin();
+	virtual void computeWin();
 	const WindowWin* wwin;
 	Spin(const Spin& spin);
 	const SymbolSet* sSet;

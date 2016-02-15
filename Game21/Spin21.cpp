@@ -40,3 +40,8 @@ int Spin21::getBonusPosition() const
 {
 	return this->bonusStackWinPosition;
 }
+
+void Spin21::computeWin()
+{
+	this->wwin = &this->window->winCrissCross3x3_game21(this->bet);
+}

@@ -14,6 +14,7 @@ public:
 	const std::vector<const Symbol*>& getStack() const;
 	int getBonusPosition() const;
 protected:
+	virtual void computeWin();
 	std::vector<const Symbol*> bonusStack;
 	int bonusStackWinPosition;
 };

@@ -19,9 +19,12 @@ public:
 	// Evaluate the win, with optional stats reported to the StatDelegate
 	int winCrissCross() const;
 	// implementation of a special case - should be replaced by a general variant
-	const WindowWin& winCrissCross3x3(int bet = 5);
+	const WindowWin& winCrissCross3x3_game21(int bet = 5);
 	bool highlighted(int x, int y) const;
 	void setHighlight(int x, int y, bool status = true);
+
+	const WindowWin& winPayLineSet(const PayLineSet& paylines, int bet = 5);
+	int winPayLine(const Payline& line, int bet = 5);
 
 protected:
 	int width, height;

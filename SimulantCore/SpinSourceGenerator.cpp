@@ -26,6 +26,19 @@ SpinSourceGenerator::SpinSourceGenerator(const SymbolSet * symbolSet, JSONArray 
 	// TODO throw exception if totalPml > 1000
 }
 
+SpinSourceGenerator::SpinSourceGenerator(const SymbolSet * symbolSet, JSONArray reelSets, JSONArray payLines)
+	: SpinSourceGenerator(symbolSet, reelSets)
+{
+	this->payLineSet.resize(payLines.size());
+	for (int i = 0; i < payLines.size(); i++)
+	{
+		JSONArray a = payLines[i]->AsArray();
+		this->payLineSet[i].resize(a.size());
+		for (int j = 0; j < a.size(); j++)
+			this->payLineSet[i][j] = (int) a[j]->AsNumber();
+	}
+}
+
 Spin * SpinSourceGenerator::getNextSpin()
 {
 	int pml = Random::gen(0, 999);

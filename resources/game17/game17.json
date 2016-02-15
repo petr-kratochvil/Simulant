@@ -14,8 +14,8 @@
         { "id": 7, "name": "Druid", "pay": [0,0,40,80,160] },
 		{ "id": 8, "name": "Asterix", "pay": [0,40,80,160,400] },
 		{ "id": 9, "name": "Prase", "pay": [0,100,200,300,1000] },
-		{ "id": 10, "name": "Pes (wild)", "pay": [0,0,0,0,0] },
-		{ "id": 11, "name": "Láhev (scatter)", "pay": [0,0,0,0,0] }
+		{ "id": 10, "name": "Pes (wild)", "wild": true, "pay": [0,0,0,0,0] },
+		{ "id": 11, "name": "Láhev (scatter)", "scatter": true, "pay": [0,0,0,0,0] }
 	],
 	"payLines:"
 	[

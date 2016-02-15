@@ -4,10 +4,14 @@ Symbol::Symbol(int id, const std::wstring& name, const std::vector<int>& pay)
 	: id(id)
 	, name(name)
 	, pay(pay)
+	, wild(false)
+	, scatter(false)
 {
 }
 
 Symbol::Symbol(const JSONValue* source)
+	: wild(false)
+	, scatter(false)
 {
 	// TODO throw exception
 	JSONObject symbol = source->AsObject();
@@ -18,6 +22,14 @@ Symbol::Symbol(const JSONValue* source)
 	this->pay.resize(array.size());
 	for (int i = 0; i < array.size(); i++)
 		this->pay[i] = array[i]->AsNumber();
+	if (symbol.find(L"wild") != symbol.end())
+	{
+		this->wild = symbol[L"wild"]->AsBool();
+	}
+	if (symbol.find(L"scatter") != symbol.end())
+	{
+		this->wild = symbol[L"scatter"]->AsBool();
+	}
 }
 
 const std::wstring& Symbol::getName() const
@@ -34,4 +46,21 @@ int Symbol::getWin(int symbolsInLine) const
 {
 	// TODO throw exception
 	return this->pay[symbolsInLine-1];
+}
+
+bool Symbol::isWild() const
+{
+	return this->wild;
+}
+
+bool Symbol::isScatter() const
+{
+	return this->scatter;
+}
+
+bool Symbol::operator==(const Symbol & symbol) const
+{
+	if (this->isWild() || symbol.isWild())
+		return true;
+	return this->getId() == symbol.getId();
 }
