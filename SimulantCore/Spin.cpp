@@ -76,7 +76,8 @@ bool Spin::isFinal() const
 
 void Spin::computeWin()
 {
-	this->wwin = &this->window->winCrissCross3x3_game21(this->bet);
+	// TODO this is not clean code
+	this->wwin = nullptr;
 }
 
 Spin::Spin(const Spin& spin)

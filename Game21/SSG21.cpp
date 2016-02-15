@@ -80,13 +80,16 @@ Spin21 * SSG21::getNextSpin()
 	if (this->zeroReelSetId >= 0)
 		dynamic_cast<ZeroReelSet21*>(this->reelSets[this->zeroReelSetId])->setBonusStackSize(this->bonusStack.size());
 
-	Spin* spin = nullptr;
+	Spin21* spin = nullptr;
+	Spin* spin_super = nullptr;
 	int spinWin;
 	do
 	{
 		if (spin != nullptr)
 			delete spin;
-		spin = SpinSourceGenerator::getNextSpin();
+		spin_super = SpinSourceGenerator::getNextSpin();
+		spin = new Spin21(*spin_super, this->bonusStack);
+		delete spin_super;
 		spinWin = spin->getTotalWin();
 	} while ((spinWin > 400) && (spinWin != 540) && (spinWin != 600) && (spinWin != 800) && (spinWin != 1080) && (spinWin != 480) && (spinWin != 720));
 	std::vector<WindowWinItem> winList = spin->getWin().getList();

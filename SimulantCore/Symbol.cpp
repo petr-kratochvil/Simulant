@@ -77,7 +77,7 @@ bool Symbol::operator==(const Symbol & symbol) const
 	return this->getId() == symbol.getId();
 }
 
-int Symbol::getWildType() const
+Symbol::WildType Symbol::getWildType() const
 {
 	return this->wildType;
 }

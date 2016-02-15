@@ -4,6 +4,7 @@ Spin21::Spin21(Window * window, bool final)
 	:Spin(window, final)
 	, bonusStackWinPosition(-1)
 {
+	this->computeWin();
 }
 
 Spin21::Spin21(Window * window, const std::vector<const Symbol*>& bonusStack, bool final, int bonusStackWinPosition)
@@ -11,6 +12,7 @@ Spin21::Spin21(Window * window, const std::vector<const Symbol*>& bonusStack, bo
 	, bonusStack(bonusStack)
 	, bonusStackWinPosition(bonusStackWinPosition)
 {
+	this->computeWin();
 }
 
 Spin21::Spin21(const Spin & spin, const std::vector<const Symbol*>& bonusStack, bool final)
@@ -19,6 +21,7 @@ Spin21::Spin21(const Spin & spin, const std::vector<const Symbol*>& bonusStack, 
 	, bonusStackWinPosition(-1)
 {
 	this->final = final;
+	this->computeWin();
 }
 
 void Spin21::stackPop()

@@ -1,7 +1,9 @@
 #include "Controller.h"
 #include "GUI.h"
+#include "Game17/SSG17.h"
 #include "Game21/SSG21.h"
 
+// TODO get rid of dependence on other game libs
 Controller::Controller(wchar_t * jsonGameDescription)
 {
 	// TODO throw exception
@@ -9,7 +11,22 @@ Controller::Controller(wchar_t * jsonGameDescription)
 	this->symbolSet = new SymbolSet(parsedJSON);
 	const JSONObject& parsedJSONObject = parsedJSON->AsObject();
 	const JSONArray& parsedJSONReelSets = parsedJSONObject.at(L"reelSets")->AsArray();
-	this->spinSourceGenerator = new SSG21(this->symbolSet, parsedJSONReelSets);
+	
+	int gameId = (int)parsedJSONObject.at(L"gameId")->AsNumber();
+	switch (gameId)
+	{
+	case 17:
+		{
+			const JSONArray& parsedPayLines = parsedJSONObject.at(L"payLines")->AsArray();
+			this->spinSourceGenerator = new SSG17(this->symbolSet, parsedJSONReelSets, parsedPayLines);
+		}
+		break;
+	case 21:
+		this->spinSourceGenerator = new SSG21(this->symbolSet, parsedJSONReelSets);
+		break;
+		// TODO throw a bunch of exceptions
+	}
+
 	this->simulator = new Simulator(*this->spinSourceGenerator);
 	delete parsedJSON;
 

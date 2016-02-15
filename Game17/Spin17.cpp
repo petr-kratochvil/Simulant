@@ -11,6 +11,7 @@ Spin17::Spin17(const Spin& spin, const PayLineSet & payLineSet)
 	: Spin(spin)
 	, payLineSet(payLineSet)
 {
+	this->computeWin();
 }
 
 void Spin17::computeWin()
