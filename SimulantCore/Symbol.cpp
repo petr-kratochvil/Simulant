@@ -25,6 +25,18 @@ Symbol::Symbol(const JSONValue* source)
 	if (symbol.find(L"wild") != symbol.end())
 	{
 		this->wild = symbol[L"wild"]->AsBool();
+		this->wildType = Symbol::Normal;
+		if (symbol.find(L"wildType") != symbol.end())
+		{
+			const std::wstring& wt = symbol[L"wildType"]->AsString();
+			if (symbol.find(L"wild") != symbol.end())
+			{
+				if (wt == L"Normal")
+					this->wildType = Symbol::Normal;
+				else if (wt == L"EachX2")
+					this->wildType = Symbol::EachX2;
+			}
+		}
 	}
 	if (symbol.find(L"scatter") != symbol.end())
 	{
@@ -63,4 +75,9 @@ bool Symbol::operator==(const Symbol & symbol) const
 	if (this->isWild() || symbol.isWild())
 		return true;
 	return this->getId() == symbol.getId();
+}
+
+int Symbol::getWildType() const
+{
+	return this->wildType;
 }

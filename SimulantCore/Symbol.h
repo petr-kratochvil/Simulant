@@ -10,6 +10,11 @@ typedef std::vector<Payline> PayLineSet;
 class Symbol
 {
 public:
+	enum WildType
+	{
+		Normal,
+		EachX2
+	};
 	Symbol(int id, const std::wstring& name, const std::vector<int>& pay);
 	Symbol(const JSONValue* source);
 	const std::wstring& getName() const;
@@ -18,6 +23,7 @@ public:
 	bool isWild() const;
 	bool isScatter() const;
 	bool operator==(const Symbol& symbol) const;
+	WildType getWildType() const;
 
 protected:
 	std::wstring name;
@@ -25,4 +31,5 @@ protected:
 	std::vector<int> pay;
 	bool wild;
 	bool scatter;
+	WildType wildType;
 };

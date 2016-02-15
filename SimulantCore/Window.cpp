@@ -113,17 +113,24 @@ int Window::winPayLine(const Payline & line, int bet)
 {
 	const Symbol* main = this->matrix[0][line[0]];
 	int symbolCount = 0;
+	int wildPayMultiply = 1;
 	for (int j = 0; j < this->getWidth(); j++)
 	{
+		const Symbol* current = this->matrix[j][line[j]];
 		if (main->isWild())
-			main = this->matrix[j][line[j]];
-		if (*this->matrix[j][line[j]] == *main)
+			main = current;
+		if (current->isWild())
+		{
+			if (current->getWildType() == Symbol::EachX2)
+				wildPayMultiply *= 2;
+		}
+		if (*current == *main)
 			symbolCount = j + 1;
 		else
 			break;
 	}
-	int pay = main->getWin(symbolCount) * bet / 5;
-	if ((pay > 0) || main->isScatter())
+	int pay = wildPayMultiply * main->getWin(symbolCount) * bet / 5;
+	if (pay > 0)
 	{
 		this->wwin.addLine(*main, symbolCount, pay);
 		for (int j = 0; j < symbolCount; j++)
