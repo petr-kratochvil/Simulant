@@ -81,31 +81,31 @@ void MainWindow::createWindow(HINSTANCE hInstance)
 
 	this->editInfo = CreateWindowEx(WS_EX_CLIENTEDGE, L"EDIT", L""
 		, WS_CHILD | WS_VISIBLE | ES_MULTILINE | WS_VSCROLL | ES_READONLY
-		, 368, voff
-		, 800-368-50, 268, this->hWnd, HMENU(NULL), hInstance, NULL);
+		, 546, voff
+		, 400, 408, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->editInfo, SW_SHOW);
 
 	this->buttonStart = CreateWindow(L"BUTTON", L"Start !"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 50, 268+50+voff
+		, 50+89, 268+50+voff
 		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonStart, SW_SHOW);
 
 	this->buttonBack = CreateWindow(L"BUTTON", L"Zpìt"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | WS_DISABLED
-		, 50, 268 + 50 + 50 + voff
+		, 50+89, 268 + 50 + 50 + voff
 		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
 	this->buttonBetUp = CreateWindow(L"BUTTON", L"Sázka +"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 218, 268 + 50 + voff
+		, 218+89, 268 + 50 + voff
 		, 100, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
 	this->buttonBetDown = CreateWindow(L"BUTTON", L"Sázka -"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 218, 268 + 50 + 50 + voff
+		, 218+89, 268 + 50 + 50 + voff
 		, 100, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
@@ -154,12 +154,9 @@ LRESULT MainWindow::windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			FillRect(this->hDC, &rect, hBrBackground);
 			DeleteObject(hBrBackground);
 
-
-			rect.top = 268+50+70, rect.left = 368, rect.right = 800, rect.bottom = 268 + 50 + 100;
-			DrawText(this->hDC, L"Bonusová okénka:", -1, &rect, DT_SINGLELINE | DT_LEFT | DT_VCENTER);
-			rect.top = 0, rect.left = 50, rect.right = 750, rect.bottom = 100;
+			rect.top = 0, rect.left = 50, rect.right = 546, rect.bottom = 100;
 			SelectObject(this->hDC, this->hFontHeading);
-			DrawText(this->hDC, L"Hra 21 Scratch It!", -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+			DrawText(this->hDC, L"Hra 17 Empire of Gauls", -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 		}
 		break;
 	case WM_PAINT:

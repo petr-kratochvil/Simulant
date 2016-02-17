@@ -13,8 +13,8 @@ ReelMachine::ReelMachine(int left, int top, int width, int reels, int rows)
 	this->symbolWidth = this->width / this->reels;
 	this->symbolHeight = this->height / this->rows;
 
-	this->highlightColor1 = Gdiplus::Color(80, 80, 0);
-	this->highlightColor2 = Gdiplus::Color(255, 255, 25);
+	this->highlightColor1 = Gdiplus::Color(80, 20, 0);
+	this->highlightColor2 = Gdiplus::Color(255, 40, 25);
 
 	this->highlightBrushEven = new Gdiplus::LinearGradientBrush(Gdiplus::Point(0, this->symbolHeight), Gdiplus::Point(this->symbolWidth, 0)
 		, this->highlightColor1, this->highlightColor2);

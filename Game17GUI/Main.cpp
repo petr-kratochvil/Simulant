@@ -50,6 +50,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	gui.addSymbol(IDB_BITMAP5);
 	gui.addSymbol(IDB_BITMAP6);
 	gui.addSymbol(IDB_BITMAP7);
+	gui.addSymbol(IDB_BITMAP8);
+	gui.addSymbol(IDB_BITMAP9);
+	gui.addSymbol(IDB_BITMAP10);
+	gui.addSymbol(IDB_BITMAP11);
 
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
