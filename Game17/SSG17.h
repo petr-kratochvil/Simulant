@@ -14,9 +14,11 @@ private:
 	enum State
 	{
 		Basic,
-		Bonus
+		Bonus,
+		BonusRespin
 	} state;
 	std::vector<int> betValues;
 	int currentBetId;
 	int freeSpinCount;
+	Window* freezeState;
 };

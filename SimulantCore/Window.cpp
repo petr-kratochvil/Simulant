@@ -6,9 +6,7 @@ Window::Window(int width, int height)
 	, matrix(width, std::vector<const Symbol*>(height))
 	, highlights(width, std::vector<bool>(height, false))
 {
-	for (int i = 0; i < width; i++)
-		for (int j = 0; j < height; j++)
-			this->highlights[i][j] = false;
+	this->highlightOff();
 }
 
 int Window::getWidth() const
@@ -35,6 +33,7 @@ void Window::setSymbol(int x, int y, const Symbol& symbol)
 const WindowWin& Window::winCrissCross3x3_game21(int bet)
 {
 	this->wwin.clear();
+	this->highlightOff();
 	bool isWildReplacing = true;
 	int wildCount = 0;
 	int winAmount = 0;
@@ -101,9 +100,20 @@ void Window::setHighlight(int x, int y, bool status)
 	this->highlights[x][y] = status;
 }
 
-const WindowWin& Window::winPayLineSet(const PayLineSet& paylines, int bet)
+int Window::getHighlightedCount() const
+{
+	int count = 0;
+	for (int i = 0; i < width; i++)
+		for (int j = 0; j < height; j++)
+			if (this->highlights[i][j])
+				count++;
+	return count;
+}
+
+WindowWin& Window::winPayLineSet(const PayLineSet& paylines, int bet)
 {
 	this->wwin.clear();
+	this->highlightOff();
 	for (int i = 0; i < paylines.size(); i++)
 		this->winPayLine(paylines[i], bet);
 	return this->wwin;
@@ -162,4 +172,11 @@ void Window::highlightScatter(const Symbol& symbol)
 	for (int j = 0; j < this->height; j++)
 			if (this->matrix[i][j]->getId() == symbol.getId())
 				this->highlights[i][j] = true;
+}
+
+void Window::highlightOff()
+{
+	for (int i = 0; i < width; i++)
+		for (int j = 0; j < height; j++)
+			this->highlights[i][j] = false;
 }

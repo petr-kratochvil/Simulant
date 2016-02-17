@@ -23,13 +23,16 @@ public:
 	bool highlighted(int x, int y) const;
 	void setHighlight(int x, int y, bool status = true);
 
-	const WindowWin& winPayLineSet(const PayLineSet& paylines, int bet = 5);
+	int getHighlightedCount() const;
+
+	WindowWin& winPayLineSet(const PayLineSet& paylines, int bet = 5);
 	int winPayLine(const Payline& line, int bet = 5);
 	int winScatter(const Symbol& symbol, int bet = 5);
 
 	void highlightScatter(const Symbol & symbol);
 
 protected:
+	void highlightOff();
 	int width, height;
 	std::vector<std::vector<const Symbol*>> matrix;
 	std::vector<std::vector<bool>> highlights;

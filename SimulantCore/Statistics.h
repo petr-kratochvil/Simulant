@@ -33,6 +33,7 @@ protected:
 	int lastWin;
 	int symbolCount;
 	bool respinNext;
+	int fsCount;
 	std::vector<SymbolStatItem> symbolStats;
 	std::vector<int64_t> winStatsBonus;
 	std::vector<int64_t> winStatsBasic;

@@ -23,6 +23,9 @@ public:
 	void setReelset(const std::wstring& reelset);
 	const std::vector<std::wstring>& getCharacteristics() const;
 	void addCharacteristic(std::wstring name);
+	void setFinal(bool isFinal);
+	void clearWin();
+	virtual int getFsCount() const { return 0; }
 
 protected:
 	bool final;
@@ -30,7 +33,7 @@ protected:
 	int bet;
 	std::wstring reelsetUsed;
 	virtual void computeWin();
-	const WindowWin* wwin;
+	WindowWin* wwin;
 	Spin(const Spin& spin);
 	const SymbolSet* sSet;
 	std::vector<std::wstring> characteristics;

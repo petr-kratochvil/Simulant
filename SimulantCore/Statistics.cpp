@@ -14,6 +14,7 @@ Statistics::Statistics(int symbolCount, int credit)
 	, credit(credit)
 	, lastWin(0)
 	, oneBetWin(0)
+	, fsCount(0)
 	, symbolCount(symbolCount)
 	, respinNext(false)
 	, symbolStats(symbolCount)
@@ -44,6 +45,7 @@ void Statistics::addSpin(const Spin & spin)
 	this->credit += this->lastWin;
 	this->oneBetWin += this->lastWin;
 	this->spinCount += 1;
+	this->fsCount = spin.getFsCount();
 	if (!respinNext)
 	{
 		this->betCount += 1;
@@ -84,6 +86,7 @@ const std::wstring & Statistics::getDescription()
 	std::wstringstream description;
 	description << L"Kredit:\t\t" << this->credit << L"\r\n";
 	description << L"Poslední výhra:\t" << this->lastWin << L"\r\n";
+	description << L"Počet freespinů:\t" << this->fsCount << L"\r\n";
 	description << L"Sada válců:\t" << this->lastReelset << L"\r\n";
 	description << L"RTP:\t\t" << double(this->totalWin) / (double(this->totalBetSpent)) * 100.0 << L" %\r\n";
 	description << L"RTP základ:\t" << double(this->totalWinBasic) / (double(this->totalBetSpent)) * 100.0 << L" %\r\n";

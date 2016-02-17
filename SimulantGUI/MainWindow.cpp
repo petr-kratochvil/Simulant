@@ -87,25 +87,25 @@ void MainWindow::createWindow(HINSTANCE hInstance)
 
 	this->buttonStart = CreateWindow(L"BUTTON", L"Start !"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 50+89, 268+50+voff
+		, 50, 268+50+voff
 		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonStart, SW_SHOW);
 
 	this->buttonBack = CreateWindow(L"BUTTON", L"Zpìt"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | WS_DISABLED
-		, 50+89, 268 + 50 + 50 + voff
+		, 50, 268 + 50 + 50 + voff
 		, 150, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
 	this->buttonBetUp = CreateWindow(L"BUTTON", L"Sázka +"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 218+89, 268 + 50 + voff
+		, 218, 268 + 50 + voff
 		, 100, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 
 	this->buttonBetDown = CreateWindow(L"BUTTON", L"Sázka -"
 		, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
-		, 218+89, 268 + 50 + 50 + voff
+		, 218, 268 + 50 + 50 + voff
 		, 100, 40, this->hWnd, HMENU(NULL), hInstance, NULL);
 	ShowWindow(this->buttonBack, SW_SHOW);
 

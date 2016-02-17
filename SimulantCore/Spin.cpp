@@ -59,6 +59,16 @@ void Spin::addCharacteristic(std::wstring name)
 	this->characteristics.push_back(name);
 }
 
+void Spin::setFinal(bool isFinal)
+{
+	this->final = isFinal;
+}
+
+void Spin::clearWin()
+{
+	this->wwin->clear();
+}
+
 int Spin::getTotalWin() const
 {
 	return this->wwin->getTotal();

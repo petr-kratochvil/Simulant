@@ -9,6 +9,8 @@ public:
 	Spin17(const Spin& spin, const PayLineSet& payLineSet);
 	bool getScatterWin() const;
 	void setFsCount(int count);
+	void freeze(const Window& freezeState);
+	virtual int getFsCount() const;
 protected:
 	virtual void computeWin();
 	const PayLineSet& payLineSet;

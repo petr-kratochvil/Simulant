@@ -12,6 +12,7 @@ Spin17::Spin17(Window * window, const PayLineSet& payLineSet, bool final)
 Spin17::Spin17(const Spin& spin, const PayLineSet & payLineSet)
 	: Spin(spin)
 	, payLineSet(payLineSet)
+	, scatterWin(false)
 {
 	this->computeWin();
 }
@@ -24,10 +25,20 @@ bool Spin17::getScatterWin() const
 void Spin17::setFsCount(int count)
 {
 	this->freeSpinCount = count;
-	if (this->freeSpinCount > 0)
-		this->final = false;
-	else
-		this->final = true;
+}
+
+void Spin17::freeze(const Window & freezeState)
+{
+	for (int i = 0; i < this->window->getWidth(); i++)
+		for (int j = 0; j < this->window->getHeight(); j++)
+			if (freezeState.highlighted(i, j))
+				this->window->setSymbol(i, j, freezeState.getSymbol(i, j));
+	this->computeWin();
+}
+
+int Spin17::getFsCount() const
+{
+	return this->freeSpinCount;
 }
 
 void Spin17::computeWin()
