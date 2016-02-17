@@ -138,3 +138,28 @@ int Window::winPayLine(const Payline & line, int bet)
 	}
 	return pay;
 }
+
+int Window::winScatter(const Symbol& symbol, int bet)
+{
+	int count = 0;
+	for (int i = 0; i < this->width; i++)
+		for (int j = 0; j < this->height; j++)
+		{
+			if (this->matrix[i][j]->getId() == symbol.getId())
+				count++;
+		}
+	int pay = symbol.getWin(count) * bet / 5;
+	if (pay > 0)
+	{
+		this->wwin.addLine(symbol, count, pay);
+	}
+	return count;
+}
+
+void Window::highlightScatter(const Symbol& symbol)
+{
+	for (int i = 0; i < this->width; i++)
+	for (int j = 0; j < this->height; j++)
+			if (this->matrix[i][j]->getId() == symbol.getId())
+				this->highlights[i][j] = true;
+}

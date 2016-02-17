@@ -18,4 +18,5 @@ private:
 	} state;
 	std::vector<int> betValues;
 	int currentBetId;
+	int freeSpinCount;
 };

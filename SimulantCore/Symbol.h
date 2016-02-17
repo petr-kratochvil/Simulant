@@ -22,6 +22,7 @@ public:
 	int getWin(int symbolsInLine) const;
 	bool isWild() const;
 	bool isScatter() const;
+	bool isWildApplied() const;
 	bool operator==(const Symbol& symbol) const;
 	WildType getWildType() const;
 
@@ -31,5 +32,6 @@ protected:
 	std::vector<int> pay;
 	bool wild;
 	bool scatter;
+	bool wildApplied;
 	WildType wildType;
 };

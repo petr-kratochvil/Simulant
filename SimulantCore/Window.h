@@ -25,6 +25,9 @@ public:
 
 	const WindowWin& winPayLineSet(const PayLineSet& paylines, int bet = 5);
 	int winPayLine(const Payline& line, int bet = 5);
+	int winScatter(const Symbol& symbol, int bet = 5);
+
+	void highlightScatter(const Symbol & symbol);
 
 protected:
 	int width, height;

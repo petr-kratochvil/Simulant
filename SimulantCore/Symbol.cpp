@@ -6,6 +6,7 @@ Symbol::Symbol(int id, const std::wstring& name, const std::vector<int>& pay)
 	, pay(pay)
 	, wild(false)
 	, scatter(false)
+	, wildApplied(true)
 {
 }
 
@@ -40,7 +41,8 @@ Symbol::Symbol(const JSONValue* source)
 	}
 	if (symbol.find(L"scatter") != symbol.end())
 	{
-		this->wild = symbol[L"scatter"]->AsBool();
+		this->scatter = symbol[L"scatter"]->AsBool();
+		this->wildApplied = false;
 	}
 }
 
@@ -57,6 +59,8 @@ int Symbol::getId() const
 int Symbol::getWin(int symbolsInLine) const
 {
 	// TODO throw exception
+	if (symbolsInLine == 0)
+		return 0;
 	return this->pay[symbolsInLine-1];
 }
 
@@ -70,9 +74,15 @@ bool Symbol::isScatter() const
 	return this->scatter;
 }
 
+bool Symbol::isWildApplied() const
+{
+	return this->wildApplied;
+}
+
 bool Symbol::operator==(const Symbol & symbol) const
 {
-	if (this->isWild() || symbol.isWild())
+	if (this->isWild() && symbol.isWildApplied()
+		|| (symbol.isWild() && this->isWildApplied()))
 		return true;
 	return this->getId() == symbol.getId();
 }
