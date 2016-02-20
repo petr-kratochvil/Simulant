@@ -38,6 +38,7 @@ protected:
 	std::vector<int64_t> winStatsBonus;
 	std::vector<int64_t> winStatsBasic;
 	std::vector<int64_t> winStatsByBets;
+	std::vector<SymbolStatItem>  winStatsByCount;
 	std::map<std::wstring, int> characteristicsStats;
 	std::wstring descOut;
 	std::wstring lastReelset;
