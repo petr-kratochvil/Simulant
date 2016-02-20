@@ -52,17 +52,34 @@ void Statistics::addSpin(const Spin & spin)
 		this->totalBetSpent += spin.getBet();
 		this->credit -= spin.getBet();
 		this->totalWinBasic += this->lastWin;
-		this->winStatsBasic[this->lastWin/ spin.getBet()]++;
+		int index = this->lastWin / spin.getBet();
+		if (index >= 2000)
+			index = 1999;
+		this->winStatsBasic[index]++;
+		const std::vector<std::wstring>& c = spin.getCharacteristics();
+		for (int i = 0; i < c.size(); i++)
+		{
+			if (this->characteristicsStats.find(c[i]) == this->characteristicsStats.end())
+				this->characteristicsStats[c[i]] = 1;
+			else
+				this->characteristicsStats[c[i]]++;
+		}
 	}
 	else
 	{
 		this->totalWinBonus += this->lastWin;
-		this->winStatsBonus[this->lastWin / spin.getBet()]++;
+		int index = this->lastWin / spin.getBet();
+		if (index >= 2000)
+			index = 1999;
+		this->winStatsBonus[index]++;
 	}
 	if (spin.isFinal())
 	{
 		respinNext = false;
-		this->winStatsByBets[this->oneBetWin / spin.getBet()]++;
+		int index = this->oneBetWin / spin.getBet();
+		if (index >= 2000)
+			index = 1999;
+		this->winStatsByBets[index]++;
 	}
 	else
 	{
@@ -71,15 +88,8 @@ void Statistics::addSpin(const Spin & spin)
 		respinNext = true;
 	}
 	this->lastReelset = spin.getReelset();
-	const std::vector<std::wstring>& c = spin.getCharacteristics();
-	for (int i = 0; i < c.size(); i++)
-	{
-		if (this->characteristicsStats.find(c[i]) == this->characteristicsStats.end())
-			this->characteristicsStats[c[i]] = 1;
-		else
-			this->characteristicsStats[c[i]]++;
-	}
 }
+
 
 const std::wstring & Statistics::getDescription()
 {

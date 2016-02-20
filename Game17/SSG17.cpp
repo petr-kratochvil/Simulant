@@ -48,15 +48,13 @@ Spin17 * SSG17::getNextSpin()
 		break;
 	}
 
-	if (spin17->getScatterWin())
-		this->freeSpinCount += 10;
-
 	if ((this->state == SSG17::Bonus) && (this->freeSpinCount <= 0))
 		this->state = SSG17::Basic;
 
-	if ((this->state == SSG17::Basic) && (this->freeSpinCount > 0))
+	if ((this->state == SSG17::Basic) && spin17->getScatterWin())
 	{
 		this->state = SSG17::Bonus;
+		this->freeSpinCount = 10;
 	}
 
 	spin17->setFsCount(this->freeSpinCount);

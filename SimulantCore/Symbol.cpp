@@ -61,6 +61,8 @@ int Symbol::getWin(int symbolsInLine) const
 	// TODO throw exception
 	if (symbolsInLine == 0)
 		return 0;
+	if (symbolsInLine > this->pay.size())
+		return 0;
 	return this->pay[symbolsInLine-1];
 }
 
