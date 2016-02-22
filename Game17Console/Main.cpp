@@ -8,20 +8,20 @@ void getJSONInput(wchar_t* json, char* fileName)
 	FILE *fr;
 	errno_t err = fopen_s(&fr, fileName, "rt,ccs=UTF-8");
 
-	wchar_t buffer[10000];
+	wchar_t buffer[20000];
 	json[0] = '\0';
 	int jsonLength = 0;
 	while (!feof(fr))
 	{
-		fgetws(buffer, 10000, fr);
-		wcsncat_s(json, 9999, buffer, 10000 - jsonLength);
+		fgetws(buffer, 15000, fr);
+		wcsncat_s(json, 19999, buffer, 20000 - jsonLength);
 		jsonLength += wcslen(buffer);
 	}
 }
 
 int main(int argc, char** argv)
 {
-	wchar_t json[10000];
+	wchar_t json[20000];
 	char fileName[50];
 	if (argc <= 1)
 		strcpy(fileName, "../resources/game17/game17.json");
@@ -67,6 +67,7 @@ int main(int argc, char** argv)
 	{
 		simulator.spinOneStart();
 		const Spin& spin = simulator.getLastSpin();
+
 		statistics.addSpin(spin);
 		int win = spin.getTotalWin();
 		totalCount++;

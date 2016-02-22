@@ -13,6 +13,7 @@ private:
 	SpinSourceGenerator(const SpinSourceGenerator&);
 	SpinSourceGenerator& operator=(const SpinSourceGenerator&);
 protected:
+	virtual Spin* getNextSpin(int reelSetChosen);
 	int reelSetCount;
 	std::vector<ReelSet*> reelSets;
 	std::vector<int> reelSetPmls;

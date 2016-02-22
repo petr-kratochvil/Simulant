@@ -19,13 +19,13 @@ void getJSONInput(HINSTANCE hInstance, wchar_t* json)
 	FreeResource(hResource);
 	FILE *fr = fopen(tmpFileName, "rt,ccs=UTF-8");
 
-	wchar_t buffer[10000];
+	wchar_t buffer[20000];
 	json[0] = '\0';
 	int jsonLength = 0;
 	while (!feof(fr))
 	{
-		fgetws(buffer, 10000, fr);
-		wcsncat_s(json, 9999, buffer, 10000 - jsonLength);
+		fgetws(buffer, 20000, fr);
+		wcsncat_s(json, 19999, buffer, 20000 - jsonLength);
 		jsonLength += wcslen(buffer);
 	}
 }
@@ -34,7 +34,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	Random::init();
 
-	wchar_t json[10000];
+	wchar_t json[20000];
 	getJSONInput(hInstance, json);
 
 	Controller controller(json);

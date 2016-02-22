@@ -13,6 +13,7 @@ Symbol::Symbol(int id, const std::wstring& name, const std::vector<int>& pay)
 Symbol::Symbol(const JSONValue* source)
 	: wild(false)
 	, scatter(false)
+	, wildApplied(true)
 {
 	// TODO throw exception
 	JSONObject symbol = source->AsObject();
@@ -42,7 +43,8 @@ Symbol::Symbol(const JSONValue* source)
 	if (symbol.find(L"scatter") != symbol.end())
 	{
 		this->scatter = symbol[L"scatter"]->AsBool();
-		this->wildApplied = false;
+		if (this->scatter)
+			this->wildApplied = false;
 	}
 }
 

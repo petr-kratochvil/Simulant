@@ -1,11 +1,12 @@
 #include "Spin17.h"
 
-Spin17::Spin17(Window * window, const PayLineSet& payLineSet, bool final)
+Spin17::Spin17(Window * window, const PayLineSet& payLineSet, const SymbolSet& symbolSet, bool final)
 	: Spin(window, final)
 	, payLineSet(payLineSet)
 	, scatterWin(false)
 	, freeSpinCount(0)
 {
+	this->setSSet(&symbolSet);
 	this->computeWin();
 }
 

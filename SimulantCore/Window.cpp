@@ -30,7 +30,7 @@ void Window::setSymbol(int x, int y, const Symbol& symbol)
 	this->matrix[x][y] = &symbol;
 }
 
-const WindowWin& Window::winCrissCross3x3_game21(int bet)
+WindowWin& Window::winCrissCross3x3_game21(int bet)
 {
 	this->wwin.clear();
 	this->highlightOff();
@@ -129,15 +129,16 @@ int Window::winPayLine(const Payline & line, int bet)
 		const Symbol* current = this->matrix[j][line[j]];
 		if (main->isWild())
 			main = current;
+
+		if (*current == *main)
+			symbolCount = j + 1;
+		else
+			break;
 		if (current->isWild())
 		{
 			if (current->getWildType() == Symbol::EachX2)
 				wildPayMultiply *= 2;
 		}
-		if (*current == *main)
-			symbolCount = j + 1;
-		else
-			break;
 	}
 	int pay = wildPayMultiply * main->getWin(symbolCount) * bet / 5;
 	if (pay > 0)

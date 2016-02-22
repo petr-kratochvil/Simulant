@@ -11,6 +11,7 @@ public:
 	virtual void betUp();
 	virtual void betDown();
 private:
+	bool winIsOK(int win) const;
 	enum State
 	{
 		Basic,
