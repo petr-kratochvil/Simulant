@@ -12,6 +12,8 @@ public:
 	virtual void betDown();
 private:
 	bool winIsOK(int win) const;
+	Spin17* rescueSpin1();
+	Spin17* rescueSpin2();
 	enum State
 	{
 		Basic,
@@ -22,4 +24,9 @@ private:
 	int currentBetId;
 	int freeSpinCount;
 	Window* freezeState;
+	int reelSetBonus;
+	bool rescue;
+	int rescueSpin;
+	int fsWinTotal;
+	int fsWinCount;
 };

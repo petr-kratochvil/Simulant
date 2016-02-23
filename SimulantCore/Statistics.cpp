@@ -48,6 +48,16 @@ void Statistics::addSpin(const Spin & spin)
 	this->oneBetWin += this->lastWin;
 	this->spinCount += 1;
 	this->fsCount = spin.getFsCount();
+
+	const std::vector<std::wstring>& c = spin.getCharacteristics();
+	for (int i = 0; i < c.size(); i++)
+	{
+		if (this->characteristicsStats.find(c[i]) == this->characteristicsStats.end())
+			this->characteristicsStats[c[i]] = 1;
+		else
+			this->characteristicsStats[c[i]]++;
+	}
+
 	if (!respinNext)
 	{
 		this->betCount += 1;
@@ -58,14 +68,7 @@ void Statistics::addSpin(const Spin & spin)
 		if (index >= 2000)
 			index = 1999;
 		this->winStatsBasic[index]++;
-		const std::vector<std::wstring>& c = spin.getCharacteristics();
-		for (int i = 0; i < c.size(); i++)
-		{
-			if (this->characteristicsStats.find(c[i]) == this->characteristicsStats.end())
-				this->characteristicsStats[c[i]] = 1;
-			else
-				this->characteristicsStats[c[i]]++;
-		}
+		
 		const std::vector<WindowWinItem>& wins = spin.getWin().getList();
 		for (int i = 0; i < wins.size(); i++)
 		{
@@ -81,7 +84,8 @@ void Statistics::addSpin(const Spin & spin)
 		int index = this->lastWin / spin.getBet();
 		if (index >= 2000)
 			index = 1999;
-		this->winStatsBonus[index]++;
+		if (std::find(c.begin(), c.end(), L"BonusFinal") != c.end())
+			this->winStatsBonus[index]++;
 	}
 	if (spin.isFinal())
 	{
@@ -124,7 +128,7 @@ const std::wstring & Statistics::getDescription()
 	for (std::map<std::wstring, int>::iterator iter = this->characteristicsStats.begin(); iter != this->characteristicsStats.end(); iter++)
 	{
 		description << std::wstring(iter->first.begin(), iter->first.end());
-		description << L"\t" << double(iter->second) / double(this->betCount) * 100.0 << L" %, tj. 1x za ";
+		description << L"\t" << double(iter->second) / double(this->spinCount) * 100.0 << L" %, tj. 1x za ";
 		description << double(this->betCount) / double(iter->second) << L" otáček\r\n";
 	}
 	for (int i = 0; i < this->symbolCount; i++)
