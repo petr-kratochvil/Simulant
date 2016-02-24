@@ -73,7 +73,7 @@ Spin17 * SSG17::getNextSpin()
 		break;
 	case SSG17::Bonus:
 		this->freeSpinCount--;
-		if (this->fsWinTotal + spin17->getTotalWin() > 1440)
+		if (this->fsWinTotal + spin17->getTotalWin() > 1500)
 		{
 			delete spin17;
 			spin = SpinSourceGenerator::getNextSpin(22);
@@ -100,7 +100,7 @@ Spin17 * SSG17::getNextSpin()
 
 			spin17->freeze(*this->freezeState);
 
-			if ((spin17->getTotalWin() > 1000) || (this->fsWinTotal + spin17->getTotalWin() > 1440))
+			if ((spin17->getTotalWin() > 1000) || (this->fsWinTotal + spin17->getTotalWin() > 1500))
 			{
 				delete spin17;
 				spin = SpinSourceGenerator::getNextSpin(41-this->reelSetBonus);

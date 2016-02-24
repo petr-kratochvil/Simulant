@@ -41,7 +41,7 @@ SpinSourceGenerator::SpinSourceGenerator(const SymbolSet * symbolSet, JSONArray 
 
 Spin * SpinSourceGenerator::getNextSpin()
 {
-	int pml = Random::gen(0, 999);
+	int pml = Random::gen(0, 9999);
 	int reelSetChosen = -1;
 	for (int i = 0; i < this->reelSetCount; i++)
 	{
