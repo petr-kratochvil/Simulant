@@ -15,11 +15,8 @@ Spin17 * SSG17::getNextSpin()
 {
 	Spin17* spin17 = nullptr;
 
-	// napevno umely spin
-	
-	/////////////////////
-
 	Spin* spin = nullptr;
+	int fsZeroReelsetId = 22 + (Random::genPct(70)?1:0);
 	switch (this->state)
 	{
 	case SSG17::Basic:
@@ -37,7 +34,7 @@ Spin17 * SSG17::getNextSpin()
 	case SSG17::Bonus:
 		this->rescue = false;
 		if ((this->freeSpinCount ==2) &&
-			((this->fsWinCount < 2) || (this->fsWinTotal < 100)))
+			((this->fsWinCount < 1) || (this->fsWinTotal < 50)))
 		{
 			spin17 = this->rescueSpin1();
 			this->rescue = true;
@@ -46,7 +43,7 @@ Spin17 * SSG17::getNextSpin()
 		}
 		else if
 			((this->freeSpinCount == 1) &&
-				((this->fsWinCount < 2) || (this->fsWinTotal < 100)))
+				((this->fsWinCount < 1) || (this->fsWinTotal < 100)))
 		{
 			spin17 = this->rescueSpin2();
 			this->rescue = true;
@@ -56,7 +53,10 @@ Spin17 * SSG17::getNextSpin()
 		else
 		{
 			this->reelSetBonus = Random::gen(0, 1) ? 20 : 21;
-			spin = SpinSourceGenerator::getNextSpin(this->reelSetBonus);
+			if (this->forceZeroReelsetInFS())
+				spin = SpinSourceGenerator::getNextSpin(fsZeroReelsetId);
+			else
+				spin = SpinSourceGenerator::getNextSpin(this->reelSetBonus);
 			spin17 = new Spin17(*spin, this->payLineSet);
 			delete spin;
 		}
@@ -76,7 +76,7 @@ Spin17 * SSG17::getNextSpin()
 		if (this->fsWinTotal + spin17->getTotalWin() > 1500)
 		{
 			delete spin17;
-			spin = SpinSourceGenerator::getNextSpin(22);
+			spin = SpinSourceGenerator::getNextSpin(fsZeroReelsetId);
 			spin17 = new Spin17(*spin, this->payLineSet);
 			delete spin;
 		}
@@ -100,7 +100,7 @@ Spin17 * SSG17::getNextSpin()
 
 			spin17->freeze(*this->freezeState);
 
-			if ((spin17->getTotalWin() > 1000) || (this->fsWinTotal + spin17->getTotalWin() > 1500))
+			if ((spin17->getTotalWin() > 500) || (this->fsWinTotal + spin17->getTotalWin() > 1500))
 			{
 				delete spin17;
 				spin = SpinSourceGenerator::getNextSpin(41-this->reelSetBonus);
@@ -139,6 +139,25 @@ Spin17 * SSG17::getNextSpin()
 
 	spin17->setFsCount(this->freeSpinCount);
 	spin17->setFinal(this->state == SSG17::Basic);
+	if (std::find(spin17->getCharacteristics().begin(), spin17->getCharacteristics().end(), L"BonusFinal") != spin17->getCharacteristics().end())
+	{
+		int wildCount = 0;
+		for (int i = 0; i < 5; i++)
+			for (int j = 0; j < 3; j++)
+			{
+				if (spin17->getWindow().getSymbol(i, j).getId() == 10)
+					wildCount++;
+			}
+		if (wildCount == 0)
+			spin17->addCharacteristic(L"WildCount 0");
+		else if (wildCount == 1)
+			spin17->addCharacteristic(L"WildCount 1");
+		else if (wildCount == 2)
+			spin17->addCharacteristic(L"WildCount 2");
+		else if (wildCount == 3)
+			spin17->addCharacteristic(L"WildCount 3");
+		else spin17->addCharacteristic(L"WildCount 4+");
+	}
 	return spin17;
 }
 
@@ -214,3 +233,48 @@ Spin17 * SSG17::rescueSpin2()
 	Spin17* spin17 = new Spin17(w, this->payLineSet, *this->symbolSet);
 	return spin17;
 }
+
+bool SSG17::forceZeroReelsetInFS()
+{
+	bool zero = Random::genPct(80);
+	switch (this->freeSpinCount)
+	{
+	case 1:
+		/*if (this->fsWinTotal > 1200)
+			return true;
+		else*/ return zero;
+	case 2:
+		if (this->fsWinTotal < 100)
+			return false;
+		else return zero;
+	case 3:
+		if (this->fsWinTotal < 80)
+			return false;
+		else return zero;
+	case 4:
+		if (this->fsWinTotal < 75)
+			return false;
+		else return zero;
+	case 5:
+		if (this->fsWinTotal < 60)
+			return false;
+		else return zero;
+	case 6:
+		if (this->fsWinTotal < 50)
+			return false;
+		else return zero;
+	case 7:
+		if (this->fsWinTotal < 40)
+			return false;
+		else return zero;
+	case 8:
+		if (this->fsWinTotal < 20)
+			return false;
+		else return zero;
+	case 9:
+	case 10:
+	default:
+		return false;
+	};
+}
+//((this->freeSpinCount < 5) && (this->fsWinTotal < 75)) || Random::genPct(30)

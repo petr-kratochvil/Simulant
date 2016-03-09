@@ -29,4 +29,5 @@ private:
 	int rescueSpin;
 	int fsWinTotal;
 	int fsWinCount;
+	bool forceZeroReelsetInFS();
 };
