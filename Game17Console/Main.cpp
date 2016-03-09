@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 		return 0;
 	}
 
-	int iterations = 5e6;
+	int iterations = 2e8;
 	double it;
 	if (argc >= 3)
 	{

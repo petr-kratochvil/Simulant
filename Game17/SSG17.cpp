@@ -39,7 +39,7 @@ Spin17 * SSG17::getNextSpin()
 			spin17 = this->rescueSpin1();
 			this->rescue = true;
 			this->rescueSpin = 1;
-			this->reelSetBonus = 21;
+			this->reelSetBonus = 20;
 		}
 		else if
 			((this->freeSpinCount == 1) &&
@@ -48,7 +48,7 @@ Spin17 * SSG17::getNextSpin()
 			spin17 = this->rescueSpin2();
 			this->rescue = true;
 			this->rescueSpin = 2;
-			this->reelSetBonus = 20;
+			this->reelSetBonus = 21;
 		}
 		else
 		{
@@ -92,23 +92,33 @@ Spin17 * SSG17::getNextSpin()
 		{
 			spin17->addCharacteristic(L"BonusFinal");
 		}
+		//if (spin17->getTotalWin() > 1500)
+		//	__debugbreak();
 		break;
 	case SSG17::BonusRespin:
+		if (this->rescue)
+			spin = SpinSourceGenerator::getNextSpin(this->reelSetBonus+4);
+		else
 			spin = SpinSourceGenerator::getNextSpin(this->reelSetBonus);
+
 			spin17 = new Spin17(*spin, this->payLineSet);
 			delete spin;
 
 			spin17->freeze(*this->freezeState);
 
-			if ((spin17->getTotalWin() > 500) || (this->fsWinTotal + spin17->getTotalWin() > 1500))
+			if ((spin17->getTotalWin() > 550) || (this->fsWinTotal + spin17->getTotalWin() > 1500))
 			{
 				delete spin17;
-				spin = SpinSourceGenerator::getNextSpin(41-this->reelSetBonus);
+				spin = SpinSourceGenerator::getNextSpin(this->reelSetBonus+4); // we use the reelset "konec"
 				spin17 = new Spin17(*spin, this->payLineSet);
 				delete spin;
+				//if (spin17->getTotalWin() > 1500)
+				//	__debugbreak();
 				spin17->freeze(*this->freezeState);
+				//if (spin17->getTotalWin() > 1500)
+				//	__debugbreak();
 			}
-
+			
 			if (spin17->getWindow().getHighlightedCount() <= this->freezeState->getHighlightedCount())
 			{
 				this->state = SSG17::Bonus;
