@@ -152,6 +152,9 @@ Spin21 * SSG21::getNextSpin()
 
 	spin21 = new Spin21(*spin, this->bonusStackVisible, final);
 	delete spin;
+	const std::vector<WindowWinItem>& wins = spin21->getWin().getList();
+	for (int i = 0; i < wins.size(); i++)
+		spin21->addCharacteristic(wins[i].symbol.getName());
 
 	return spin21;
 }
