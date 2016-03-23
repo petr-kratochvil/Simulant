@@ -133,7 +133,7 @@ const std::wstring & Statistics::getDescription()
 	}
 	for (int i = 0; i < this->symbolCount; i++)
 	{
-		description << L"symbol" << i << ": RTP " << double(this->symbolStats[i].totalWin) / double(this->totalBetSpent) * 100.0 << L" %\r\n";
+		description << L"symbol" << i << ": RTP " << double(this->symbolStats[i].totalWin) / double(this->totalBetSpent) * 100.0 << L" %, četnost: " << double(this->symbolStats[i].winCount) / double(this->betCount) * 100.0 << L" %\r\n";
 	}
 	for (int i = 0; i < 5; i++)
 	{
